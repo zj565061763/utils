@@ -2,9 +2,6 @@ package com.fanwe.lib.utils;
 
 import android.util.Base64;
 
-/**
- * Created by zhengjun on 2017/12/15.
- */
 public final class FEncryptUtil
 {
     private FEncryptUtil()
