@@ -200,20 +200,23 @@ public final class FDialogUtil
      */
     public static void setDialogLeftAlignTop(Dialog dialog, View view, int marginRight, int marginTop)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.TOP | Gravity.RIGHT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = SDViewUtil.getScreenWidth() - location[0] + marginRight;
-                int y = location[1] + marginTop - SDViewUtil.getActivityStatusBarHeight(view.getContext());
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.TOP | Gravity.RIGHT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = FViewUtil.getScreenWidth(context) - location[0] + marginRight;
+            int y = location[1] + marginTop - FViewUtil.getActivityStatusBarHeight(context);
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
@@ -227,20 +230,23 @@ public final class FDialogUtil
      */
     public static void setDialogLeftAlignCenter(Dialog dialog, View view, int marginRight, int marginTop)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = SDViewUtil.getScreenWidth() - location[0] + marginRight;
-                int y = location[1] - SDViewUtil.getScreenHeight() / 2 + view.getHeight() / 2 - SDViewUtil.getActivityStatusBarHeight(view.getContext()) / 2 + marginTop;
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = FViewUtil.getScreenWidth(context) - location[0] + marginRight;
+            int y = location[1] - FViewUtil.getScreenHeight(context) / 2 + view.getHeight() / 2 - FViewUtil.getActivityStatusBarHeight(context) / 2 + marginTop;
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
@@ -254,20 +260,23 @@ public final class FDialogUtil
      */
     public static void setDialogLeftAlignBottom(Dialog dialog, View view, int marginRight, int marginBottom)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = SDViewUtil.getScreenWidth() - location[0] + marginRight;
-                int y = SDViewUtil.getScreenHeight() - location[1] - view.getHeight() + marginBottom;
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = FViewUtil.getScreenWidth(context) - location[0] + marginRight;
+            int y = FViewUtil.getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
@@ -281,20 +290,23 @@ public final class FDialogUtil
      */
     public static void setDialogRightAlignTop(Dialog dialog, View view, int marginLeft, int marginTop)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.TOP | Gravity.LEFT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = location[0] + view.getWidth() + marginLeft;
-                int y = location[1] + marginTop - SDViewUtil.getActivityStatusBarHeight(view.getContext());
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.TOP | Gravity.LEFT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = location[0] + view.getWidth() + marginLeft;
+            int y = location[1] + marginTop - FViewUtil.getActivityStatusBarHeight(context);
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
@@ -308,20 +320,23 @@ public final class FDialogUtil
      */
     public static void setDialogRightAlignCenter(Dialog dialog, View view, int marginLeft, int marginTop)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = location[0] + view.getWidth() + marginLeft;
-                int y = location[1] - SDViewUtil.getScreenHeight() / 2 + view.getHeight() / 2 - SDViewUtil.getActivityStatusBarHeight(view.getContext()) / 2 + marginTop;
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = location[0] + view.getWidth() + marginLeft;
+            int y = location[1] - FViewUtil.getScreenHeight(context) / 2 + view.getHeight() / 2 - FViewUtil.getActivityStatusBarHeight(context) / 2 + marginTop;
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
@@ -335,20 +350,23 @@ public final class FDialogUtil
      */
     public static void setDialogRightAlignBottom(Dialog dialog, View view, int marginLeft, int marginBottom)
     {
-        if (dialog != null && view != null)
+        if (dialog == null || view == null)
         {
-            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            if (params != null)
-            {
-                params.gravity = Gravity.BOTTOM | Gravity.LEFT;
-                int[] location = SDViewUtil.getLocationOnScreen(view);
-                int x = location[0] + view.getWidth() + marginLeft;
-                int y = SDViewUtil.getScreenHeight() - location[1] - view.getHeight() + marginBottom;
+            return;
+        }
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        if (params != null)
+        {
+            params.gravity = Gravity.BOTTOM | Gravity.LEFT;
+            int[] location = FViewUtil.getLocationOnScreen(view, null);
+            Context context = view.getContext();
 
-                params.x = x;
-                params.y = y;
-                dialog.getWindow().setAttributes(params);
-            }
+            int x = location[0] + view.getWidth() + marginLeft;
+            int y = FViewUtil.getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
+
+            params.x = x;
+            params.y = y;
+            dialog.getWindow().setAttributes(params);
         }
     }
 
