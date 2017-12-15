@@ -27,7 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FViewUtil
+public final class FViewUtil
 {
     private FViewUtil()
     {

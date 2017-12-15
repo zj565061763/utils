@@ -15,10 +15,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 
-public class FIOUtil
+public final class FIOUtil
 {
-    public static final String CHARSET_UTF8 = "UTF-8";
-
     private FIOUtil()
     {
     }
@@ -111,7 +109,7 @@ public class FIOUtil
     {
         if (TextUtils.isEmpty(charset))
         {
-            charset = CHARSET_UTF8;
+            charset = FCharset.UTF8;
         }
         if (!(inputStream instanceof BufferedInputStream))
         {
@@ -152,7 +150,7 @@ public class FIOUtil
     {
         if (TextUtils.isEmpty(charset))
         {
-            charset = CHARSET_UTF8;
+            charset = FCharset.UTF8;
         }
         Writer writer = new OutputStreamWriter(outputStream, charset);
         writer.write(content);
