@@ -23,20 +23,26 @@ public class FIOUtil
     {
     }
 
-
-    public static byte[] readBytes(InputStream in) throws IOException
+    /**
+     * 从输入流中获得byte数组
+     *
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    public static byte[] readBytes(InputStream inputStream) throws IOException
     {
-        if (!(in instanceof BufferedInputStream))
+        if (!(inputStream instanceof BufferedInputStream))
         {
-            in = new BufferedInputStream(in);
+            inputStream = new BufferedInputStream(inputStream);
         }
         ByteArrayOutputStream out = null;
         try
         {
             out = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) != -1)
+            int len = -1;
+            while ((len = inputStream.read(buf)) != -1)
             {
                 out.write(buf, 0, len);
             }
@@ -47,7 +53,16 @@ public class FIOUtil
         }
     }
 
-    public static byte[] readBytes(InputStream in, long skip, long size) throws IOException
+    /**
+     * 从输入流中获得byte数组
+     *
+     * @param inputStream
+     * @param skip
+     * @param size
+     * @return
+     * @throws IOException
+     */
+    public static byte[] readBytes(InputStream inputStream, long skip, long size) throws IOException
     {
         ByteArrayOutputStream out = null;
         try
@@ -55,7 +70,7 @@ public class FIOUtil
             if (skip > 0)
             {
                 long skipSize = 0;
-                while (skip > 0 && (skipSize = in.skip(skip)) > 0)
+                while (skip > 0 && (skipSize = inputStream.skip(skip)) > 0)
                 {
                     skip -= skipSize;
                 }
@@ -63,7 +78,7 @@ public class FIOUtil
             out = new ByteArrayOutputStream();
             for (int i = 0; i < size; i++)
             {
-                out.write(in.read());
+                out.write(inputStream.read());
             }
             return out.toByteArray();
         } finally
@@ -73,7 +88,7 @@ public class FIOUtil
     }
 
     /**
-     * 从输入流中读取字符串
+     * 从输入流中获得字符串
      *
      * @param inputStream 输入流
      * @return
@@ -85,7 +100,7 @@ public class FIOUtil
     }
 
     /**
-     * 从输入流中读取字符串
+     * 从输入流中获得字符串
      *
      * @param inputStream 输入流
      * @param charset     编码格式，如果为空则默认编码为UTF-8
@@ -106,7 +121,7 @@ public class FIOUtil
         StringBuilder sb = new StringBuilder();
         char[] buf = new char[1024];
         int len = -1;
-        while ((len = reader.read(buf)) >= 0)
+        while ((len = reader.read(buf)) != -1)
         {
             sb.append(buf, 0, len);
         }
