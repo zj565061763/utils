@@ -29,6 +29,10 @@ import java.util.List;
 
 public class FViewUtil
 {
+    private FViewUtil()
+    {
+    }
+
     /**
      * 设置view的背景
      *
