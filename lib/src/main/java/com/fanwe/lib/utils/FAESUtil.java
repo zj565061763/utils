@@ -2,6 +2,8 @@ package com.fanwe.lib.utils;
 
 import android.util.Base64;
 
+import java.nio.charset.Charset;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -66,13 +68,13 @@ public class FAESUtil
         try
         {
             byte[] contentBytes = Base64.decode(content, 0);
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             decryptResult = cipher.doFinal(contentBytes);
             if (decryptResult != null)
             {
-                result = new String(decryptResult, "UTF-8");
+                result = new String(decryptResult, Charset.defaultCharset());
             }
         } catch (Exception ex)
         {
