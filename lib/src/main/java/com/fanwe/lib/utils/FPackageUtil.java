@@ -31,28 +31,7 @@ public class FPackageUtil
     }
 
     /**
-     * 返回手机上是否安装了某个app
-     *
-     * @param packageName
-     * @param context
-     * @return
-     */
-    public static boolean isPackageExist(String packageName, Context context)
-    {
-        PackageManager manager = context.getPackageManager();
-        List<PackageInfo> listInfo = manager.getInstalledPackages(0);
-        for (PackageInfo item : listInfo)
-        {
-            if (item.packageName.equalsIgnoreCase(packageName))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 返回某个apk文件的包信息
+     * 返回apk文件的包信息
      *
      * @param apkFilePath
      * @param context
@@ -66,22 +45,23 @@ public class FPackageUtil
     }
 
     /**
-     * 返回当前app的包信息
+     * 返回app的包信息
      *
+     * @param packageName app包名
      * @param context
      * @return
      */
-    public static PackageInfo getPackageInfo(Context context)
+    public static PackageInfo getPackageInfo(String packageName, Context context)
     {
-        PackageInfo apkInfo = null;
         try
         {
             PackageManager pm = context.getPackageManager();
-            apkInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            return pm.getPackageInfo(packageName, 0);
         } catch (Exception e)
         {
+            e.printStackTrace();
+            return null;
         }
-        return apkInfo;
     }
 
     /**
@@ -111,17 +91,18 @@ public class FPackageUtil
     }
 
     /**
-     * 返回当前app的MetaData
+     * 返回app的MetaData
      *
+     * @param packageName app包名
      * @param context
      * @return
      */
-    public static Bundle getMetaData(Context context)
+    public static Bundle getMetaData(String packageName, Context context)
     {
         try
         {
             PackageManager pm = context.getPackageManager();
-            ApplicationInfo info = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            ApplicationInfo info = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             return info.metaData;
         } catch (Exception e)
         {
@@ -133,7 +114,7 @@ public class FPackageUtil
     /**
      * 启动某个app
      *
-     * @param packageName app的包名
+     * @param packageName app包名
      * @param context
      * @return
      */
@@ -153,17 +134,17 @@ public class FPackageUtil
     }
 
     /**
-     * 当前app是否处于后台
+     * app是否处于后台
      *
+     * @param packageName app包名
      * @param context
      * @return
      */
-    public static boolean isBackground(Context context)
+    public static boolean isBackground(String packageName, Context context)
     {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
 
-        final String packageName = context.getPackageName();
         for (RunningAppProcessInfo appProcess : appProcesses)
         {
             if (appProcess.processName.equals(packageName))
@@ -180,20 +161,29 @@ public class FPackageUtil
         return false;
     }
 
-    public static boolean isAppInstalled(Context context, String packagename)
+    /**
+     * 返回手机上是否安装了某个app
+     *
+     * @param packageName app包名
+     * @param context
+     * @return
+     */
+    public static boolean isAppInstalled(String packageName, Context context)
     {
         try
         {
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+            PackageManager pm = context.getPackageManager();
+            PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
             return packageInfo != null;
         } catch (Exception e)
         {
+            e.printStackTrace();
             return false;
         }
     }
 
     /**
-     * 获得进程名称
+     * 返回当前进程的名称
      *
      * @param context
      * @return
@@ -217,16 +207,4 @@ public class FPackageUtil
         }
         return null;
     }
-
-    /**
-     * 是否是主进程
-     *
-     * @param context
-     * @return
-     */
-    public static boolean isMainProcess(Context context)
-    {
-        return context.getPackageName().equals(getProcessName(context));
-    }
-
 }
