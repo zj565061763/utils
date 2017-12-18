@@ -60,17 +60,17 @@ public final class FSystemUtil
         return value;
     }
 
-    public static int getStreamVolumeVoiceCall(Context context)
+    /**
+     * 获得音量
+     *
+     * @param context
+     * @param streamType 音量类型{@link AudioManager}
+     * @return
+     */
+    public static int getStreamVolume(Context context, int streamType)
     {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        int value = audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
-        return value;
-    }
-
-    public static int getStreamSystem(Context context)
-    {
-        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        int value = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+        int value = audioManager.getStreamVolume(streamType);
         return value;
     }
 
