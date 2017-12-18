@@ -7,13 +7,12 @@ import com.fanwe.lib.utils.encrypt.FMD5Util;
 
 public class BitmapLruCache
 {
-    private static final int DEFAULT_MEMORY_CACHE_SIZE = 4 * 1024 * 1024;
-
     private LruCache<String, Bitmap> mCache;
+    private int mMaxCacheSize;
 
     public BitmapLruCache()
     {
-        this(DEFAULT_MEMORY_CACHE_SIZE);
+        this((int) ((double) Runtime.getRuntime().maxMemory() / 8));
     }
 
     /**
@@ -21,14 +20,23 @@ public class BitmapLruCache
      */
     public BitmapLruCache(int maxSize)
     {
-        mCache = new LruCache<String, Bitmap>(maxSize)
+        this.mMaxCacheSize = maxSize;
+    }
+
+    private LruCache<String, Bitmap> getCache()
+    {
+        if (mCache == null)
         {
-            @Override
-            protected int sizeOf(String key, Bitmap value)
+            mCache = new LruCache<String, Bitmap>(mMaxCacheSize)
             {
-                return value.getByteCount();
-            }
-        };
+                @Override
+                protected int sizeOf(String key, Bitmap value)
+                {
+                    return value.getByteCount();
+                }
+            };
+        }
+        return mCache;
     }
 
     private String createKey(String url)
@@ -40,7 +48,7 @@ public class BitmapLruCache
     {
         try
         {
-            mCache.put(createKey(url), bitmap);
+            getCache().put(createKey(url), bitmap);
             return true;
         } catch (Exception e)
         {
@@ -53,7 +61,7 @@ public class BitmapLruCache
     {
         try
         {
-            return mCache.get(createKey(url));
+            return getCache().get(createKey(url));
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -61,8 +69,13 @@ public class BitmapLruCache
         }
     }
 
+    public int size()
+    {
+        return getCache().size();
+    }
+
     public void clear()
     {
-        mCache.evictAll();
+        getCache().evictAll();
     }
 }
