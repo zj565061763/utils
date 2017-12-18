@@ -85,11 +85,7 @@ public class FFileUtil
      */
     public static long getFileOrDirSize(File file)
     {
-        if (file == null)
-        {
-            return 0;
-        }
-        if (!file.exists())
+        if (file == null || !file.exists())
         {
             return 0;
         }
@@ -97,38 +93,44 @@ public class FFileUtil
         {
             return file.length();
         }
-        File[] list = file.listFiles();
-        if (list == null || list.length <= 0)
+        File[] files = file.listFiles();
+        if (files == null || files.length <= 0)
         {
             return 0;
         }
         long length = 0;
-        for (File item : list)
+        for (File item : files)
         {
             length += getFileOrDirSize(item);
         }
         return length;
     }
 
-    public static boolean deleteFileOrDir(File path)
+    /**
+     * 删除文件或者目录
+     *
+     * @param file
+     * @return
+     */
+    public static boolean deleteFileOrDir(File file)
     {
-        if (path == null || !path.exists())
+        if (file == null || !file.exists())
         {
             return true;
         }
-        if (path.isFile())
+        if (file.isFile())
         {
-            return path.delete();
+            return file.delete();
         }
-        File[] files = path.listFiles();
+        File[] files = file.listFiles();
         if (files != null)
         {
-            for (File file : files)
+            for (File item : files)
             {
-                deleteFileOrDir(file);
+                deleteFileOrDir(item);
             }
         }
-        return path.delete();
+        return file.delete();
     }
 
     /**
