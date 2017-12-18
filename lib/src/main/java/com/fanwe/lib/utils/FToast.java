@@ -9,9 +9,13 @@ import android.widget.Toast;
 /**
  * toast显示类，可以在子线程直接调用
  */
-public class FToast
+public final class FToast
 {
     private static Toast sToast;
+
+    private FToast()
+    {
+    }
 
     public static void show(CharSequence text, Context context)
     {
