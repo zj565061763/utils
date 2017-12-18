@@ -71,7 +71,7 @@ public class FPackageUtil
      * @param context
      * @return
      */
-    public static boolean installApkPackage(String path, Context context)
+    public static boolean installApk(String path, Context context)
     {
         if (path == null)
         {
@@ -97,7 +97,7 @@ public class FPackageUtil
      * @param context
      * @return
      */
-    public static Bundle getMetaData(String packageName, Context context)
+    public static Bundle getAppMetaData(String packageName, Context context)
     {
         try
         {
@@ -140,7 +140,7 @@ public class FPackageUtil
      * @param context
      * @return
      */
-    public static boolean isBackground(String packageName, Context context)
+    public static boolean isAppBackground(String packageName, Context context)
     {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
