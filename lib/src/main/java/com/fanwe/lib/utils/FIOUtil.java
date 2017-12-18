@@ -6,6 +6,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +22,128 @@ public final class FIOUtil
 {
     private FIOUtil()
     {
+    }
+
+    /**
+     * 从文件中读取字符串
+     *
+     * @param file
+     * @return
+     */
+    public static String readStringFromFile(File file)
+    {
+        if (file == null || !file.exists())
+        {
+            return null;
+        }
+
+        InputStream inputStream = null;
+        try
+        {
+            inputStream = new FileInputStream(file);
+            return readString(inputStream, null);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        } finally
+        {
+            closeQuietly(inputStream);
+        }
+    }
+
+    /**
+     * 写入字符串到文件中
+     *
+     * @param content
+     * @param file
+     * @return
+     */
+    public static boolean writeStringToFile(String content, File file)
+    {
+        if (file == null || content == null)
+        {
+            return false;
+        }
+        OutputStream outputStream = null;
+        try
+        {
+            outputStream = new FileOutputStream(file);
+            writeString(outputStream, content, null);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(outputStream);
+        }
+    }
+
+    /**
+     * 添加字符串到文件的末尾
+     *
+     * @param content
+     * @param file
+     * @return
+     */
+    public static boolean appendStringToFile(String content, File file)
+    {
+        if (file == null || content == null)
+        {
+            return false;
+        }
+        OutputStream outputStream = null;
+        try
+        {
+            outputStream = new FileOutputStream(file, true);
+            writeString(outputStream, content, null);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(outputStream);
+        }
+    }
+
+    /**
+     * 拷贝文件
+     *
+     * @param fileFrom
+     * @param fileTo
+     * @return
+     */
+    public static boolean copy(File fileFrom, File fileTo)
+    {
+        if (fileFrom == null || !fileFrom.exists())
+        {
+            return false;
+        }
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try
+        {
+            if (!fileTo.exists())
+            {
+                fileTo.createNewFile();
+            }
+            inputStream = new FileInputStream(fileFrom);
+            outputStream = new FileOutputStream(fileTo);
+            copy(inputStream, outputStream);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(inputStream);
+            closeQuietly(outputStream);
+        }
     }
 
     /**
@@ -89,18 +214,6 @@ public final class FIOUtil
      * 从输入流中获得字符串
      *
      * @param inputStream 输入流
-     * @return
-     * @throws IOException
-     */
-    public static String readString(InputStream inputStream) throws IOException
-    {
-        return readString(inputStream, null);
-    }
-
-    /**
-     * 从输入流中获得字符串
-     *
-     * @param inputStream 输入流
      * @param charset     编码格式，如果为空则默认编码为UTF-8
      * @return
      * @throws IOException
@@ -124,18 +237,6 @@ public final class FIOUtil
             sb.append(buf, 0, len);
         }
         return sb.toString();
-    }
-
-    /**
-     * 往输出流写入字符串
-     *
-     * @param outputStream 输出流
-     * @param content      字符串内容
-     * @throws IOException
-     */
-    public static void writeString(OutputStream outputStream, String content) throws IOException
-    {
-        writeString(outputStream, content, null);
     }
 
     /**
