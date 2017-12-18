@@ -1,8 +1,9 @@
 package com.fanwe.lib.utils;
 
-
+import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 public final class FResUtil
 {
@@ -10,8 +11,7 @@ public final class FResUtil
     {
     }
 
-
-    public static DisplayMetrics getDisplayMetrics(Context context)
+    private static DisplayMetrics getDisplayMetrics(Context context)
     {
         return context.getResources().getDisplayMetrics();
     }
@@ -97,5 +97,63 @@ public final class FResUtil
     public static int getScreenHeightPercent(float percent, Context context)
     {
         return (int) ((float) getScreenHeight(context) * percent);
+    }
+
+    /**
+     * 获得状态栏的高度
+     *
+     * @return
+     */
+    public static int getStatusBarHeight(Context context)
+    {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+        {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    /**
+     * 返回activity的状态栏高度<br>
+     * 如果该activity的状态栏可见则返回状态栏高度，如果不可见则返回0
+     *
+     * @param context
+     * @return
+     */
+    public static int getActivityStatusBarHeight(Context context)
+    {
+        if (context == null)
+        {
+            return 0;
+        }
+        if (!(context instanceof Activity))
+        {
+            return getStatusBarHeight(context);
+        }
+
+        if (isStatusBarVisible((Activity) context))
+        {
+            return getStatusBarHeight(context);
+        } else
+        {
+            return 0;
+        }
+    }
+
+    /**
+     * 状态栏是否可见
+     *
+     * @param activity
+     * @return
+     */
+    public static boolean isStatusBarVisible(Activity activity)
+    {
+        if (activity == null)
+        {
+            return false;
+        }
+        return ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0);
     }
 }

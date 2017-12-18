@@ -830,7 +830,7 @@ public final class FViewUtil
     {
         int[] location = getLocationOnScreen(view, outLocation);
 
-        int statusBarHeight = getStatusBarHeight(view.getContext());
+        int statusBarHeight = FResUtil.getStatusBarHeight(view.getContext());
         location[1] -= statusBarHeight;
 
         return location;
@@ -1342,64 +1342,6 @@ public final class FViewUtil
             listChild.add(parent.getChildAt(i));
         }
         return listChild;
-    }
-
-    /**
-     * 获得状态栏的高度
-     *
-     * @return
-     */
-    public static int getStatusBarHeight(Context context)
-    {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0)
-        {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
-
-    /**
-     * 返回activity的状态栏高度<br>
-     * 如果该activity的状态栏可见则返回状态栏高度，如果不可见则返回0
-     *
-     * @param context
-     * @return
-     */
-    public static int getActivityStatusBarHeight(Context context)
-    {
-        if (context == null)
-        {
-            return 0;
-        }
-        if (!(context instanceof Activity))
-        {
-            return getStatusBarHeight(context);
-        }
-
-        if (isStatusBarVisible((Activity) context))
-        {
-            return getStatusBarHeight(context);
-        } else
-        {
-            return 0;
-        }
-    }
-
-    /**
-     * 状态栏是否可见
-     *
-     * @param activity
-     * @return
-     */
-    public static boolean isStatusBarVisible(Activity activity)
-    {
-        if (activity == null)
-        {
-            return false;
-        }
-        return ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0);
     }
 
     /**
