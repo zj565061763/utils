@@ -10,10 +10,13 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * aes加解密工具类
  */
-public class FAESUtil
+public final class FAESUtil
 {
-
     public static final String DEFAULT_KEY = "1400009129000000";
+
+    private FAESUtil()
+    {
+    }
 
     public static String encrypt(String content)
     {

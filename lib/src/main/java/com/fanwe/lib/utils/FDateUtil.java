@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FDateUtil
+public final class FDateUtil
 {
     /**
      * 1秒的毫秒数
@@ -25,6 +25,10 @@ public class FDateUtil
     public static final long MILLIS_DAY = MILLIS_HOUR * 24;
 
     public static final String SEPARATOR_DEFAULT = ":";
+
+    private FDateUtil()
+    {
+    }
 
     /**
      * 返回"天"部分的数值
