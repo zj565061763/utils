@@ -1,6 +1,5 @@
 package com.fanwe.lib.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -12,15 +11,8 @@ public final class FMD5Util
 
     public static String MD5(String value)
     {
-        try
-        {
-            byte[] byteValue = value.getBytes(FCharset.UTF8);
-            return MD5(byteValue);
-        } catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        byte[] byteValue = value.getBytes();
+        return MD5(byteValue);
     }
 
     public static String MD5(byte[] value)

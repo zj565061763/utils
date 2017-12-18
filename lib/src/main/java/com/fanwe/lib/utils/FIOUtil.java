@@ -1,7 +1,6 @@
 package com.fanwe.lib.utils;
 
 import android.database.Cursor;
-import android.text.TextUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -14,6 +13,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.charset.Charset;
 
 public final class FIOUtil
 {
@@ -105,11 +105,11 @@ public final class FIOUtil
      * @return
      * @throws IOException
      */
-    public static String readString(InputStream inputStream, String charset) throws IOException
+    public static String readString(InputStream inputStream, Charset charset) throws IOException
     {
-        if (TextUtils.isEmpty(charset))
+        if (charset == null)
         {
-            charset = FCharset.UTF8;
+            charset = Charset.defaultCharset();
         }
         if (!(inputStream instanceof BufferedInputStream))
         {
@@ -146,11 +146,11 @@ public final class FIOUtil
      * @param charset      编码格式，如果为空则默认编码为UTF-8
      * @throws IOException
      */
-    public static void writeString(OutputStream outputStream, String content, String charset) throws IOException
+    public static void writeString(OutputStream outputStream, String content, Charset charset) throws IOException
     {
-        if (TextUtils.isEmpty(charset))
+        if (charset == null)
         {
-            charset = FCharset.UTF8;
+            charset = Charset.defaultCharset();
         }
         Writer writer = new OutputStreamWriter(outputStream, charset);
         writer.write(content);
