@@ -7,10 +7,10 @@ import java.util.Date;
 
 public class FDateUtil
 {
-    public static final long MILLISECONDS_DAY = 1000 * 60 * 60 * 24;
-    public static final long MILLISECONDS_HOUR = 1000 * 60 * 60;
-    public static final long MILLISECONDS_MINUTES = 1000 * 60;
-    public static final long MILLISECONDS_SECOND = 1000;
+    public static final long MILLIS_SECOND = 1000;
+    public static final long MILLIS_MINUTES = MILLIS_SECOND * 60;
+    public static final long MILLIS_HOUR = MILLIS_MINUTES * 60;
+    public static final long MILLIS_DAY = MILLIS_HOUR * 24;
 
     public static final String SEPARATOR_DEFAULT = ":";
 
@@ -22,7 +22,7 @@ public class FDateUtil
      */
     public static long getDuringDay(long mss)
     {
-        return mss / MILLISECONDS_DAY;
+        return mss / MILLIS_DAY;
     }
 
     /**
@@ -33,7 +33,7 @@ public class FDateUtil
      */
     public static long getDuringHours(long mss)
     {
-        return (mss % MILLISECONDS_DAY) / MILLISECONDS_HOUR;
+        return (mss % MILLIS_DAY) / MILLIS_HOUR;
     }
 
     /**
@@ -44,7 +44,7 @@ public class FDateUtil
      */
     public static long getDuringMinutes(long mss)
     {
-        return (mss % MILLISECONDS_HOUR) / MILLISECONDS_MINUTES;
+        return (mss % MILLIS_HOUR) / MILLIS_MINUTES;
     }
 
     /**
@@ -55,7 +55,7 @@ public class FDateUtil
      */
     public static long getDuringSeconds(long mss)
     {
-        return (mss % MILLISECONDS_MINUTES) / MILLISECONDS_SECOND;
+        return (mss % MILLIS_MINUTES) / MILLIS_SECOND;
     }
 
     /**
@@ -66,7 +66,7 @@ public class FDateUtil
      */
     public static long getTotalMinutes(long mss)
     {
-        return mss / MILLISECONDS_MINUTES;
+        return mss / MILLIS_MINUTES;
     }
 
     /**
@@ -77,7 +77,7 @@ public class FDateUtil
      */
     public static long getTotalHours(long mss)
     {
-        return mss / MILLISECONDS_HOUR;
+        return mss / MILLIS_HOUR;
     }
 
     public static String getTotalMinutesFormat(long mss)
@@ -385,14 +385,14 @@ public class FDateUtil
         long current = System.currentTimeMillis();
         long timeSpan = current - timestamp;
 
-        if (timeSpan <= 0 || timeSpan < MILLISECONDS_MINUTES)
+        if (timeSpan <= 0 || timeSpan < MILLIS_MINUTES)
         {
             return "刚刚";
-        } else if (timeSpan < MILLISECONDS_HOUR)
+        } else if (timeSpan < MILLIS_HOUR)
         {
             long min = getDuringMinutes(timeSpan);
             return min + "分钟前";
-        } else if (timeSpan < MILLISECONDS_DAY)
+        } else if (timeSpan < MILLIS_DAY)
         {
             try
             {
