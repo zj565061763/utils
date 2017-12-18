@@ -14,8 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class FPackageUtil
+public final class FPackageUtil
 {
+    private FPackageUtil()
+    {
+    }
 
     public static void chmod(String permission, String path)
     {

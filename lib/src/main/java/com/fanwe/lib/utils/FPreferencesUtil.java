@@ -7,8 +7,11 @@ import android.preference.PreferenceManager;
 /**
  * SharedPreferences工具类
  */
-public class FPreferencesUtil
+public final class FPreferencesUtil
 {
+    private FPreferencesUtil()
+    {
+    }
 
     public static SharedPreferences getDefaultSharedPreferences(Context context)
     {
