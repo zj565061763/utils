@@ -392,6 +392,12 @@ public class FDateUtil
         return format.format(date);
     }
 
+    /**
+     * 返回当前时间到指定时间点的格式化描述
+     *
+     * @param timestamp
+     * @return
+     */
     public static String formatDuringFrom(long timestamp)
     {
         long current = System.currentTimeMillis();
