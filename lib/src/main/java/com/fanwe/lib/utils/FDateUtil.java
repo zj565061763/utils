@@ -7,9 +7,21 @@ import java.util.Date;
 
 public class FDateUtil
 {
+    /**
+     * 1秒的毫秒数
+     */
     public static final long MILLIS_SECOND = 1000;
+    /**
+     * 1分钟的毫秒数
+     */
     public static final long MILLIS_MINUTES = MILLIS_SECOND * 60;
+    /**
+     * 1小时的毫秒数
+     */
     public static final long MILLIS_HOUR = MILLIS_MINUTES * 60;
+    /**
+     * 1天的毫秒数
+     */
     public static final long MILLIS_DAY = MILLIS_HOUR * 24;
 
     public static final String SEPARATOR_DEFAULT = ":";
