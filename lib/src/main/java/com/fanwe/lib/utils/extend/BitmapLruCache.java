@@ -12,7 +12,7 @@ public class BitmapLruCache
 
     public BitmapLruCache()
     {
-        this((int) ((double) Runtime.getRuntime().maxMemory() / 8));
+        this((int) ((double) Runtime.getRuntime().maxMemory() / 16));
     }
 
     /**
