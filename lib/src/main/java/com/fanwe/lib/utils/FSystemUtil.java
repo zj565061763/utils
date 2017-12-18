@@ -3,6 +3,7 @@ package com.fanwe.lib.utils;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 public final class FSystemUtil
 {
@@ -74,4 +75,12 @@ public final class FSystemUtil
         return value;
     }
 
+    /**
+     * 获取设备ID
+     */
+    public static String getDeviceId(Context context)
+    {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
 }
