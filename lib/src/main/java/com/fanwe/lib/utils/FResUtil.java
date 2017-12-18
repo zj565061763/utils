@@ -156,4 +156,23 @@ public final class FResUtil
         }
         return ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0);
     }
+
+    /**
+     * 获得图片文件名对应的资源id
+     *
+     * @param drawableName
+     * @return
+     */
+    public static int getDrawableIdentifier(String drawableName, Context context)
+    {
+        try
+        {
+            return context.getResources().getIdentifier(drawableName, "drawable",
+                    context.getPackageName());
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
