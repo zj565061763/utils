@@ -11,6 +11,10 @@ public final class FMD5Util
 
     public static String MD5(String value)
     {
+        if (value == null)
+        {
+            return null;
+        }
         byte[] byteValue = value.getBytes();
         return MD5(byteValue);
     }
