@@ -6,8 +6,12 @@ import android.os.Environment;
 import java.io.File;
 import java.text.DecimalFormat;
 
-public class FFileUtil
+public final class FFileUtil
 {
+    private FFileUtil()
+    {
+    }
+
     /**
      * sd卡是否存在
      *
