@@ -5,6 +5,77 @@ import java.math.RoundingMode;
 
 public class FMathUtil
 {
+    //----------加减乘除 start----------
+
+    /**
+     * 加法
+     *
+     * @param value1
+     * @param value2
+     * @return
+     */
+    public static double add(double value1, double value2)
+    {
+        return new BigDecimal(String.valueOf(value1))
+                .add(new BigDecimal(String.valueOf(value2))).doubleValue();
+    }
+
+    /**
+     * 减法
+     *
+     * @param value1
+     * @param value2
+     * @return
+     */
+    public static double subtract(double value1, double value2)
+    {
+        return new BigDecimal(String.valueOf(value1))
+                .subtract(new BigDecimal(String.valueOf(value2))).doubleValue();
+    }
+
+    /**
+     * 乘法
+     *
+     * @param value1
+     * @param value2
+     * @return
+     */
+    public static double multiply(double value1, double value2)
+    {
+        return new BigDecimal(String.valueOf(value1))
+                .multiply(new BigDecimal(String.valueOf(value2))).doubleValue();
+    }
+
+    /**
+     * 除法
+     *
+     * @param value1       被除数
+     * @param value2       除数
+     * @param scale        保留几位小数
+     * @param roundingMode 保留小数的规则(如：四舍五入等)
+     * @return
+     */
+    public static double divide(double value1, double value2, int scale, RoundingMode roundingMode)
+    {
+        return new BigDecimal(String.valueOf(value1))
+                .divide(new BigDecimal(String.valueOf(value2)), scale, roundingMode).doubleValue();
+    }
+
+    /**
+     * 除法（最终结果四舍五入）
+     *
+     * @param value1 被除数
+     * @param value2 除数
+     * @param scale  保留几位小数
+     * @return
+     */
+    public static double divide(double value1, double value2, int scale)
+    {
+        return divide(value1, value2, scale, RoundingMode.HALF_UP);
+    }
+
+    //----------加减乘除 end----------
+
     /**
      * 保留小数位（四舍五入模式）
      *
@@ -30,114 +101,15 @@ public class FMathUtil
         return new BigDecimal(String.valueOf(value)).setScale(scale, mode).doubleValue();
     }
 
-    //----------加减乘除 start----------
-
     /**
-     * 加法
+     * 计算经纬度之间的距离
      *
-     * @param value1
-     * @param value2
+     * @param lat1
+     * @param lon1
+     * @param lat2
+     * @param lon2
      * @return
      */
-    public static double add(double value1, double value2)
-    {
-        return new BigDecimal(String.valueOf(value1))
-                .add(new BigDecimal(String.valueOf(value2))).doubleValue();
-    }
-
-    /**
-     * 加法（最终结果四舍五入）
-     *
-     * @param value1
-     * @param value2
-     * @param scale  保留几位小数
-     * @return
-     */
-    public static double add(double value1, double value2, int scale)
-    {
-        return scaleHalfUp(add(value1, value2), scale);
-    }
-
-    /**
-     * 减法
-     *
-     * @param value1
-     * @param value2
-     * @return
-     */
-    public static double subtract(double value1, double value2)
-    {
-        return new BigDecimal(String.valueOf(value1))
-                .subtract(new BigDecimal(String.valueOf(value2))).doubleValue();
-    }
-
-    /**
-     * 减法（最终结果四舍五入）
-     *
-     * @param value1
-     * @param value2
-     * @param scale  保留几位小数
-     * @return
-     */
-    public static double subtract(double value1, double value2, int scale)
-    {
-        return scaleHalfUp(subtract(value1, value2), scale);
-    }
-
-    /**
-     * 乘法
-     *
-     * @param value1
-     * @param value2
-     * @return
-     */
-    public static double multiply(double value1, double value2)
-    {
-        return new BigDecimal(String.valueOf(value1))
-                .multiply(new BigDecimal(String.valueOf(value2))).doubleValue();
-    }
-
-    /**
-     * 乘法（最终结果四舍五入）
-     *
-     * @param value1
-     * @param value2
-     * @param scale  保留几位小数
-     * @return
-     */
-    public static double multiply(double value1, double value2, int scale)
-    {
-        return scaleHalfUp(multiply(value1, value2), scale);
-    }
-
-    /**
-     * 除法
-     *
-     * @param value1
-     * @param value2
-     * @return
-     */
-    public static double divide(double value1, double value2, int scale, RoundingMode roundingMode)
-    {
-        return new BigDecimal(String.valueOf(value1))
-                .divide(new BigDecimal(String.valueOf(value2)), scale, roundingMode).doubleValue();
-    }
-
-    /**
-     * 除法（最终结果四舍五入）
-     *
-     * @param value1
-     * @param value2
-     * @param scale  保留几位小数
-     * @return
-     */
-    public static double divide(double value1, double value2, int scale)
-    {
-        return divide(value1, value2, scale, RoundingMode.HALF_UP);
-    }
-
-    //----------加减乘除 end----------
-
     public static double distance(double lat1, double lon1, double lat2, double lon2)
     {
         double theta = lon1 - lon2;
