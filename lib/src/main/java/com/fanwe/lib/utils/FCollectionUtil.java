@@ -249,23 +249,4 @@ public class FCollectionUtil
             }
         }
     }
-
-
-    /**
-     * 遍历回调
-     *
-     * @param <T>
-     */
-    public interface IterateCallback<T>
-    {
-        /**
-         * 返回true，结束遍历
-         *
-         * @param i
-         * @param item
-         * @param it
-         * @return
-         */
-        boolean next(int i, T item, Iterator<T> it);
-    }
 }
