@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class FCollectionUtil
+public final class FCollectionUtil
 {
+    private FCollectionUtil()
+    {
+    }
+
     public static boolean isEmpty(Collection<?> list)
     {
         if (list != null && !list.isEmpty())

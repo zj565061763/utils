@@ -3,8 +3,12 @@ package com.fanwe.lib.utils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class FMathUtil
+public final class FMathUtil
 {
+    private FMathUtil()
+    {
+    }
+
     //----------加减乘除 start----------
 
     /**

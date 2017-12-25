@@ -5,8 +5,12 @@ import java.util.Iterator;
 /**
  * 遍历工具类
  */
-public class FIterateUtil
+public final class FIterateUtil
 {
+    private FIterateUtil()
+    {
+    }
+
     /**
      * 遍历
      *
