@@ -144,58 +144,44 @@ public class FCollectionUtil
         return listGroup;
     }
 
-    public static <T> List<List<T>> splitListLinked(List<T> listModel, int countPerList)
+    public static <T> List<List<T>> splitListLinked(List<T> list, int countPerList)
     {
-        List<List<T>> listGroupModel = new ArrayList<List<T>>();
-        List<T> listPageModel = new ArrayList<T>();
-
-        if (listModel != null && !listModel.isEmpty())
+        if (isEmpty(list) || countPerList <= 0)
         {
-            boolean needBackIndex = false;
-            for (int i = 0; i < listModel.size(); i++)
-            {
-                if (needBackIndex)
-                {
-                    needBackIndex = false;
-                    listPageModel.add(listModel.get(i - 1));
-                } else
-                {
-                    listPageModel.add(listModel.get(i));
-                }
+            return null;
+        }
 
-                if (i != 0)
-                {
-                    if ((i + 1) % (countPerList) == 0)
-                    {
-                        needBackIndex = true;
-                        listGroupModel.add(listPageModel);
-                        listPageModel = new ArrayList<T>();
-                    }
-                }
+        List<List<T>> listGroup = new ArrayList<>();
+        List<T> listPage = new ArrayList<>();
+
+        boolean needBackIndex = false;
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (needBackIndex)
+            {
+                needBackIndex = false;
+                listPage.add(list.get(i - 1));
+            } else
+            {
+                listPage.add(list.get(i));
             }
 
-            if (listPageModel.size() > 0)
+            if (i != 0)
             {
-                listGroupModel.add(listPageModel);
+                if ((i + 1) % (countPerList) == 0)
+                {
+                    needBackIndex = true;
+                    listGroup.add(listPage);
+                    listPage = new ArrayList<T>();
+                }
             }
         }
-        return listGroupModel;
-    }
-
-
-    public static <T> List<T> subList(List<T> list, int start)
-    {
-        List<T> listReturn = null;
-        if (isIndexLegal(list, start))
+        if (listPage.size() > 0)
         {
-            listReturn = new ArrayList<T>();
-            for (int i = start; i < list.size(); i++)
-            {
-                T t = list.get(i);
-                listReturn.add(t);
-            }
+            listGroup.add(listPage);
         }
-        return listReturn;
+
+        return listGroup;
     }
 
     public static <T> void removeList(List<T> list, int start, int end)
