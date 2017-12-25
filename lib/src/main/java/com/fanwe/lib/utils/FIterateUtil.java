@@ -17,25 +17,28 @@ public final class FIterateUtil
      * @param iterable
      * @param callback
      * @param <T>
+     * @return true-遍历中某一次遍历回调返回了true
      */
-    public static <T> void iterate(Iterable<T> iterable, IterateCallback<T> callback)
+    public static <T> boolean iterate(Iterable<T> iterable, IterateCallback<T> callback)
     {
         if (iterable == null || callback == null)
         {
-            return;
+            return false;
         }
-        Iterator<T> it = iterable.iterator();
 
+        Iterator<T> it = iterable.iterator();
         int i = 0;
         while (it.hasNext())
         {
             T item = it.next();
             if (callback.next(i, item, it))
             {
-                return;
+                return true;
             }
             i++;
         }
+
+        return false;
     }
 
     /**
@@ -43,41 +46,49 @@ public final class FIterateUtil
      *
      * @param count    遍历次数
      * @param callback
+     * @return true-遍历中某一次遍历回调返回了true
      */
-    public static void foreach(int count, SimpleIterateCallback callback)
+    public static boolean foreach(int count, SimpleIterateCallback callback)
     {
         if (count <= 0 || callback == null)
         {
-            return;
+            return false;
         }
+
         for (int i = 0; i < count; i++)
         {
             if (callback.next(i))
             {
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     /**
      * 倒序遍历
      *
-     * @param count    要遍历的次数
+     * @param count
      * @param callback
+     * @return true-遍历中某一次遍历回调返回了true
      */
-    public static void foreachReverse(int count, SimpleIterateCallback callback)
+    public static boolean foreachReverse(int count, SimpleIterateCallback callback)
     {
         if (count <= 0 || callback == null)
         {
-            return;
+            return false;
         }
+
         for (int i = count - 1; i >= 0; i--)
         {
             if (callback.next(i))
             {
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     /**
