@@ -8,6 +8,10 @@ import java.text.DecimalFormat;
 
 public final class FFileUtil
 {
+    public static final long KB = 1024;
+    public static final long MB = 1024 * KB;
+    public static final long GB = 1024 * MB;
+
     private FFileUtil()
     {
     }
@@ -150,18 +154,18 @@ public final class FFileUtil
         if (fileLength <= 0)
         {
             fileSizeString = "0.00B";
-        } else if (fileLength < 1024)
+        } else if (fileLength < KB)
         {
             fileSizeString = df.format((double) fileLength) + "B";
-        } else if (fileLength < 1048576)
+        } else if (fileLength < MB)
         {
-            fileSizeString = df.format((double) fileLength / 1024) + "KB";
-        } else if (fileLength < 1073741824)
+            fileSizeString = df.format((double) fileLength / KB) + "KB";
+        } else if (fileLength < GB)
         {
-            fileSizeString = df.format((double) fileLength / 1048576) + "MB";
+            fileSizeString = df.format((double) fileLength / MB) + "MB";
         } else
         {
-            fileSizeString = df.format((double) fileLength / 1073741824) + "GB";
+            fileSizeString = df.format((double) fileLength / GB) + "GB";
         }
         return fileSizeString;
     }
