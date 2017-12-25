@@ -34,40 +34,6 @@ public final class FPackageUtil
     }
 
     /**
-     * 返回apk文件的包信息
-     *
-     * @param apkFilePath
-     * @param context
-     * @return
-     */
-    public static PackageInfo getApkPackageInfo(String apkFilePath, Context context)
-    {
-        PackageManager pm = context.getPackageManager();
-        PackageInfo apkInfo = pm.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA);
-        return apkInfo;
-    }
-
-    /**
-     * 返回app的包信息
-     *
-     * @param packageName app包名
-     * @param context
-     * @return
-     */
-    public static PackageInfo getPackageInfo(String packageName, Context context)
-    {
-        try
-        {
-            PackageManager pm = context.getPackageManager();
-            return pm.getPackageInfo(packageName, 0);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * 安装某个apk
      *
      * @param path    apk文件路径
@@ -94,6 +60,51 @@ public final class FPackageUtil
     }
 
     /**
+     * 返回apk文件的包信息
+     *
+     * @param apkFilePath
+     * @param context
+     * @return
+     */
+    public static PackageInfo getApkPackageInfo(String apkFilePath, Context context)
+    {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo apkInfo = pm.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA);
+        return apkInfo;
+    }
+
+    /**
+     * 返回当前app的包信息
+     *
+     * @param context
+     * @return
+     */
+    public static PackageInfo getPackageInfo(Context context)
+    {
+        return getPackageInfo(context.getPackageName(), context);
+    }
+
+    /**
+     * 返回app的包信息
+     *
+     * @param packageName app包名
+     * @param context
+     * @return
+     */
+    public static PackageInfo getPackageInfo(String packageName, Context context)
+    {
+        try
+        {
+            PackageManager pm = context.getPackageManager();
+            return pm.getPackageInfo(packageName, 0);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * 返回app的MetaData
      *
      * @param packageName app包名
@@ -112,6 +123,17 @@ public final class FPackageUtil
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 启动当前app
+     *
+     * @param context
+     * @return
+     */
+    public static boolean startApp(Context context)
+    {
+        return startApp(context.getPackageName(), context);
     }
 
     /**
@@ -134,6 +156,17 @@ public final class FPackageUtil
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 当前app是否处于后台
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isAppBackground(Context context)
+    {
+        return isAppBackground(context.getPackageName(), context);
     }
 
     /**
