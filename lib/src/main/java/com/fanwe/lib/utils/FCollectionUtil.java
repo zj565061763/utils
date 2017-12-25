@@ -106,6 +106,7 @@ public class FCollectionUtil
         {
             return null;
         }
+
         List<T> listResult = new ArrayList<>();
         for (int i = start; i < end; i++)
         {
