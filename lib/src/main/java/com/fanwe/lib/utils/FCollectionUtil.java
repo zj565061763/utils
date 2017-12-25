@@ -74,17 +74,6 @@ public class FCollectionUtil
         return list.get(index);
     }
 
-    public static <T> List<T> getTempList(List<T> list)
-    {
-        List<T> listReturn = null;
-        if (list != null)
-        {
-            listReturn = new ArrayList<>();
-            listReturn.addAll(list);
-        }
-        return listReturn;
-    }
-
     public static <T> List<T> subListToSize(List<T> list, int size)
     {
         List<T> listReturn = null;
