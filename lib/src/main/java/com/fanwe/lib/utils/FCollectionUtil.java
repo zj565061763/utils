@@ -1,6 +1,5 @@
 package com.fanwe.lib.utils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -74,88 +73,75 @@ public class FCollectionUtil
         return list.get(index);
     }
 
-    public static <T> List<T> subListToSize(List<T> list, int size)
+    /**
+     * 截取list
+     *
+     * @param list
+     * @param start 截取的开始位置，闭区间
+     * @param end   截取的结束为止，开区间
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> subList(List<T> list, int start, int end)
     {
-        List<T> listReturn = null;
-        if (!isEmpty(list) && list.size() >= size && size > 0)
+        if (isEmpty(list) || !isIndexLegal(list, start) || !isIndexLegal(list, end))
         {
-            listReturn = new ArrayList<T>();
-            for (int i = 0; i < size; i++)
-            {
-                T t = list.get(i);
-                listReturn.add(t);
-            }
+            return null;
         }
-        return listReturn;
+        return list.subList(start, end);
     }
 
-    public static <T> List<T> subListToSizeAvailable(List<T> list, int size)
+    /**
+     * 拷贝list
+     *
+     * @param list
+     * @param start 拷贝的开始位置，闭区间
+     * @param end   拷贝的结束为止，开区间
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> copyList(List<T> list, int start, int end)
     {
-        List<T> listReturn = null;
-        if (!isEmpty(list) && size > 0)
+        if (isEmpty(list) || !isIndexLegal(list, start) || !isIndexLegal(list, end) || start > end)
         {
-            int loopCount = 0;
-            int listSize = list.size();
-            if (size <= listSize)
-            {
-                loopCount = size;
-            } else
-            {
-                loopCount = listSize;
-            }
-            listReturn = new ArrayList<T>();
-            for (int i = 0; i < loopCount; i++)
-            {
-                T t = list.get(i);
-                listReturn.add(t);
-            }
+            return null;
         }
-        return listReturn;
+        List<T> listResult = new ArrayList<>();
+        for (int i = start; i < end; i++)
+        {
+            listResult.add(list.get(i));
+        }
+        return listResult;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T[] toArray(List<T> list)
+    public static <T> List<List<T>> splitList(List<T> list, int countPerList)
     {
-        T[] arr = null;
-        if (!isEmpty(list))
+        if (isEmpty(list) || countPerList <= 0)
         {
-            T item = list.get(0);
-            if (item != null)
-            {
-                Class<?> clazzItem = item.getClass();
-                arr = (T[]) Array.newInstance(clazzItem, list.size());
-                list.toArray(arr);
-            }
+            return null;
         }
-        return arr;
-    }
 
-    public static <T> List<List<T>> splitList(List<T> listModel, int countPerList)
-    {
-        List<List<T>> listGroupModel = new ArrayList<List<T>>();
-        List<T> listPageModel = new ArrayList<T>();
+        List<List<T>> listGroup = new ArrayList<>();
+        List<T> listPage = new ArrayList<>();
 
-        if (listModel != null && !listModel.isEmpty())
+        for (int i = 0; i < list.size(); i++)
         {
-            for (int i = 0; i < listModel.size(); i++)
+            listPage.add(list.get(i));
+            if (i != 0)
             {
-                listPageModel.add(listModel.get(i));
-                if (i != 0)
+                if ((i + 1) % (countPerList) == 0)
                 {
-                    if ((i + 1) % (countPerList) == 0)
-                    {
-                        listGroupModel.add(listPageModel);
-                        listPageModel = new ArrayList<T>();
-                    }
+                    listGroup.add(listPage);
+                    listPage = new ArrayList<T>();
                 }
             }
-
-            if (listPageModel.size() > 0)
-            {
-                listGroupModel.add(listPageModel);
-            }
         }
-        return listGroupModel;
+        if (listPage.size() > 0)
+        {
+            listGroup.add(listPage);
+        }
+
+        return listGroup;
     }
 
     public static <T> List<List<T>> splitListLinked(List<T> listModel, int countPerList)
@@ -196,20 +182,6 @@ public class FCollectionUtil
         return listGroupModel;
     }
 
-    public static <T> List<T> subList(List<T> list, int start, int end)
-    {
-        List<T> listReturn = null;
-        if (end >= start && isIndexLegal(list, start) && isIndexLegal(list, end))
-        {
-            listReturn = new ArrayList<T>();
-            for (int i = start; i <= end; i++)
-            {
-                T t = list.get(i);
-                listReturn.add(t);
-            }
-        }
-        return listReturn;
-    }
 
     public static <T> List<T> subList(List<T> list, int start)
     {
