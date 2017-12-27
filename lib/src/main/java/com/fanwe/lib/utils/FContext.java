@@ -1,6 +1,7 @@
 package com.fanwe.lib.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 /**
  * 保存Context对象
@@ -24,5 +25,10 @@ public final class FContext
     public static final Context get()
     {
         return sContext;
+    }
+
+    public static final Resources getResources()
+    {
+        return get().getResources();
     }
 }
