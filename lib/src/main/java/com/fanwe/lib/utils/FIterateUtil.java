@@ -14,24 +14,23 @@ public final class FIterateUtil
     /**
      * 遍历
      *
-     * @param iterable
+     * @param iterator
      * @param callback
      * @param <T>
      * @return true-遍历中某一次遍历回调返回了true
      */
-    public static <T> boolean iterate(Iterable<T> iterable, IterateCallback<T> callback)
+    public static <T> boolean iterate(Iterator<T> iterator, IterateCallback<T> callback)
     {
-        if (iterable == null || callback == null)
+        if (iterator == null || callback == null)
         {
             return false;
         }
 
-        Iterator<T> it = iterable.iterator();
         int i = 0;
-        while (it.hasNext())
+        while (iterator.hasNext())
         {
-            T item = it.next();
-            if (callback.next(i, item, it))
+            T item = iterator.next();
+            if (callback.next(i, item, iterator))
             {
                 return true;
             }
