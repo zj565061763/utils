@@ -52,7 +52,7 @@ public final class FToast
             sToast.setDuration(duration);
         } else
         {
-            sToast = Toast.makeText(context, text, duration);
+            sToast = Toast.makeText(context.getApplicationContext(), text, duration);
         }
         sToast.show();
     }
