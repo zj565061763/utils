@@ -7,7 +7,7 @@ import android.os.Looper;
 /**
  * Handler管理类
  */
-public class FHandlerManager
+public final class FHandlerManager
 {
     private static final HandlerThread HANDLER_THREAD = new HandlerThread("handlehread");
 
@@ -18,6 +18,10 @@ public class FHandlerManager
 
     private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     private static final Handler BACKGROUND_HANDLER = new Handler(HANDLER_THREAD.getLooper());
+
+    private FHandlerManager()
+    {
+    }
 
     /**
      * 获得主线程Handler

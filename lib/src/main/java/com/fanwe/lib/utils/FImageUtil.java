@@ -14,8 +14,12 @@ import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
 
-public class FImageUtil
+public final class FImageUtil
 {
+    private FImageUtil()
+    {
+    }
+
     /**
      * bitmap转drawable
      *
