@@ -57,6 +57,19 @@ public class FIntentUtil
     }
 
     /**
+     * 系统图库选择界面
+     *
+     * @return
+     */
+    public static Intent getIntentSelectImage()
+    {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        return intent;
+    }
+
+    /**
      * 调用系统相机拍照
      *
      * @param saveFile 图片要保存的file
@@ -67,6 +80,20 @@ public class FIntentUtil
         Intent intent = new Intent();
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(saveFile));
+        return intent;
+    }
+
+    /**
+     * 拨打电话界面
+     *
+     * @param phoneNumber
+     * @return
+     */
+    public static Intent getIntentCallPhone(String phoneNumber)
+    {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
         return intent;
     }
 
@@ -93,21 +120,6 @@ public class FIntentUtil
         {
             intent.putExtra(Intent.EXTRA_TITLE, title);
         }
-        return intent;
-    }
-
-    /**
-     * 获得打开本地图库的intent
-     *
-     * @return
-     */
-    public static Intent getIntentSelectLocalImage()
-    {
-        // Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        // intent.setType("image/*");
-        // intent.putExtra("crop", true);
-        // intent.putExtra("return-data", true);
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         return intent;
     }
 
@@ -138,10 +150,6 @@ public class FIntentUtil
         return intent;
     }
 
-    public static Intent getIntentCallPhone(String phoneNumber)
-    {
-        return new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
-    }
 
     public static boolean isIntentAvailable(Intent intent, Context context)
     {
