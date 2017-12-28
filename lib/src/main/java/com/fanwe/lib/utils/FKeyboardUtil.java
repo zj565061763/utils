@@ -95,7 +95,7 @@ public final class FKeyboardUtil
      * @param context
      * @return
      */
-    public static InputMethodManager getInputMethodManager(Context context)
+    private static InputMethodManager getInputMethodManager(Context context)
     {
         InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         return manager;
