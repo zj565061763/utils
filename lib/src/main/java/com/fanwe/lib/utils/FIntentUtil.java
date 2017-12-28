@@ -14,6 +14,40 @@ import java.util.List;
 
 public class FIntentUtil
 {
+    /**
+     * 选择文件
+     *
+     * @return
+     */
+    public static Intent getIntentGetContent()
+    {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        return intent;
+    }
+
+    /**
+     * 用系统浏览器打开url链接
+     *
+     * @param url
+     * @return
+     */
+    public static Intent getIntentOpenBrowser(String url)
+    {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        return intent;
+    }
+
+    /**
+     * app设置界面
+     *
+     * @param packageName app包名
+     * @return
+     */
     public static Intent getIntentAppSetting(String packageName)
     {
         Intent intent = new Intent();
@@ -22,22 +56,17 @@ public class FIntentUtil
         return intent;
     }
 
+    /**
+     * qq聊天界面
+     *
+     * @param qqNumber 对方的qq号码
+     * @return
+     */
     public static Intent getIntentQQChat(String qqNumber)
     {
-        Intent intent = null;
-        if (!TextUtils.isEmpty(qqNumber))
-        {
-            String url = "mqqwpa://im/chat?chat_type=wpa&uin=" + qqNumber;
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        }
-        return intent;
-    }
-
-    public static Intent getIntentGetContent()
-    {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=" + qqNumber));
         return intent;
     }
 
@@ -50,20 +79,6 @@ public class FIntentUtil
         {
             intent.putExtra(Intent.EXTRA_TITLE, title);
         }
-        return intent;
-    }
-
-    public static Intent getIntentOpenBrowser(String url)
-    {
-        if (TextUtils.isEmpty(url))
-        {
-            return null;
-        }
-
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(url);
-        intent.setData(content_url);
         return intent;
     }
 
