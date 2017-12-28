@@ -1,7 +1,9 @@
 package com.fanwe.lib.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,7 +34,7 @@ public final class FDialogUtil
             Context context = view.getContext();
 
             int x = location[0] + marginLeft;
-            int y = FResUtil.getScreenHeight(context) - location[1] + marginBottom;
+            int y = getScreenHeight(context) - location[1] + marginBottom;
 
             params.x = x;
             params.y = y;
@@ -61,8 +63,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = location[0] - FResUtil.getScreenWidth(context) / 2 + view.getWidth() / 2 + marginLeft;
-            int y = FResUtil.getScreenHeight(context) - location[1] + marginBottom;
+            int x = location[0] - getScreenWidth(context) / 2 + view.getWidth() / 2 + marginLeft;
+            int y = getScreenHeight(context) - location[1] + marginBottom;
 
             params.x = x;
             params.y = y;
@@ -91,8 +93,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = FResUtil.getScreenWidth(context) - location[0] - view.getWidth() + marginRight;
-            int y = FResUtil.getScreenHeight(context) - location[1] + marginBottom;
+            int x = getScreenWidth(context) - location[0] - view.getWidth() + marginRight;
+            int y = getScreenHeight(context) - location[1] + marginBottom;
 
             params.x = x;
             params.y = y;
@@ -122,7 +124,7 @@ public final class FDialogUtil
             Context context = view.getContext();
 
             int x = location[0] + marginLeft;
-            int y = location[1] + view.getHeight() + marginTop - FResUtil.getActivityStatusBarHeight(context);
+            int y = location[1] + view.getHeight() + marginTop - getActivityStatusBarHeight(context);
 
             params.x = x;
             params.y = y;
@@ -151,8 +153,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = location[0] - FResUtil.getScreenWidth(context) / 2 + view.getWidth() / 2 + marginLeft;
-            int y = location[1] + view.getHeight() + marginTop - FResUtil.getActivityStatusBarHeight(context);
+            int x = location[0] - getScreenWidth(context) / 2 + view.getWidth() / 2 + marginLeft;
+            int y = location[1] + view.getHeight() + marginTop - getActivityStatusBarHeight(context);
 
             params.x = x;
             params.y = y;
@@ -181,8 +183,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = FResUtil.getScreenWidth(context) - location[0] - view.getWidth() + marginRight;
-            int y = location[1] + view.getHeight() + marginTop - FResUtil.getActivityStatusBarHeight(context);
+            int x = getScreenWidth(context) - location[0] - view.getWidth() + marginRight;
+            int y = location[1] + view.getHeight() + marginTop - getActivityStatusBarHeight(context);
 
             params.x = x;
             params.y = y;
@@ -211,8 +213,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = FResUtil.getScreenWidth(context) - location[0] + marginRight;
-            int y = location[1] + marginTop - FResUtil.getActivityStatusBarHeight(context);
+            int x = getScreenWidth(context) - location[0] + marginRight;
+            int y = location[1] + marginTop - getActivityStatusBarHeight(context);
 
             params.x = x;
             params.y = y;
@@ -241,8 +243,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = FResUtil.getScreenWidth(context) - location[0] + marginRight;
-            int y = location[1] - FResUtil.getScreenHeight(context) / 2 + view.getHeight() / 2 - FResUtil.getActivityStatusBarHeight(context) / 2 + marginTop;
+            int x = getScreenWidth(context) - location[0] + marginRight;
+            int y = location[1] - getScreenHeight(context) / 2 + view.getHeight() / 2 - getActivityStatusBarHeight(context) / 2 + marginTop;
 
             params.x = x;
             params.y = y;
@@ -271,8 +273,8 @@ public final class FDialogUtil
             int[] location = FViewUtil.getLocationOnScreen(view, null);
             Context context = view.getContext();
 
-            int x = FResUtil.getScreenWidth(context) - location[0] + marginRight;
-            int y = FResUtil.getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
+            int x = getScreenWidth(context) - location[0] + marginRight;
+            int y = getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
 
             params.x = x;
             params.y = y;
@@ -302,7 +304,7 @@ public final class FDialogUtil
             Context context = view.getContext();
 
             int x = location[0] + view.getWidth() + marginLeft;
-            int y = location[1] + marginTop - FResUtil.getActivityStatusBarHeight(context);
+            int y = location[1] + marginTop - getActivityStatusBarHeight(context);
 
             params.x = x;
             params.y = y;
@@ -332,7 +334,7 @@ public final class FDialogUtil
             Context context = view.getContext();
 
             int x = location[0] + view.getWidth() + marginLeft;
-            int y = location[1] - FResUtil.getScreenHeight(context) / 2 + view.getHeight() / 2 - FResUtil.getActivityStatusBarHeight(context) / 2 + marginTop;
+            int y = location[1] - getScreenHeight(context) / 2 + view.getHeight() / 2 - getActivityStatusBarHeight(context) / 2 + marginTop;
 
             params.x = x;
             params.y = y;
@@ -362,7 +364,7 @@ public final class FDialogUtil
             Context context = view.getContext();
 
             int x = location[0] + view.getWidth() + marginLeft;
-            int y = FResUtil.getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
+            int y = getScreenHeight(context) - location[1] - view.getHeight() + marginBottom;
 
             params.x = x;
             params.y = y;
@@ -371,4 +373,56 @@ public final class FDialogUtil
     }
 
     //----------dialog position end----------
+
+    private static int getScreenWidth(Context context)
+    {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return metrics.widthPixels;
+    }
+
+    private static int getScreenHeight(Context context)
+    {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return metrics.heightPixels;
+    }
+
+    private static int getActivityStatusBarHeight(Context context)
+    {
+        if (context == null)
+        {
+            return 0;
+        }
+        if (!(context instanceof Activity))
+        {
+            return getStatusBarHeight(context);
+        }
+
+        if (isStatusBarVisible((Activity) context))
+        {
+            return getStatusBarHeight(context);
+        } else
+        {
+            return 0;
+        }
+    }
+
+    private static int getStatusBarHeight(Context context)
+    {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+        {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    private static boolean isStatusBarVisible(Activity activity)
+    {
+        if (activity == null)
+        {
+            return false;
+        }
+        return ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0);
+    }
 }

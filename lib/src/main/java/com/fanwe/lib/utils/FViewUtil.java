@@ -820,23 +820,6 @@ public final class FViewUtil
     }
 
     /**
-     * 获得view在屏幕上的坐标，y坐标会减去状态栏的高度
-     *
-     * @param view
-     * @param outLocation 如果为null或者长度不等于2，内部会创建一个长度为2的数组返回
-     * @return
-     */
-    public static int[] getLocationOnScreenIgnoreStatusBar(View view, int[] outLocation)
-    {
-        int[] location = getLocationOnScreen(view, outLocation);
-
-        int statusBarHeight = FResUtil.getStatusBarHeight(view.getContext());
-        location[1] -= statusBarHeight;
-
-        return location;
-    }
-
-    /**
      * 把view从它的父布局移除
      *
      * @param view
