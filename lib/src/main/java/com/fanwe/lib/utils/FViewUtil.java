@@ -558,117 +558,6 @@ public final class FViewUtil
     }
 
     /**
-     * view是否处于VISIBLE状态
-     *
-     * @param view
-     * @return
-     */
-    public static boolean isVisible(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        } else
-        {
-            return view.getVisibility() == View.VISIBLE;
-        }
-    }
-
-    /**
-     * view是否处于INVISIBLE状态
-     *
-     * @param view
-     * @return
-     */
-    public static boolean isInvisible(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        } else
-        {
-            return view.getVisibility() == View.INVISIBLE;
-        }
-    }
-
-    /**
-     * view是否处于GONE状态
-     *
-     * @param view
-     * @return
-     */
-    public static boolean isGone(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        } else
-        {
-            return view.getVisibility() == View.GONE;
-        }
-    }
-
-    /**
-     * 设置view为VISIBLE
-     *
-     * @param view
-     * @return true-view处于VISIBLE
-     */
-    public static boolean setVisible(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        }
-        if (isVisible(view))
-        {
-            return true;
-        }
-        view.setVisibility(View.VISIBLE);
-        return true;
-    }
-
-    /**
-     * 设置view为INVISIBLE
-     *
-     * @param view
-     * @return true-view处于INVISIBLE
-     */
-    public static boolean setInvisible(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        }
-        if (isInvisible(view))
-        {
-            return true;
-        }
-        view.setVisibility(View.INVISIBLE);
-        return true;
-    }
-
-    /**
-     * 设置view为GONE
-     *
-     * @param view
-     * @return true-view处于GONE
-     */
-    public static boolean setGone(View view)
-    {
-        if (view == null)
-        {
-            return false;
-        }
-        if (isGone(view))
-        {
-            return true;
-        }
-        view.setVisibility(View.GONE);
-        return true;
-    }
-
-    /**
      * 设置view在VISIBLE和GONE之间切换
      *
      * @param view
@@ -680,13 +569,13 @@ public final class FViewUtil
         {
             return false;
         }
-        if (isVisible(view))
+        if (View.VISIBLE == view.getVisibility())
         {
-            setGone(view);
+            view.setVisibility(View.GONE);
             return false;
         } else
         {
-            setVisible(view);
+            view.setVisibility(View.VISIBLE);
             return true;
         }
     }
@@ -703,46 +592,15 @@ public final class FViewUtil
         {
             return false;
         }
-        if (isVisible(view))
+        if (View.VISIBLE == view.getVisibility())
         {
-            setInvisible(view);
+            view.setVisibility(View.INVISIBLE);
             return false;
         } else
         {
-            setVisible(view);
+            view.setVisibility(View.VISIBLE);
             return true;
         }
-    }
-
-    /**
-     * 设置view为VISIBLE或者INVISIBLE
-     *
-     * @param view
-     * @param visible
-     * @return
-     */
-    public static boolean setVisibleOrInvisible(View view, boolean visible)
-    {
-        if (visible)
-        {
-            setVisible(view);
-        } else
-        {
-            setInvisible(view);
-        }
-        return visible;
-    }
-
-    public static boolean setVisibleOrGone(View view, boolean visible)
-    {
-        if (visible)
-        {
-            setVisible(view);
-        } else
-        {
-            setGone(view);
-        }
-        return visible;
     }
 
     /**
@@ -1237,10 +1095,10 @@ public final class FViewUtil
         {
             if (item == child)
             {
-                setVisible(item);
+                item.setVisibility(View.VISIBLE);
             } else
             {
-                setGone(item);
+                item.setVisibility(View.GONE);
             }
         }
     }
