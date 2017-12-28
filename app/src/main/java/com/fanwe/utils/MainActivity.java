@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = FIntentUtil.getIntentGetContent();
+        Intent intent = FIntentUtil.getIntentOpenBrowser("http://www.baidu.com");
         startActivity(intent);
     }
 }
