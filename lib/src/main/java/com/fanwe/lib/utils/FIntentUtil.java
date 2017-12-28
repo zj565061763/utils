@@ -57,6 +57,20 @@ public class FIntentUtil
     }
 
     /**
+     * 调用系统相机拍照
+     *
+     * @param saveFile 图片要保存的file
+     * @return
+     */
+    public static Intent getIntentTakePhoto(File saveFile)
+    {
+        Intent intent = new Intent();
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(saveFile));
+        return intent;
+    }
+
+    /**
      * qq聊天界面
      *
      * @param qqNumber 对方的qq号码
@@ -105,22 +119,6 @@ public class FIntentUtil
         return intent;
     }
 
-    /**
-     * 获调用拍照的intent
-     *
-     * @return
-     */
-    public static Intent getIntentTakePhoto(File saveFile)
-    {
-        if (saveFile == null)
-        {
-            return null;
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri uri = Uri.fromFile(saveFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        return intent;
-    }
 
     /**
      * 获调发送邮件的intent
