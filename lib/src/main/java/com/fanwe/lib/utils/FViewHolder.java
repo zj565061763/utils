@@ -5,7 +5,6 @@ import android.view.View;
 
 public final class FViewHolder
 {
-
     private FViewHolder()
     {
     }
