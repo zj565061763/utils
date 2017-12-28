@@ -10,7 +10,7 @@ public class FContext
 {
     private static Context sContext;
 
-    private FContext()
+    protected FContext()
     {
     }
 
