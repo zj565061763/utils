@@ -12,11 +12,6 @@ public final class FViewBinder
     {
     }
 
-    public static boolean setTextView(TextView textView, CharSequence content)
-    {
-        return setTextView(textView, content, null);
-    }
-
     /**
      * 设置textView内容
      *
@@ -33,18 +28,9 @@ public final class FViewBinder
             return true;
         } else
         {
-            if (emptyTip == null)
-            {
-                emptyTip = "";
-            }
             textView.setText(emptyTip);
             return false;
         }
-    }
-
-    public static boolean setTextViewHtml(TextView textView, CharSequence contentHtml)
-    {
-        return setTextViewHtml(textView, contentHtml, null);
     }
 
     public static boolean setTextViewHtml(TextView textView, CharSequence contentHtml, String emptyTip)
