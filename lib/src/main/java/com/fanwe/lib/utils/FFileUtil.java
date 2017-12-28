@@ -191,7 +191,7 @@ public final class FFileUtil
         return file;
     }
 
-    public static File getAnrFile(Context context)
+    public static File getAnrFile()
     {
         File file = new File("/data/anr/traces.txt");
         if (file.exists())
