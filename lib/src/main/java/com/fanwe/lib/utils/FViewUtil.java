@@ -2,13 +2,11 @@ package com.fanwe.lib.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,61 +68,6 @@ public final class FViewUtil
         int paddingBottom = view.getPaddingBottom();
         view.setBackgroundResource(resId);
         view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
-    }
-
-    /**
-     * 设置view的背景颜色
-     *
-     * @param view
-     * @param resId 颜色资源id
-     */
-    public static void setBackgroundColorResId(View view, int resId, Context context)
-    {
-        view.setBackgroundColor(context.getResources().getColor(resId));
-    }
-
-    /**
-     * 设置textView的字体颜色
-     *
-     * @param textView
-     * @param resId    字体颜色资源id
-     */
-    public static void setTextViewColorResId(TextView textView, int resId, Context context)
-    {
-        textView.setTextColor(context.getResources().getColor(resId));
-    }
-
-    /**
-     * 设置textView的字体大小
-     *
-     * @param textView
-     * @param sizeSp   sp单位
-     */
-    public static void setTextSizeSp(TextView textView, float sizeSp)
-    {
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeSp);
-    }
-
-    /**
-     * 设置textView的字体大小
-     *
-     * @param textView
-     * @param sizeDp   dp单位
-     */
-    public static void setTextSizeDp(TextView textView, float sizeDp)
-    {
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, sizeDp);
-    }
-
-    /**
-     * 设置textView的字体大小
-     *
-     * @param textView
-     * @param sizePx   px单位
-     */
-    public static void setTextSizePx(TextView textView, float sizePx)
-    {
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, sizePx);
     }
 
     /**
