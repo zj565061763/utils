@@ -123,15 +123,6 @@ public class FIntentUtil
         return intent;
     }
 
-    public static Intent getIntentSelectLocalImage2()
-    {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        return intent;
-    }
-
-
     /**
      * 获调发送邮件的intent
      *
