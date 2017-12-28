@@ -1,4 +1,4 @@
-package com.fanwe.lib.utils;
+package com.fanwe.lib.utils.encrypt;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
