@@ -115,6 +115,7 @@ public class FIntentUtil
     {
         // 显示一个供用户选择的应用列表
         Intent intent = new Intent(Intent.ACTION_CHOOSER);
+        intent.setAction(Intent.ACTION_CHOOSER);
         intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
         if (!TextUtils.isEmpty(title))
         {
