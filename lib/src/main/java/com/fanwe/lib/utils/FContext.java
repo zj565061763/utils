@@ -6,7 +6,7 @@ import android.content.res.Resources;
 /**
  * 保存Context对象
  */
-public final class FContext
+public class FContext
 {
     private static Context sContext;
 
