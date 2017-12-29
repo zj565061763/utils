@@ -10,7 +10,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-public class FUriUtil
+public class FUriFileUtil
 {
 	/**
 	 * @param uri
