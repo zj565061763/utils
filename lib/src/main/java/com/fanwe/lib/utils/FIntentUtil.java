@@ -131,11 +131,8 @@ public class FIntentUtil
      */
     public static Intent getIntentSendEmail(String email, String subject)
     {
-        if (TextUtils.isEmpty(email))
-        {
-            return null;
-        }
-        Intent intent = new Intent(Intent.ACTION_SEND);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
         intent.setType("plain/text");
         intent.putExtra(Intent.EXTRA_EMAIL, email);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
