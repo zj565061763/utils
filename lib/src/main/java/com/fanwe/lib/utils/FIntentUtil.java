@@ -12,8 +12,12 @@ import android.text.TextUtils;
 import java.io.File;
 import java.util.List;
 
-public class FIntentUtil
+public final class FIntentUtil
 {
+    private FIntentUtil()
+    {
+    }
+
     /**
      * 选择文件
      *
