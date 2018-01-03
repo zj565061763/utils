@@ -9,7 +9,6 @@ import java.net.UnknownHostException;
 /**
  * 网络工具类
  */
-
 public final class FNetUtil
 {
     private FNetUtil()
