@@ -22,18 +22,6 @@ public final class FResUtil extends FContext
     }
 
     /**
-     * sp转px
-     *
-     * @param sp
-     * @return
-     */
-    public static int sp2px(float sp)
-    {
-        final float fontScale = getResources().getDisplayMetrics().scaledDensity;
-        return (int) (sp * fontScale + 0.5f);
-    }
-
-    /**
      * dp转px
      *
      * @param dp
@@ -55,6 +43,18 @@ public final class FResUtil extends FContext
     {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
+    }
+
+    /**
+     * sp转px
+     *
+     * @param sp
+     * @return
+     */
+    public static int sp2px(float sp)
+    {
+        final float fontScale = getResources().getDisplayMetrics().scaledDensity;
+        return (int) (sp * fontScale + 0.5f);
     }
 
     /**
