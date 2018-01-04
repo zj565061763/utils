@@ -558,6 +558,54 @@ public final class FViewUtil
     }
 
     /**
+     * 设置view为VISIBLE
+     *
+     * @param view
+     * @return true-view处于VISIBLE
+     */
+    public static boolean setVisible(View view)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        view.setVisibility(View.VISIBLE);
+        return true;
+    }
+
+    /**
+     * 设置view为INVISIBLE
+     *
+     * @param view
+     * @return true-view处于INVISIBLE
+     */
+    public static boolean setInvisible(View view)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        view.setVisibility(View.INVISIBLE);
+        return true;
+    }
+
+    /**
+     * 设置view为GONE
+     *
+     * @param view
+     * @return true-view处于GONE
+     */
+    public static boolean setGone(View view)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        view.setVisibility(View.GONE);
+        return true;
+    }
+
+    /**
      * 设置view在VISIBLE和GONE之间切换
      *
      * @param view
@@ -569,7 +617,7 @@ public final class FViewUtil
         {
             return false;
         }
-        if (View.VISIBLE == view.getVisibility())
+        if (view.getVisibility() == View.VISIBLE)
         {
             view.setVisibility(View.GONE);
             return false;
@@ -592,7 +640,7 @@ public final class FViewUtil
         {
             return false;
         }
-        if (View.VISIBLE == view.getVisibility())
+        if (view.getVisibility() == View.VISIBLE)
         {
             view.setVisibility(View.INVISIBLE);
             return false;
