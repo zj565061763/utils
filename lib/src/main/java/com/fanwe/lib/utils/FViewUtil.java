@@ -558,51 +558,28 @@ public final class FViewUtil
     }
 
     /**
-     * 设置view为VISIBLE
+     * 设置view的可见状态
      *
      * @param view
-     * @return true-view处于VISIBLE
+     * @param visibility
+     * @return true-view处于设置的状态
      */
-    public static boolean setVisible(View view)
+    public static boolean setVisibility(View view, int visibility)
     {
         if (view == null)
         {
             return false;
         }
-        view.setVisibility(View.VISIBLE);
-        return true;
-    }
-
-    /**
-     * 设置view为INVISIBLE
-     *
-     * @param view
-     * @return true-view处于INVISIBLE
-     */
-    public static boolean setInvisible(View view)
-    {
-        if (view == null)
+        if (visibility == View.VISIBLE ||
+                visibility == View.INVISIBLE ||
+                visibility == View.GONE)
         {
-            return false;
-        }
-        view.setVisibility(View.INVISIBLE);
-        return true;
-    }
-
-    /**
-     * 设置view为GONE
-     *
-     * @param view
-     * @return true-view处于GONE
-     */
-    public static boolean setGone(View view)
-    {
-        if (view == null)
+            view.setVisibility(visibility);
+            return true;
+        } else
         {
-            return false;
+            throw new IllegalArgumentException("visibility is Illegal");
         }
-        view.setVisibility(View.GONE);
-        return true;
     }
 
     /**
