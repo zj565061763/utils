@@ -78,28 +78,6 @@ public final class FResUtil extends FContext
     }
 
     /**
-     * 获得屏幕宽度的百分比
-     *
-     * @param percent [0-1]
-     * @return
-     */
-    public static int getScreenWidthPercent(float percent)
-    {
-        return (int) ((float) getScreenWidth() * percent);
-    }
-
-    /**
-     * 获得屏幕高度的百分比
-     *
-     * @param percent [0-1]
-     * @return
-     */
-    public static int getScreenHeightPercent(float percent)
-    {
-        return (int) ((float) getScreenHeight() * percent);
-    }
-
-    /**
      * 获得状态栏的高度
      *
      * @return
