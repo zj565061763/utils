@@ -86,9 +86,13 @@ public final class FImageUtil
         {
             return false;
         }
+
+        FileOutputStream fos = null;
         try
         {
-            return bitmap.compress(format, quality, new FileOutputStream(file));
+            fos = new FileOutputStream(file);
+            bitmap.compress(format, quality, fos);
+            return true;
         } catch (Exception e)
         {
             return false;
