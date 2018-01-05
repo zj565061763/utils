@@ -2,9 +2,12 @@ package com.fanwe.lib.utils;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class FFileUtil
 {
@@ -12,16 +15,32 @@ public final class FFileUtil
     public static final long MB = 1024 * KB;
     public static final long GB = 1024 * MB;
 
+    private static final List<String> PUBLIC_DIRECTORIES = new ArrayList<>();
+
+    static
+    {
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DCIM);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_PICTURES);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOWNLOADS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOCUMENTS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_MUSIC);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_PODCASTS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_RINGTONES);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_ALARMS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_NOTIFICATIONS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_MOVIES);
+    }
+
     private FFileUtil()
     {
     }
 
     /**
-     * sd卡是否存在
+     * 外部存储是否存在
      *
      * @return
      */
-    public static boolean isSdcardExist()
+    public static boolean isExternalStorageMounted()
     {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
@@ -36,12 +55,41 @@ public final class FFileUtil
     public static File getCacheDir(String dirName, Context context)
     {
         File dir = null;
-        if (isSdcardExist())
+        if (isExternalStorageMounted())
         {
             dir = new File(context.getExternalCacheDir(), dirName);
         } else
         {
             dir = new File(context.getCacheDir(), dirName);
+        }
+        return mkdirs(dir);
+    }
+
+    /**
+     * 返回外部存储指定名称的目录<br>
+     * 如果名称为空并且外部存储存在，则返回外部存储目录
+     *
+     * @param directory 目录名称
+     * @return
+     */
+    public static File getExternalDirectory(String directory)
+    {
+        if (!isExternalStorageMounted())
+        {
+            return null;
+        }
+        if (TextUtils.isEmpty(directory))
+        {
+            return Environment.getExternalStorageDirectory();
+        }
+
+        File dir = null;
+        if (PUBLIC_DIRECTORIES.contains(directory))
+        {
+            dir = Environment.getExternalStoragePublicDirectory(directory);
+        } else
+        {
+            dir = new File(Environment.getExternalStorageDirectory(), directory);
         }
         return mkdirs(dir);
     }
