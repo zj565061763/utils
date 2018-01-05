@@ -59,7 +59,7 @@ public final class FFileUtil
         {
             dir = new File(context.getCacheDir(), dirName);
         }
-        if (dir.exists() || dir.mkdirs())
+        if (mkdirs(dir))
         {
             return dir;
         } else
@@ -69,19 +69,61 @@ public final class FFileUtil
     }
 
     /**
-     * 获得公共的相册目录
+     * 返回公共的图片目录(Pictures)
      *
      * @return
      */
     public static File getPicturesDir()
     {
         File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        if ((dir != null) && (dir.exists() || dir.mkdirs()))
+        if (mkdirs(dir))
         {
             return dir;
         } else
         {
             return null;
+        }
+    }
+
+    /**
+     * 返回目录(DCIM)
+     *
+     * @return
+     */
+    public static File getDcimDir()
+    {
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        if (mkdirs(dir))
+        {
+            return dir;
+        } else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * 创建文件夹
+     *
+     * @param dir
+     * @return
+     */
+    public static boolean mkdirs(File dir)
+    {
+        if (dir == null)
+        {
+            return false;
+        }
+        if (dir.exists())
+        {
+            return true;
+        }
+        try
+        {
+            return dir.mkdirs();
+        } catch (Exception e)
+        {
+            return false;
         }
     }
 
@@ -170,6 +212,13 @@ public final class FFileUtil
         return fileSizeString;
     }
 
+    /**
+     * 在文件夹下创建一个文件
+     *
+     * @param dir 文件夹
+     * @param ext 文件扩展名
+     * @return 创建的文件
+     */
     public static File newFileUnderDir(File dir, String ext)
     {
         if (dir == null)
