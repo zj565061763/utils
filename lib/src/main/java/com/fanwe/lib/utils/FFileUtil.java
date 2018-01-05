@@ -128,6 +128,34 @@ public final class FFileUtil
     }
 
     /**
+     * 在文件夹下创建一个文件
+     *
+     * @param dir 文件夹
+     * @param ext 文件扩展名
+     * @return 创建的文件
+     */
+    public static File newFileUnderDir(File dir, String ext)
+    {
+        if (dir == null)
+        {
+            return null;
+        }
+        if (ext == null)
+        {
+            ext = "";
+        }
+
+        long current = System.currentTimeMillis();
+        File file = new File(dir, current + ext);
+        while (file.exists())
+        {
+            current++;
+            file = new File(dir, current + ext);
+        }
+        return file;
+    }
+
+    /**
      * 获得文件或者文件夹下所有文件的大小
      *
      * @param file
@@ -213,33 +241,10 @@ public final class FFileUtil
     }
 
     /**
-     * 在文件夹下创建一个文件
+     * 返回anr文件
      *
-     * @param dir 文件夹
-     * @param ext 文件扩展名
-     * @return 创建的文件
+     * @return
      */
-    public static File newFileUnderDir(File dir, String ext)
-    {
-        if (dir == null)
-        {
-            return null;
-        }
-        if (ext == null)
-        {
-            ext = "";
-        }
-
-        long current = System.currentTimeMillis();
-        File file = new File(dir, current + ext);
-        while (file.exists())
-        {
-            current++;
-            file = new File(dir, current + ext);
-        }
-        return file;
-    }
-
     public static File getAnrFile()
     {
         File file = new File("/data/anr/traces.txt");
