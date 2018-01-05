@@ -73,6 +73,18 @@ public final class FIntentUtil
     }
 
     /**
+     * wifi设置界面
+     *
+     * @return
+     */
+    public static Intent getIntentWifiSettings()
+    {
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_WIFI_SETTINGS);
+        return intent;
+    }
+
+    /**
      * 系统图库选择界面
      *
      * @return
