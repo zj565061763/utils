@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -151,5 +152,23 @@ public final class FImageUtil
             bitmap.recycle();
         }
         return bmpGray;
+    }
+
+    public static BitmapFactory.Options inJustDecodeBounds(String path)
+    {
+        if (TextUtils.isEmpty(path))
+        {
+            return null;
+        }
+        try
+        {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, options);
+            return options;
+        } catch (Exception e)
+        {
+            return null;
+        }
     }
 }
