@@ -231,11 +231,11 @@ public final class FFileUtil
         }
 
         long current = System.currentTimeMillis();
-        File file = new File(dir, String.valueOf(current + ext));
+        File file = new File(dir, current + ext);
         while (file.exists())
         {
             current++;
-            file = new File(dir, String.valueOf(current + ext));
+            file = new File(dir, current + ext);
         }
         return file;
     }
