@@ -139,17 +139,28 @@ public final class FIntentUtil
         return intent;
     }
 
-    public static Intent getIntentChooser(String title, Intent[] initials, Intent target)
+    public static Intent getIntentChooser(String title, Intent... intents)
     {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CHOOSER);
-        intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, initials);
-        intent.putExtra(Intent.EXTRA_INTENT, target);
         if (title == null)
         {
             title = "";
         }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_CHOOSER);
         intent.putExtra(Intent.EXTRA_TITLE, title);
+
+        int length = intents.length;
+        if (length == 1)
+        {
+            intent.putExtra(Intent.EXTRA_INTENT, intents[0]);
+        } else if (length > 1)
+        {
+            Intent[] arrInitial = new Intent[length - 1];
+            System.arraycopy(intents, 0, arrInitial, 0, length - 1);
+
+            intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrInitial);
+            intent.putExtra(Intent.EXTRA_INTENT, intents[length - 1]);
+        }
         return intent;
     }
 
