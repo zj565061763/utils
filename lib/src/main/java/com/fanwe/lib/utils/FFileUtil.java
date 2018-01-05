@@ -27,22 +27,6 @@ public final class FFileUtil
     }
 
     /**
-     * 获得sd卡根目录file对象引用
-     *
-     * @return
-     */
-    public static File getSdCardFile()
-    {
-        if (isSdcardExist())
-        {
-            return Environment.getExternalStorageDirectory();
-        } else
-        {
-            return null;
-        }
-    }
-
-    /**
      * 获得缓存目录
      *
      * @param dirName 缓存目录下的文件夹名字
@@ -59,40 +43,6 @@ public final class FFileUtil
         {
             dir = new File(context.getCacheDir(), dirName);
         }
-        if (mkdirs(dir))
-        {
-            return dir;
-        } else
-        {
-            return null;
-        }
-    }
-
-    /**
-     * 返回公共的图片目录(Pictures)
-     *
-     * @return
-     */
-    public static File getPicturesDir()
-    {
-        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        if (mkdirs(dir))
-        {
-            return dir;
-        } else
-        {
-            return null;
-        }
-    }
-
-    /**
-     * 返回目录(DCIM)
-     *
-     * @return
-     */
-    public static File getDcimDir()
-    {
-        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         if (mkdirs(dir))
         {
             return dir;
