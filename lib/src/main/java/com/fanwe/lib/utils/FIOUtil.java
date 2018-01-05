@@ -25,128 +25,6 @@ public final class FIOUtil
     }
 
     /**
-     * 从文件中读取字符串
-     *
-     * @param file
-     * @return
-     */
-    public static String readStringFromFile(File file)
-    {
-        if (file == null || !file.exists())
-        {
-            return null;
-        }
-
-        InputStream inputStream = null;
-        try
-        {
-            inputStream = new FileInputStream(file);
-            return readString(inputStream, null);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        } finally
-        {
-            closeQuietly(inputStream);
-        }
-    }
-
-    /**
-     * 写入字符串到文件中
-     *
-     * @param content
-     * @param file
-     * @return
-     */
-    public static boolean writeStringToFile(String content, File file)
-    {
-        if (file == null || content == null)
-        {
-            return false;
-        }
-        OutputStream outputStream = null;
-        try
-        {
-            outputStream = new FileOutputStream(file);
-            writeString(outputStream, content, null);
-            return true;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        } finally
-        {
-            closeQuietly(outputStream);
-        }
-    }
-
-    /**
-     * 添加字符串到文件的末尾
-     *
-     * @param content
-     * @param file
-     * @return
-     */
-    public static boolean appendStringToFile(String content, File file)
-    {
-        if (file == null || content == null)
-        {
-            return false;
-        }
-        OutputStream outputStream = null;
-        try
-        {
-            outputStream = new FileOutputStream(file, true);
-            writeString(outputStream, content, null);
-            return true;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        } finally
-        {
-            closeQuietly(outputStream);
-        }
-    }
-
-    /**
-     * 拷贝文件
-     *
-     * @param fileFrom
-     * @param fileTo
-     * @return
-     */
-    public static boolean copy(File fileFrom, File fileTo)
-    {
-        if (fileFrom == null || !fileFrom.exists())
-        {
-            return false;
-        }
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        try
-        {
-            if (!fileTo.exists())
-            {
-                fileTo.createNewFile();
-            }
-            inputStream = new FileInputStream(fileFrom);
-            outputStream = new FileOutputStream(fileTo);
-            copy(inputStream, outputStream);
-            return true;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        } finally
-        {
-            closeQuietly(inputStream);
-            closeQuietly(outputStream);
-        }
-    }
-
-    /**
      * 从输入流中获得byte数组
      *
      * @param inputStream
@@ -309,4 +187,130 @@ public final class FIOUtil
             }
         }
     }
+
+    //---------- util method start ----------
+
+    /**
+     * 从文件中读取字符串
+     *
+     * @param file
+     * @return
+     */
+    public static String readStringFromFile(File file)
+    {
+        if (file == null || !file.exists())
+        {
+            return null;
+        }
+
+        InputStream inputStream = null;
+        try
+        {
+            inputStream = new FileInputStream(file);
+            return readString(inputStream, null);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        } finally
+        {
+            closeQuietly(inputStream);
+        }
+    }
+
+    /**
+     * 写入字符串到文件中
+     *
+     * @param content
+     * @param file
+     * @return
+     */
+    public static boolean writeStringToFile(String content, File file)
+    {
+        if (file == null || content == null)
+        {
+            return false;
+        }
+        OutputStream outputStream = null;
+        try
+        {
+            outputStream = new FileOutputStream(file);
+            writeString(outputStream, content, null);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(outputStream);
+        }
+    }
+
+    /**
+     * 添加字符串到文件的末尾
+     *
+     * @param content
+     * @param file
+     * @return
+     */
+    public static boolean appendStringToFile(String content, File file)
+    {
+        if (file == null || content == null)
+        {
+            return false;
+        }
+        OutputStream outputStream = null;
+        try
+        {
+            outputStream = new FileOutputStream(file, true);
+            writeString(outputStream, content, null);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(outputStream);
+        }
+    }
+
+    /**
+     * 拷贝文件
+     *
+     * @param fileFrom
+     * @param fileTo
+     * @return
+     */
+    public static boolean copy(File fileFrom, File fileTo)
+    {
+        if (fileFrom == null || !fileFrom.exists())
+        {
+            return false;
+        }
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try
+        {
+            if (!fileTo.exists())
+            {
+                fileTo.createNewFile();
+            }
+            inputStream = new FileInputStream(fileFrom);
+            outputStream = new FileOutputStream(fileTo);
+            copy(inputStream, outputStream);
+            return true;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        } finally
+        {
+            closeQuietly(inputStream);
+            closeQuietly(outputStream);
+        }
+    }
+
+    //---------- util method end ----------
 }
