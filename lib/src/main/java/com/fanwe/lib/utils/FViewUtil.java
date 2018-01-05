@@ -583,6 +583,54 @@ public final class FViewUtil
     }
 
     /**
+     * 设置View.VISIBLE或者View.GONE
+     *
+     * @param view
+     * @param visible true-View.VISIBLE；false-View.GONE
+     * @return true-view处于VISIBLE
+     */
+    public static boolean setVisibleOrGone(View view, boolean visible)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        if (visible)
+        {
+            view.setVisibility(View.VISIBLE);
+            return true;
+        } else
+        {
+            view.setVisibility(View.GONE);
+            return false;
+        }
+    }
+
+    /**
+     * 设置View.VISIBLE或者View.INVISIBLE
+     *
+     * @param view
+     * @param visible true-View.VISIBLE；false-View.INVISIBLE
+     * @return true-view处于VISIBLE
+     */
+    public static boolean setVisibleOrInvisible(View view, boolean visible)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        if (visible)
+        {
+            view.setVisibility(View.VISIBLE);
+            return true;
+        } else
+        {
+            view.setVisibility(View.INVISIBLE);
+            return false;
+        }
+    }
+
+    /**
      * 设置view在VISIBLE和GONE之间切换
      *
      * @param view
