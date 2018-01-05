@@ -52,11 +52,23 @@ public final class FIntentUtil
      * @param packageName app包名
      * @return
      */
-    public static Intent getIntentAppSetting(String packageName)
+    public static Intent getIntentApplicationDetailsSettings(String packageName)
     {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.fromParts("package", packageName, null));
+        return intent;
+    }
+
+    /**
+     * 网络设置界面
+     *
+     * @return
+     */
+    public static Intent getIntentWirelessSettings()
+    {
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_WIRELESS_SETTINGS);
         return intent;
     }
 
