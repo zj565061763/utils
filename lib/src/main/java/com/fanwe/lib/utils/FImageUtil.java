@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public final class FImageUtil
 {
@@ -92,10 +93,22 @@ public final class FImageUtil
         {
             fos = new FileOutputStream(file);
             bitmap.compress(format, quality, fos);
+            fos.flush();
             return true;
         } catch (Exception e)
         {
             return false;
+        } finally
+        {
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                } catch (IOException e)
+                {
+                }
+            }
         }
     }
 
