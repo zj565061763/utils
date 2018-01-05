@@ -13,6 +13,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public final class FImageUtil
 {
@@ -67,6 +69,30 @@ public final class FImageUtil
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(format, quality, baos);
         return baos.toByteArray();
+    }
+
+    /**
+     * bitmap转File
+     *
+     * @param bitmap
+     * @param file
+     * @param format
+     * @param quality
+     * @return
+     */
+    public static boolean bitmapToFile(Bitmap bitmap, File file, Bitmap.CompressFormat format, int quality)
+    {
+        if (bitmap == null || file == null)
+        {
+            return false;
+        }
+        try
+        {
+            return bitmap.compress(format, quality, new FileOutputStream(file));
+        } catch (Exception e)
+        {
+            return false;
+        }
     }
 
     /**
