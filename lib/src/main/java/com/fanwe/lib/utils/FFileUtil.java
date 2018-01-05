@@ -43,13 +43,7 @@ public final class FFileUtil
         {
             dir = new File(context.getCacheDir(), dirName);
         }
-        if (mkdirs(dir))
-        {
-            return dir;
-        } else
-        {
-            return null;
-        }
+        return mkdirs(dir);
     }
 
     /**
@@ -58,22 +52,24 @@ public final class FFileUtil
      * @param dir
      * @return
      */
-    public static boolean mkdirs(File dir)
+    public static File mkdirs(File dir)
     {
-        if (dir == null)
+        if (dir == null || dir.exists())
         {
-            return false;
-        }
-        if (dir.exists())
-        {
-            return true;
+            return dir;
         }
         try
         {
-            return dir.mkdirs();
+            if (dir.mkdirs())
+            {
+                return dir;
+            } else
+            {
+                return null;
+            }
         } catch (Exception e)
         {
-            return false;
+            return null;
         }
     }
 
