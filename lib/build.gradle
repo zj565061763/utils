@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20171215
+        versionCode 20180124
         versionName "1.0.0"
     }
 
