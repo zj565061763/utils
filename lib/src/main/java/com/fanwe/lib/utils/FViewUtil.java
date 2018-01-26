@@ -688,12 +688,7 @@ public final class FViewUtil
         {
             return false;
         }
-        View rootView = view.getRootView();
-        if (rootView == null)
-        {
-            return false;
-        }
-        ViewParent parent = rootView.getParent();
+        ViewParent parent = view.getRootView().getParent();
         if (parent == null)
         {
             return false;
