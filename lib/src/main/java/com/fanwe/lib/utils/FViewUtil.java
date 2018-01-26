@@ -677,6 +677,35 @@ public final class FViewUtil
     }
 
     /**
+     * view是否被添加到界面上
+     *
+     * @param view
+     * @return
+     */
+    public static boolean isViewAttached(View view)
+    {
+        if (view == null)
+        {
+            return false;
+        }
+        View rootView = view.getRootView();
+        if (rootView == null)
+        {
+            return false;
+        }
+        ViewParent parent = rootView.getParent();
+        if (parent == null)
+        {
+            return false;
+        }
+        if (!(parent instanceof View))
+        {
+            return true;
+        }
+        return isViewAttached((View) parent);
+    }
+
+    /**
      * 获得view在屏幕上的坐标
      *
      * @param view
