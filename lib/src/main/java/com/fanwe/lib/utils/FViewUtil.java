@@ -682,7 +682,7 @@ public final class FViewUtil
      * @param view
      * @return
      */
-    public static boolean isViewAttached(View view)
+    public static boolean isAttached(View view)
     {
         if (view == null)
         {
@@ -702,7 +702,7 @@ public final class FViewUtil
         {
             return true;
         }
-        return isViewAttached((View) parent);
+        return isAttached((View) parent);
     }
 
     /**
