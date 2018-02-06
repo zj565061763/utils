@@ -29,17 +29,13 @@ public final class FStringUtil
         }
 
         Iterator<Map.Entry<String, String>> it = params.entrySet().iterator();
-        Map.Entry<String, String> item = it.next();
-
-        sb.append(item.getKey()).append("=").append(item.getValue());
         while (it.hasNext())
         {
-            item = it.next();
-
-            sb.append('&');
+            Map.Entry<String, String> item = it.next();
             sb.append(item.getKey()).append("=").append(item.getValue());
+            sb.append('&');
         }
-
+        sb.setLength(sb.length() - 1);
         return sb.toString();
     }
 }
