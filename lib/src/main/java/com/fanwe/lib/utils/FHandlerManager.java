@@ -9,7 +9,7 @@ import android.os.Looper;
  */
 public final class FHandlerManager
 {
-    private static final HandlerThread HANDLER_THREAD = new HandlerThread("handlehread");
+    private static final HandlerThread HANDLER_THREAD = new HandlerThread("HandlerThread");
 
     static
     {
