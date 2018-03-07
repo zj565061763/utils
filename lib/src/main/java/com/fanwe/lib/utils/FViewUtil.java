@@ -558,6 +558,21 @@ public final class FViewUtil
     }
 
     /**
+     * 返回View的可见状态
+     *
+     * @param view
+     * @return -1(view为null的时候)<br> {@link View#VISIBLE}<br> {@link View#INVISIBLE}<br> {@link View#GONE}<br>
+     */
+    public static int getVisibility(View view)
+    {
+        if (view == null)
+        {
+            return -1;
+        }
+        return view.getVisibility();
+    }
+
+    /**
      * 设置view的可见状态
      *
      * @param view
