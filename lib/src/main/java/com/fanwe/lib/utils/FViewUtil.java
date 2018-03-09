@@ -1139,7 +1139,7 @@ public final class FViewUtil
      */
     public static boolean replaceView(ViewGroup parent, View child)
     {
-        return addView(parent, child, null, true);
+        return addView(parent, child, true);
     }
 
     /**
@@ -1151,7 +1151,7 @@ public final class FViewUtil
      */
     public static boolean addView(ViewGroup parent, View child)
     {
-        return addView(parent, child, null, false);
+        return addView(parent, child, false);
     }
 
     /**
@@ -1159,11 +1159,10 @@ public final class FViewUtil
      *
      * @param parent         父容器
      * @param child          要添加的view
-     * @param params         布局参数
      * @param removeAllViews 添加的时候是否需要先移除parent的所有子view
      * @return
      */
-    private static boolean addView(ViewGroup parent, View child, ViewGroup.LayoutParams params, boolean removeAllViews)
+    private static boolean addView(ViewGroup parent, View child, boolean removeAllViews)
     {
         if (parent != null && child != null && child.getParent() != parent)
         {
@@ -1172,13 +1171,7 @@ public final class FViewUtil
                 parent.removeAllViews();
             }
             removeView(child);
-            if (params != null)
-            {
-                parent.addView(child, params);
-            } else
-            {
-                parent.addView(child);
-            }
+            parent.addView(child);
             return true;
         }
         return false;
