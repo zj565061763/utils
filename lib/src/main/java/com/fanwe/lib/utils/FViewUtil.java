@@ -1088,7 +1088,7 @@ public final class FViewUtil
      *
      * @param view
      */
-    public static void removeView(View view)
+    public static void removeView(final View view)
     {
         if (view == null)
         {
@@ -1107,7 +1107,7 @@ public final class FViewUtil
      * @param oldView
      * @param newView
      */
-    public static void replaceOldView(View oldView, View newView)
+    public static void replaceOldView(final View oldView, final View newView)
     {
         if (oldView == null || newView == null || oldView == newView)
         {
@@ -1116,9 +1116,9 @@ public final class FViewUtil
         final ViewParent parent = oldView.getParent();
         if (parent instanceof ViewGroup)
         {
-            ViewGroup viewGroup = (ViewGroup) parent;
-            int index = viewGroup.indexOfChild(oldView);
-            ViewGroup.LayoutParams params = oldView.getLayoutParams();
+            final ViewGroup viewGroup = (ViewGroup) parent;
+            final int index = viewGroup.indexOfChild(oldView);
+            final ViewGroup.LayoutParams params = oldView.getLayoutParams();
 
             removeView(oldView);
             removeView(newView);
@@ -1156,7 +1156,7 @@ public final class FViewUtil
      * @param child          要添加的view
      * @param removeAllViews 添加的时候是否需要先移除parent的所有子view
      */
-    private static void addView(final ViewGroup parent, final View child, boolean removeAllViews)
+    private static void addView(final ViewGroup parent, final View child, final boolean removeAllViews)
     {
         if (parent == null || child == null)
         {
