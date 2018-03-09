@@ -21,9 +21,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class FViewUtil
 {
     private FViewUtil()
@@ -1181,10 +1178,10 @@ public final class FViewUtil
                 final int count = parent.getChildCount();
                 for (int i = 0; i < count; i++)
                 {
-                    final View view = parent.getChildAt(i);
-                    if (view != child)
+                    final View item = parent.getChildAt(i);
+                    if (item != child)
                     {
-                        parent.removeView(view);
+                        parent.removeView(item);
                     }
                 }
             }
@@ -1198,7 +1195,7 @@ public final class FViewUtil
      * @param parent
      * @param child
      */
-    public static void toggleView(ViewGroup parent, View child)
+    public static void toggleView(final ViewGroup parent, final View child)
     {
         if (child == null || parent == null)
         {
@@ -1209,9 +1206,11 @@ public final class FViewUtil
             removeView(child);
             parent.addView(child);
         }
-        List<View> listChild = getChilds(parent);
-        for (View item : listChild)
+
+        final int count = parent.getChildCount();
+        for (int i = 0; i < count; i++)
         {
+            final View item = parent.getChildAt(i);
             if (item == child)
             {
                 item.setVisibility(View.VISIBLE);
@@ -1220,31 +1219,6 @@ public final class FViewUtil
                 item.setVisibility(View.GONE);
             }
         }
-    }
-
-    /**
-     * 获得parent的所有第一级子view
-     *
-     * @param parent
-     * @return
-     */
-    public static List<View> getChilds(ViewGroup parent)
-    {
-        if (parent == null)
-        {
-            return null;
-        }
-        int count = parent.getChildCount();
-        if (count <= 0)
-        {
-            return null;
-        }
-        List<View> listChild = new ArrayList<>();
-        for (int i = 0; i < count; i++)
-        {
-            listChild.add(parent.getChildAt(i));
-        }
-        return listChild;
     }
 
     /**
