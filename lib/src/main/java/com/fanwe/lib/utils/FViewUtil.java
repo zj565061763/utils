@@ -1135,11 +1135,10 @@ public final class FViewUtil
      *
      * @param parent
      * @param child
-     * @return
      */
-    public static boolean replaceView(ViewGroup parent, View child)
+    public static void replaceView(ViewGroup parent, View child)
     {
-        return addView(parent, child, true);
+        addView(parent, child, true);
     }
 
     /**
@@ -1147,11 +1146,10 @@ public final class FViewUtil
      *
      * @param parent
      * @param child
-     * @return
      */
-    public static boolean addView(ViewGroup parent, View child)
+    public static void addView(ViewGroup parent, View child)
     {
-        return addView(parent, child, false);
+        addView(parent, child, false);
     }
 
     /**
@@ -1160,11 +1158,15 @@ public final class FViewUtil
      * @param parent         父容器
      * @param child          要添加的view
      * @param removeAllViews 添加的时候是否需要先移除parent的所有子view
-     * @return
      */
-    private static boolean addView(ViewGroup parent, View child, boolean removeAllViews)
+    private static void addView(final ViewGroup parent, final View child, boolean removeAllViews)
     {
-        if (parent != null && child != null && child.getParent() != parent)
+        if (parent == null || child == null)
+        {
+            return;
+        }
+
+        if (child.getParent() != parent)
         {
             if (removeAllViews)
             {
@@ -1172,9 +1174,21 @@ public final class FViewUtil
             }
             removeView(child);
             parent.addView(child);
-            return true;
+        } else
+        {
+            if (removeAllViews)
+            {
+                final int count = parent.getChildCount();
+                for (int i = 0; i < count; i++)
+                {
+                    final View view = parent.getChildAt(i);
+                    if (view != child)
+                    {
+                        parent.removeView(view);
+                    }
+                }
+            }
         }
-        return false;
     }
 
     /**
