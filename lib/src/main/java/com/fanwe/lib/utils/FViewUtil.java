@@ -733,25 +733,6 @@ public final class FViewUtil
     }
 
     /**
-     * 把view从它的父布局移除
-     *
-     * @param view
-     */
-    public static void removeView(View view)
-    {
-        if (view == null)
-        {
-            return;
-        }
-        final ViewParent viewParent = view.getParent();
-        if (viewParent instanceof ViewGroup)
-        {
-            ViewGroup parent = (ViewGroup) viewParent;
-            parent.removeView(view);
-        }
-    }
-
-    /**
      * 获得view的截图
      *
      * @param view
@@ -1106,6 +1087,24 @@ public final class FViewUtil
     }
 
     /**
+     * 把view从它的父容器移除
+     *
+     * @param view
+     */
+    public static void removeView(View view)
+    {
+        if (view == null)
+        {
+            return;
+        }
+        final ViewParent parent = view.getParent();
+        if (parent instanceof ViewGroup)
+        {
+            ((ViewGroup) parent).removeView(view);
+        }
+    }
+
+    /**
      * 用新的view去替换布局中的旧view
      *
      * @param oldView
@@ -1113,20 +1112,21 @@ public final class FViewUtil
      */
     public static void replaceOldView(View oldView, View newView)
     {
-        if (oldView != null && newView != null && oldView != newView)
+        if (oldView == null || newView == null || oldView == newView)
         {
-            ViewParent viewParent = oldView.getParent();
-            if (viewParent instanceof ViewGroup)
-            {
-                ViewGroup viewGroup = (ViewGroup) viewParent;
-                int index = viewGroup.indexOfChild(oldView);
-                ViewGroup.LayoutParams params = oldView.getLayoutParams();
+            return;
+        }
+        final ViewParent parent = oldView.getParent();
+        if (parent instanceof ViewGroup)
+        {
+            ViewGroup viewGroup = (ViewGroup) parent;
+            int index = viewGroup.indexOfChild(oldView);
+            ViewGroup.LayoutParams params = oldView.getLayoutParams();
 
-                removeView(oldView);
-                removeView(newView);
+            removeView(oldView);
+            removeView(newView);
 
-                viewGroup.addView(newView, index, params);
-            }
+            viewGroup.addView(newView, index, params);
         }
     }
 
