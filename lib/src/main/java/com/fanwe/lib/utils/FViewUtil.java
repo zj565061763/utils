@@ -1128,7 +1128,7 @@ public final class FViewUtil
     }
 
     /**
-     * 替换child到parent，替换之前会先移除parent的所有view
+     * 替换child到parent，仅保留当前child对象在容器中
      *
      * @param parent
      * @param child
