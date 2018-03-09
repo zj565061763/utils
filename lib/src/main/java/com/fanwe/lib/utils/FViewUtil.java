@@ -1133,7 +1133,7 @@ public final class FViewUtil
      * @param parent
      * @param child
      */
-    public static void replaceView(ViewGroup parent, View child)
+    public static void replaceView(View parent, View child)
     {
         addView(parent, child, true);
     }
@@ -1144,7 +1144,7 @@ public final class FViewUtil
      * @param parent
      * @param child
      */
-    public static void addView(ViewGroup parent, View child)
+    public static void addView(View parent, View child)
     {
         addView(parent, child, false);
     }
@@ -1156,32 +1156,37 @@ public final class FViewUtil
      * @param child          要添加的view
      * @param removeAllViews 添加的时候是否需要先移除parent的所有子view
      */
-    private static void addView(final ViewGroup parent, final View child, final boolean removeAllViews)
+    private static void addView(final View parent, final View child, final boolean removeAllViews)
     {
         if (parent == null || child == null)
         {
             return;
         }
+        if (!(parent instanceof ViewGroup))
+        {
+            throw new IllegalArgumentException("parent must be instance of ViewGroup");
+        }
 
-        if (child.getParent() != parent)
+        final ViewGroup viewGroup = (ViewGroup) parent;
+        if (child.getParent() != viewGroup)
         {
             if (removeAllViews)
             {
-                parent.removeAllViews();
+                viewGroup.removeAllViews();
             }
             removeView(child);
-            parent.addView(child);
+            viewGroup.addView(child);
         } else
         {
             if (removeAllViews)
             {
-                final int count = parent.getChildCount();
+                final int count = viewGroup.getChildCount();
                 for (int i = 0; i < count; i++)
                 {
-                    final View item = parent.getChildAt(i);
+                    final View item = viewGroup.getChildAt(i);
                     if (item != child)
                     {
-                        parent.removeView(item);
+                        viewGroup.removeView(item);
                     }
                 }
             }
