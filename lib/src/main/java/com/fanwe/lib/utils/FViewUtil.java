@@ -1090,14 +1090,12 @@ public final class FViewUtil
      */
     public static void removeView(final View view)
     {
-        if (view == null)
+        try
         {
-            return;
-        }
-        final ViewParent parent = view.getParent();
-        if (parent instanceof ViewGroup)
+            final ViewGroup viewGroup = (ViewGroup) view.getParent();
+            viewGroup.removeView(view);
+        } catch (Exception e)
         {
-            ((ViewGroup) parent).removeView(view);
         }
     }
 
