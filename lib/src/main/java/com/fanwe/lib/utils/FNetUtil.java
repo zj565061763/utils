@@ -1,5 +1,7 @@
 package com.fanwe.lib.utils;
 
+import android.text.TextUtils;
+
 import java.net.InetAddress;
 import java.net.URL;
 
@@ -23,8 +25,11 @@ public final class FNetUtil
         try
         {
             final String host = new URL(url).getHost();
-            final String hostAddress = InetAddress.getByName(host).getHostAddress();
-            return hostAddress;
+            if (TextUtils.isEmpty(host))
+            {
+                return null;
+            }
+            return InetAddress.getByName(host).getHostAddress();
         } catch (Exception e)
         {
             e.printStackTrace();
