@@ -27,6 +27,7 @@ public final class FNetUtil
             return hostAddress;
         } catch (Exception e)
         {
+            e.printStackTrace();
             return null;
         }
     }
@@ -38,6 +39,7 @@ public final class FNetUtil
             return new URL(url).getHost();
         } catch (Exception e)
         {
+            e.printStackTrace();
             return null;
         }
     }
