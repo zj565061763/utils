@@ -3,7 +3,7 @@ package com.fanwe.lib.utils;
 import android.util.SparseArray;
 import android.view.View;
 
-public final class FViewHolder
+public class FViewHolder
 {
     private FViewHolder()
     {

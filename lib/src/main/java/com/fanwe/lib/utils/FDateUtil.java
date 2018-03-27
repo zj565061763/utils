@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public final class FDateUtil
+public class FDateUtil
 {
     /**
      * 1秒的毫秒数

@@ -6,8 +6,12 @@ import java.util.Map;
 /**
  * Created by zhengjun on 2018/2/5.
  */
-public final class FStringUtil
+public class FStringUtil
 {
+    private FStringUtil()
+    {
+    }
+
     public static String buildUrl(String baseUrl, Map<String, String> params)
     {
         if (baseUrl == null || baseUrl.isEmpty() ||

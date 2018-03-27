@@ -8,7 +8,7 @@ import android.widget.Toast;
 /**
  * toast显示类，可以在子线程直接调用
  */
-public final class FToast extends FContext
+public class FToast extends FContext
 {
     private static Toast sToast;
 

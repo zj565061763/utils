@@ -7,7 +7,7 @@ import android.content.Context;
 /**
  * 剪贴板工具类
  */
-public final class FClipboardUtil extends FContext
+public class FClipboardUtil extends FContext
 {
     private FClipboardUtil()
     {

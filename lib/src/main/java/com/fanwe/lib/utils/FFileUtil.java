@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class FFileUtil
+public class FFileUtil
 {
     public static final long KB = 1024;
     public static final long MB = 1024 * KB;

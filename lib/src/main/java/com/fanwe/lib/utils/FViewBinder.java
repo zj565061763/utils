@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public final class FViewBinder
+public class FViewBinder
 {
     private FViewBinder()
     {

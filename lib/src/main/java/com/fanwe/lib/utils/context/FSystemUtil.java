@@ -6,7 +6,7 @@ import android.location.LocationManager;
 /**
  * 系统工具类
  */
-public final class FSystemUtil extends FContext
+public class FSystemUtil extends FContext
 {
     private FSystemUtil()
     {

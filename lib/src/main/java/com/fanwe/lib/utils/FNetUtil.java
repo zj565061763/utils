@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * 网络工具类
  */
-public final class FNetUtil
+public class FNetUtil
 {
     private FNetUtil()
     {

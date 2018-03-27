@@ -18,7 +18,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-public final class FIOUtil
+public class FIOUtil
 {
     private FIOUtil()
     {

@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 /**
  * 软键盘操作工具类
  */
-public final class FKeyboardUtil
+public class FKeyboardUtil
 {
     private FKeyboardUtil()
     {

@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import java.io.File;
 import java.util.List;
 
-public final class FIntentUtil
+public class FIntentUtil
 {
     private FIntentUtil()
     {

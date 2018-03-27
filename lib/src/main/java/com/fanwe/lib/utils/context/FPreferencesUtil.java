@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 /**
  * SharedPreferences工具类
  */
-public final class FPreferencesUtil extends FContext
+public class FPreferencesUtil extends FContext
 {
     private FPreferencesUtil()
     {

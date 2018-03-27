@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 /**
  * 反射工具类
  */
-public final class FReflectUtil
+public class FReflectUtil
 {
     private FReflectUtil()
     {

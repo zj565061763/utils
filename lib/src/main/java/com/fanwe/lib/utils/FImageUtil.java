@@ -18,7 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public final class FImageUtil
+public class FImageUtil
 {
     private FImageUtil()
     {

@@ -13,7 +13,7 @@ import android.os.Bundle;
 import java.io.File;
 import java.util.List;
 
-public final class FPackageUtil extends FContext
+public class FPackageUtil extends FContext
 {
     private FPackageUtil()
     {
@@ -202,30 +202,5 @@ public final class FPackageUtil extends FContext
             e.printStackTrace();
             return false;
         }
-    }
-
-    /**
-     * 返回当前进程的名称
-     *
-     * @return
-     */
-    public static String getProcessName()
-    {
-        int pid = android.os.Process.myPid();
-
-        ActivityManager am = (ActivityManager) get().getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
-        if (runningApps == null)
-        {
-            return null;
-        }
-        for (RunningAppProcessInfo procInfo : runningApps)
-        {
-            if (procInfo.pid == pid)
-            {
-                return procInfo.processName;
-            }
-        }
-        return null;
     }
 }

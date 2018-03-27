@@ -3,7 +3,7 @@ package com.fanwe.lib.utils.encrypt;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public final class FMD5Util
+public class FMD5Util
 {
     private FMD5Util()
     {

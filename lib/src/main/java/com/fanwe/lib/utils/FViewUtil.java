@@ -21,7 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public final class FViewUtil
+public class FViewUtil
 {
     private FViewUtil()
     {
