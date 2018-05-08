@@ -772,32 +772,25 @@ public class FViewUtil
     }
 
     /**
-     * 获得view在屏幕上的可见范围
+     * 返回view在屏幕上的可见范围
      *
      * @param view
+     * @param outRect
      * @return
      */
-    public static Rect getGlobalVisibleRect(View view)
-    {
-        return getGlobalVisibleRect(view, null);
-    }
-
-    /**
-     * 获得view在屏幕上的可见范围
-     *
-     * @param view
-     * @param outRect 如果为null，内部会创建一个Rect对象
-     * @return
-     */
-    public static Rect getGlobalVisibleRect(View view, Rect outRect)
+    public static Rect getRectOnScreen(View view, Rect outRect)
     {
         if (outRect == null)
         {
             outRect = new Rect();
         }
-        if (view != null && view.getVisibility() == View.VISIBLE)
+        if (view != null)
         {
-            view.getGlobalVisibleRect(outRect);
+            final int[] location = getLocationOnScreen(view, null);
+            outRect.left = location[0];
+            outRect.top = location[1];
+            outRect.right = outRect.left + view.getWidth();
+            outRect.bottom = outRect.top + view.getHeight();
         }
         return outRect;
     }
@@ -806,17 +799,17 @@ public class FViewUtil
      * 相对屏幕的x和y坐标是否在view的区域内
      *
      * @param view
-     * @param x
-     * @param y
+     * @param rawX 相对屏幕的x坐标
+     * @param rawY 相对屏幕的y坐标
      * @return
      */
-    public static boolean isViewUnder(View view, int x, int y)
+    public static boolean isViewUnder(View view, int rawX, int rawY)
     {
         boolean result = false;
-        Rect r = getGlobalVisibleRect(view);
+        Rect r = getRectOnScreen(view, null);
         if (r != null)
         {
-            result = r.contains(x, y);
+            result = r.contains(rawX, rawY);
         }
         return result;
     }
