@@ -3,11 +3,9 @@ package com.fanwe.lib.utils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -769,66 +767,6 @@ public class FViewUtil
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(bmp.getWidth(), bmp.getHeight());
         imageView.setLayoutParams(params);
         return imageView;
-    }
-
-    /**
-     * 返回view在屏幕上的可见范围
-     *
-     * @param view
-     * @param outRect
-     * @return
-     */
-    public static Rect getRectOnScreen(View view, Rect outRect)
-    {
-        if (outRect == null)
-        {
-            outRect = new Rect();
-        }
-        if (view != null)
-        {
-            final int[] location = getLocationOnScreen(view, null);
-            outRect.left = location[0];
-            outRect.top = location[1];
-            outRect.right = outRect.left + view.getWidth();
-            outRect.bottom = outRect.top + view.getHeight();
-        }
-        return outRect;
-    }
-
-    /**
-     * 相对屏幕的x和y坐标是否在view的区域内
-     *
-     * @param view
-     * @param rawX 相对屏幕的x坐标
-     * @param rawY 相对屏幕的y坐标
-     * @return
-     */
-    public static boolean isViewUnder(View view, int rawX, int rawY)
-    {
-        boolean result = false;
-        Rect r = getRectOnScreen(view, null);
-        if (r != null)
-        {
-            result = r.contains(rawX, rawY);
-        }
-        return result;
-    }
-
-    /**
-     * MotionEvent是否在view的区域内
-     *
-     * @param view
-     * @param e
-     * @return
-     */
-    public static boolean isViewUnder(View view, MotionEvent e)
-    {
-        boolean result = false;
-        if (e != null)
-        {
-            result = isViewUnder(view, (int) e.getRawX(), (int) e.getRawY());
-        }
-        return result;
     }
 
     public static void wrapperPopupWindow(PopupWindow pop)
