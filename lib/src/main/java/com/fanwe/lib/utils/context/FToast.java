@@ -18,7 +18,7 @@ public class FToast extends FContext
 
     public static void show(CharSequence text)
     {
-        show(text, Toast.LENGTH_LONG);
+        show(text, Toast.LENGTH_SHORT);
     }
 
     public static void show(final CharSequence text, final int duration)
@@ -45,14 +45,13 @@ public class FToast extends FContext
         {
             return;
         }
+
         if (sToast != null)
         {
-            sToast.setText(text);
-            sToast.setDuration(duration);
-        } else
-        {
-            sToast = Toast.makeText(get(), text, duration);
+            sToast.cancel();
         }
+
+        sToast = Toast.makeText(get(), text, duration);
         sToast.show();
     }
 }
