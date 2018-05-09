@@ -711,6 +711,27 @@ public class FViewUtil
     }
 
     /**
+     * view是否在某个屏幕坐标下面
+     *
+     * @param view
+     * @param x           屏幕x坐标
+     * @param y           屏幕y坐标
+     * @param outLocation 用于接收view的x和y坐标的数组，可以为null
+     * @return
+     */
+    public static boolean isViewUnder(View view, int x, int y, int[] outLocation)
+    {
+        final int[] location = getLocationOnScreen(view, outLocation);
+        final int left = location[0];
+        final int top = location[1];
+        final int right = left + view.getWidth();
+        final int bottom = top + view.getHeight();
+
+        return left < right && top < bottom
+                && x >= left && x < right && y >= top && y < bottom;
+    }
+
+    /**
      * 获得view在屏幕上的坐标
      *
      * @param view
