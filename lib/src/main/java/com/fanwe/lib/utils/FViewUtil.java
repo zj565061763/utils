@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -708,6 +709,21 @@ public class FViewUtil
             return true;
         }
         return isAttached((View) parent);
+    }
+
+    /**
+     * view是否在某个屏幕的触摸点下面
+     *
+     * @param view
+     * @param event       触摸点
+     * @param outLocation 用于接收view的x和y坐标的数组，可以为null
+     * @return
+     */
+    public static boolean isViewUnder(View view, MotionEvent event, int[] outLocation)
+    {
+        final int x = (int) event.getRawX();
+        final int y = (int) event.getRawY();
+        return isViewUnder(view, x, y, outLocation);
     }
 
     /**
