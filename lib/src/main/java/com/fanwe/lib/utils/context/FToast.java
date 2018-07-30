@@ -10,8 +10,6 @@ import android.widget.Toast;
  */
 public class FToast extends FContext
 {
-    private static Toast sToast;
-
     private FToast()
     {
     }
@@ -42,16 +40,8 @@ public class FToast extends FContext
     private static void showInternal(CharSequence text, int duration)
     {
         if (TextUtils.isEmpty(text))
-        {
             return;
-        }
 
-        if (sToast != null)
-        {
-            sToast.cancel();
-        }
-
-        sToast = Toast.makeText(get(), text, duration);
-        sToast.show();
+        Toast.makeText(get(), text, duration).show();
     }
 }
