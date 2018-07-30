@@ -1,4 +1,2 @@
 # Gradle
-```
-implementation 'com.fanwe.android:utils:1.0.8'
-```
+[![](https://jitpack.io/v/zj565061763/utils.svg)](https://jitpack.io/#zj565061763/utils)
