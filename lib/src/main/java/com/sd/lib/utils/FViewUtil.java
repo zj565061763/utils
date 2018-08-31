@@ -1137,9 +1137,8 @@ public class FViewUtil
         if (child.getParent() != viewGroup)
         {
             if (removeAllViews)
-            {
                 viewGroup.removeAllViews();
-            }
+
             removeView(child);
             viewGroup.addView(child);
         } else
@@ -1147,13 +1146,11 @@ public class FViewUtil
             if (removeAllViews)
             {
                 final int count = viewGroup.getChildCount();
-                for (int i = 0; i < count; i++)
+                for (int i = count - 1; i >= 0; i--)
                 {
                     final View item = viewGroup.getChildAt(i);
                     if (item != child)
-                    {
                         viewGroup.removeView(item);
-                    }
                 }
             }
         }
