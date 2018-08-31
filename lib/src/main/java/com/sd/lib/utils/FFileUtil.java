@@ -103,18 +103,11 @@ public class FFileUtil
     public static File mkdirs(File dir)
     {
         if (dir == null || dir.exists())
-        {
             return dir;
-        }
+
         try
         {
-            if (dir.mkdirs())
-            {
-                return dir;
-            } else
-            {
-                return null;
-            }
+            return dir.mkdirs() ? dir : null;
         } catch (Exception e)
         {
             return null;
