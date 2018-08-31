@@ -180,14 +180,12 @@ public class FFileUtil
     public static boolean deleteFileOrDir(File file)
     {
         if (file == null || !file.exists())
-        {
             return true;
-        }
+
         if (file.isFile())
-        {
             return file.delete();
-        }
-        File[] files = file.listFiles();
+
+        final File[] files = file.listFiles();
         if (files != null)
         {
             for (File item : files)
