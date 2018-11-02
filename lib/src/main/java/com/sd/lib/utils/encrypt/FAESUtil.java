@@ -12,22 +12,15 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class FAESUtil
 {
-    public static final String DEFAULT_KEY = "1400009129000000";
-
     private FAESUtil()
     {
-    }
-
-    public static String encrypt(String content)
-    {
-        return encrypt(content, DEFAULT_KEY);
     }
 
     /**
      * 加密
      *
      * @param content 要加密的内容
-     * @param key     key（16位）
+     * @param key     key（16个字符）
      * @return
      */
     public static String encrypt(String content, String key)
@@ -52,16 +45,11 @@ public class FAESUtil
         return result;
     }
 
-    public static String decrypt(String content)
-    {
-        return decrypt(content, DEFAULT_KEY);
-    }
-
     /**
      * 解密
      *
      * @param content 要解密的内容
-     * @param key     key（16位）
+     * @param key     key（16个字符）
      * @return
      */
     public static String decrypt(String content, String key)
@@ -85,5 +73,4 @@ public class FAESUtil
         }
         return result;
     }
-
 }
