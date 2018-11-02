@@ -9,11 +9,18 @@ public class FMD5Util
     {
     }
 
+    public static String MD5_16(String value)
+    {
+        return MD5_16(value.getBytes());
+    }
+
+    public static String MD5_16(byte[] value)
+    {
+        return MD5(value).substring(8, 24);
+    }
+
     public static String MD5(String value)
     {
-        if (value == null)
-            return null;
-
         return MD5(value.getBytes());
     }
 
