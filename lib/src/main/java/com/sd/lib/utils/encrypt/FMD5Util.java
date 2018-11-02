@@ -12,28 +12,26 @@ public class FMD5Util
     public static String MD5(String value)
     {
         if (value == null)
-        {
             return null;
-        }
-        byte[] byteValue = value.getBytes();
-        return MD5(byteValue);
+
+        return MD5(value.getBytes());
     }
 
     public static String MD5(byte[] value)
     {
         try
         {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(value);
-            byte[] bytes = digest.digest();
-            StringBuilder sb = new StringBuilder();
+            final MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(value);
+            final byte[] bytes = messageDigest.digest();
+
+            final StringBuilder sb = new StringBuilder();
             for (int i = 0; i < bytes.length; i++)
             {
-                String hex = Integer.toHexString(0xFF & bytes[i]);
+                final String hex = Integer.toHexString(0xFF & bytes[i]);
                 if (hex.length() == 1)
-                {
                     sb.append('0');
-                }
+
                 sb.append(hex);
             }
             return sb.toString();
