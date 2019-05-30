@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.view.WindowManager;
 
+import com.sd.lib.context.FContext;
+
 public class FResUtil extends FContext
 {
     private FResUtil()

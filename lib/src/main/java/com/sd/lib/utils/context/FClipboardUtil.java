@@ -4,6 +4,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 
+import com.sd.lib.context.FContext;
+
 /**
  * 剪贴板工具类
  */

@@ -3,6 +3,8 @@ package com.sd.lib.utils.context;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
+import com.sd.lib.context.FContext;
+
 public class FDeviceUtil extends FContext
 {
     private FDeviceUtil()

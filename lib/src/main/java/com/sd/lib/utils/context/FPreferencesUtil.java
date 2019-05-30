@@ -3,6 +3,8 @@ package com.sd.lib.utils.context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.sd.lib.context.FContext;
+
 /**
  * SharedPreferences工具类
  */

@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.sd.lib.context.FContext;
+
 /**
  * toast显示类，可以在子线程直接调用
  */

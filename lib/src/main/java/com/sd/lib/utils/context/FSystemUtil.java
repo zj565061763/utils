@@ -3,6 +3,8 @@ package com.sd.lib.utils.context;
 import android.content.Context;
 import android.location.LocationManager;
 
+import com.sd.lib.context.FContext;
+
 /**
  * 系统工具类
  */
