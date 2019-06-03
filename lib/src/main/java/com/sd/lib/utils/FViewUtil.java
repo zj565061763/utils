@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,13 @@ public class FViewUtil
     public static void setBackgroundDrawable(View view, Drawable drawable)
     {
         if (view == null)
-        {
             return;
-        }
-        int paddingLeft = view.getPaddingLeft();
-        int paddingTop = view.getPaddingTop();
-        int paddingRight = view.getPaddingRight();
-        int paddingBottom = view.getPaddingBottom();
+
+        final int paddingLeft = view.getPaddingLeft();
+        final int paddingTop = view.getPaddingTop();
+        final int paddingRight = view.getPaddingRight();
+        final int paddingBottom = view.getPaddingBottom();
+
         view.setBackgroundDrawable(drawable);
         view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
@@ -55,13 +56,13 @@ public class FViewUtil
     public static void setBackgroundResource(View view, int resId)
     {
         if (view == null)
-        {
             return;
-        }
-        int paddingLeft = view.getPaddingLeft();
-        int paddingTop = view.getPaddingTop();
-        int paddingRight = view.getPaddingRight();
-        int paddingBottom = view.getPaddingBottom();
+
+        final int paddingLeft = view.getPaddingLeft();
+        final int paddingTop = view.getPaddingTop();
+        final int paddingRight = view.getPaddingRight();
+        final int paddingBottom = view.getPaddingBottom();
+
         view.setBackgroundResource(resId);
         view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
@@ -74,16 +75,15 @@ public class FViewUtil
      */
     public static void setMarginLeft(View view, int left)
     {
-        MarginLayoutParams params = getMarginLayoutParams(view);
+        final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-        {
             return;
-        }
-        if (params.leftMargin != left)
-        {
-            params.leftMargin = left;
-            view.setLayoutParams(params);
-        }
+
+        if (params.leftMargin == left)
+            return;
+
+        params.leftMargin = left;
+        view.setLayoutParams(params);
     }
 
     /**
@@ -94,16 +94,15 @@ public class FViewUtil
      */
     public static void setMarginTop(View view, int top)
     {
-        MarginLayoutParams params = getMarginLayoutParams(view);
+        final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-        {
             return;
-        }
-        if (params.topMargin != top)
-        {
-            params.topMargin = top;
-            view.setLayoutParams(params);
-        }
+
+        if (params.topMargin == top)
+            return;
+
+        params.topMargin = top;
+        view.setLayoutParams(params);
     }
 
     /**
@@ -114,16 +113,15 @@ public class FViewUtil
      */
     public static void setMarginRight(View view, int right)
     {
-        MarginLayoutParams params = getMarginLayoutParams(view);
+        final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-        {
             return;
-        }
-        if (params.rightMargin != right)
-        {
-            params.rightMargin = right;
-            view.setLayoutParams(params);
-        }
+
+        if (params.rightMargin == right)
+            return;
+
+        params.rightMargin = right;
+        view.setLayoutParams(params);
     }
 
     /**
@@ -134,16 +132,15 @@ public class FViewUtil
      */
     public static void setMarginBottom(View view, int bottom)
     {
-        MarginLayoutParams params = getMarginLayoutParams(view);
+        final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-        {
             return;
-        }
-        if (params.bottomMargin != bottom)
-        {
-            params.bottomMargin = bottom;
-            view.setLayoutParams(params);
-        }
+
+        if (params.bottomMargin == bottom)
+            return;
+
+        params.bottomMargin = bottom;
+        view.setLayoutParams(params);
     }
 
     /**
@@ -168,11 +165,9 @@ public class FViewUtil
      */
     public static void setMargin(View view, int left, int top, int right, int bottom)
     {
-        MarginLayoutParams params = getMarginLayoutParams(view);
+        final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-        {
             return;
-        }
 
         boolean needSet = false;
         if (params.leftMargin != left)
@@ -195,10 +190,9 @@ public class FViewUtil
             params.bottomMargin = bottom;
             needSet = true;
         }
+
         if (needSet)
-        {
             view.setLayoutParams(params);
-        }
     }
 
     /**
@@ -210,17 +204,13 @@ public class FViewUtil
     public static MarginLayoutParams getMarginLayoutParams(View view)
     {
         if (view == null)
-        {
             return null;
-        }
-        ViewGroup.LayoutParams params = view.getLayoutParams();
+
+        final ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params != null && params instanceof MarginLayoutParams)
-        {
             return (MarginLayoutParams) params;
-        } else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     /**
@@ -232,19 +222,15 @@ public class FViewUtil
     public static void setLayoutGravity(View view, int gravity)
     {
         if (view == null)
-        {
             return;
-        }
 
-        ViewGroup.LayoutParams p = view.getLayoutParams();
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
         if (p == null)
-        {
             return;
-        }
 
         if (p instanceof FrameLayout.LayoutParams)
         {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) p;
+            final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) p;
             if (params.gravity != gravity)
             {
                 params.gravity = gravity;
@@ -252,7 +238,7 @@ public class FViewUtil
             }
         } else if (p instanceof LinearLayout.LayoutParams)
         {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) p;
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) p;
             if (params.gravity != gravity)
             {
                 params.gravity = gravity;
@@ -270,9 +256,8 @@ public class FViewUtil
     public static void setPaddingLeft(View view, int left)
     {
         if (view == null)
-        {
             return;
-        }
+
         view.setPadding(left, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
     }
 
@@ -285,9 +270,8 @@ public class FViewUtil
     public static void setPaddingTop(View view, int top)
     {
         if (view == null)
-        {
             return;
-        }
+
         view.setPadding(view.getPaddingLeft(), top, view.getPaddingRight(), view.getPaddingBottom());
     }
 
@@ -300,9 +284,8 @@ public class FViewUtil
     public static void setPaddingRight(View view, int right)
     {
         if (view == null)
-        {
             return;
-        }
+
         view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), right, view.getPaddingBottom());
     }
 
@@ -315,9 +298,8 @@ public class FViewUtil
     public static void setPaddingBottom(View view, int bottom)
     {
         if (view == null)
-        {
             return;
-        }
+
         view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), bottom);
     }
 
@@ -332,9 +314,8 @@ public class FViewUtil
     public static int getScaleHeight(int scaleWidth, int scaleHeight, int width)
     {
         if (scaleWidth == 0)
-        {
             return 0;
-        }
+
         return scaleHeight * width / scaleWidth;
     }
 
@@ -349,22 +330,24 @@ public class FViewUtil
     public static int getScaleWidth(int scaleWidth, int scaleHeight, int height)
     {
         if (scaleHeight == 0)
-        {
             return 0;
-        }
+
         return scaleWidth * height / scaleHeight;
     }
 
     /**
      * 测量view，测量后，可以获得view的测量宽高
      *
-     * @param v
+     * @param view
      */
-    public static void measureView(View v)
+    public static void measureView(View view)
     {
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        v.measure(w, h);
+        if (view == null)
+            return;
+
+        final int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        final int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        view.measure(w, h);
     }
 
     /**
@@ -423,11 +406,11 @@ public class FViewUtil
      *
      * @param view
      * @param height
-     * @return
+     * @return true-view的高度和指定的高度的一致
      */
     public static boolean setHeight(View view, int height)
     {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
+        final ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params != null)
         {
             if (params.height != height)
@@ -449,7 +432,7 @@ public class FViewUtil
      */
     public static boolean setWidth(View view, int width)
     {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
+        final ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params != null)
         {
             if (params.width != width)
@@ -472,7 +455,7 @@ public class FViewUtil
      */
     public static boolean setSize(View view, int width, int height)
     {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
+        final ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params != null)
         {
             boolean needSet = false;
@@ -486,10 +469,10 @@ public class FViewUtil
                 params.height = height;
                 needSet = true;
             }
+
             if (needSet)
-            {
                 view.setLayoutParams(params);
-            }
+
             return true;
         }
         return false;
@@ -505,26 +488,24 @@ public class FViewUtil
     public static void addRule(View view, int anchorId, Integer... rules)
     {
         if (view == null || rules == null)
-        {
             return;
-        }
-        if (!(view.getLayoutParams() instanceof RelativeLayout.LayoutParams))
-        {
-            return;
-        }
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
 
-        for (Integer item : rules)
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p instanceof RelativeLayout.LayoutParams)
         {
-            if (anchorId != 0)
+            final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) p;
+            for (Integer item : rules)
             {
-                params.addRule(item, anchorId);
-            } else
-            {
-                params.addRule(item);
+                if (anchorId != 0)
+                {
+                    params.addRule(item, anchorId);
+                } else
+                {
+                    params.addRule(item);
+                }
             }
+            view.setLayoutParams(params);
         }
-        view.setLayoutParams(params);
     }
 
     /**
@@ -537,20 +518,18 @@ public class FViewUtil
     public static void removeRule(View view, Integer... rules)
     {
         if (view == null || rules == null)
-        {
             return;
-        }
-        if (!(view.getLayoutParams() instanceof RelativeLayout.LayoutParams))
-        {
-            return;
-        }
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
 
-        for (Integer item : rules)
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p instanceof RelativeLayout.LayoutParams)
         {
-            params.removeRule(item);
+            final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) p;
+            for (Integer item : rules)
+            {
+                params.removeRule(item);
+            }
+            view.setLayoutParams(params);
         }
-        view.setLayoutParams(params);
     }
 
     /**
@@ -562,9 +541,8 @@ public class FViewUtil
     public static int getVisibility(View view)
     {
         if (view == null)
-        {
             return -1;
-        }
+
         return view.getVisibility();
     }
 
@@ -578,9 +556,8 @@ public class FViewUtil
     public static boolean setVisibility(View view, int visibility)
     {
         if (view == null)
-        {
             return false;
-        }
+
         if (visibility == View.VISIBLE ||
                 visibility == View.INVISIBLE ||
                 visibility == View.GONE)
@@ -603,9 +580,8 @@ public class FViewUtil
     public static boolean setVisibleOrGone(View view, boolean visible)
     {
         if (view == null)
-        {
             return false;
-        }
+
         if (visible)
         {
             view.setVisibility(View.VISIBLE);
@@ -627,9 +603,8 @@ public class FViewUtil
     public static boolean setVisibleOrInvisible(View view, boolean visible)
     {
         if (view == null)
-        {
             return false;
-        }
+
         if (visible)
         {
             view.setVisibility(View.VISIBLE);
@@ -650,9 +625,8 @@ public class FViewUtil
     public static boolean toggleVisibleOrGone(View view)
     {
         if (view == null)
-        {
             return false;
-        }
+
         if (view.getVisibility() == View.VISIBLE)
         {
             view.setVisibility(View.GONE);
@@ -673,9 +647,8 @@ public class FViewUtil
     public static boolean toggleVisibleOrInvisible(View view)
     {
         if (view == null)
-        {
             return false;
-        }
+
         if (view.getVisibility() == View.VISIBLE)
         {
             view.setVisibility(View.INVISIBLE);
@@ -688,6 +661,20 @@ public class FViewUtil
     }
 
     /**
+     * view是否处于活动状态（可见并且已经被添加到界面上）
+     *
+     * @param view
+     * @return
+     */
+    public static boolean isActive(View view)
+    {
+        if (view == null)
+            return false;
+
+        return view.getVisibility() == View.VISIBLE && isAttached(view);
+    }
+
+    /**
      * view是否被添加到界面上
      *
      * @param view
@@ -696,19 +683,12 @@ public class FViewUtil
     public static boolean isAttached(View view)
     {
         if (view == null)
-        {
             return false;
-        }
-        ViewParent parent = view.getRootView().getParent();
-        if (parent == null)
-        {
-            return false;
-        }
-        if (!(parent instanceof View))
-        {
-            return true;
-        }
-        return isAttached((View) parent);
+
+        if (Build.VERSION.SDK_INT >= 19)
+            return view.isAttachedToWindow();
+        else
+            return view.getWindowToken() != null;
     }
 
     /**
@@ -721,6 +701,9 @@ public class FViewUtil
      */
     public static boolean isViewUnder(View view, MotionEvent event, int[] outLocation)
     {
+        if (view == null)
+            return false;
+
         final int x = (int) event.getRawX();
         final int y = (int) event.getRawY();
         return isViewUnder(view, x, y, outLocation);
@@ -737,6 +720,9 @@ public class FViewUtil
      */
     public static boolean isViewUnder(View view, int x, int y, int[] outLocation)
     {
+        if (view == null)
+            return false;
+
         final int[] location = getLocationOnScreen(view, outLocation);
         final int left = location[0];
         final int top = location[1];
@@ -757,10 +743,11 @@ public class FViewUtil
     public static int[] getLocationOnScreen(View view, int[] outLocation)
     {
         if (outLocation == null || outLocation.length != 2)
-        {
             outLocation = new int[]{0, 0};
-        }
-        view.getLocationOnScreen(outLocation);
+
+        if (view != null)
+            view.getLocationOnScreen(outLocation);
+
         return outLocation;
     }
 
@@ -772,18 +759,17 @@ public class FViewUtil
      */
     public static Bitmap createViewBitmap(View view)
     {
-        Bitmap bmp = null;
-        if (view != null)
-        {
-            view.setDrawingCacheEnabled(true);
-            Bitmap drawingCache = view.getDrawingCache();
-            if (drawingCache != null)
-            {
-                bmp = Bitmap.createBitmap(drawingCache);
-            }
-            view.destroyDrawingCache();
-        }
-        return bmp;
+        if (view == null)
+            return null;
+
+        view.setDrawingCacheEnabled(true);
+        final Bitmap drawingCache = view.getDrawingCache();
+        if (drawingCache == null)
+            return null;
+
+        final Bitmap result = Bitmap.createBitmap(drawingCache);
+        view.destroyDrawingCache();
+        return result;
     }
 
     /**
@@ -794,14 +780,13 @@ public class FViewUtil
      */
     public static ImageView getViewsImage(View view)
     {
-        Bitmap bmp = createViewBitmap(view);
-        if (bmp == null)
-        {
+        final Bitmap bitmap = createViewBitmap(view);
+        if (bitmap == null)
             return null;
-        }
-        ImageView imageView = new ImageView(view.getContext());
-        imageView.setImageBitmap(bmp);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(bmp.getWidth(), bmp.getHeight());
+
+        final ImageView imageView = new ImageView(view.getContext());
+        imageView.setImageBitmap(bitmap);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(bitmap.getWidth(), bitmap.getHeight());
         imageView.setLayoutParams(params);
         return imageView;
     }
@@ -809,11 +794,10 @@ public class FViewUtil
     public static void wrapperPopupWindow(PopupWindow pop)
     {
         if (pop == null)
-        {
             return;
-        }
-        ColorDrawable dw = new ColorDrawable(0x00ffffff);
-        pop.setBackgroundDrawable(dw);
+
+        final ColorDrawable drawable = new ColorDrawable(0x00ffffff);
+        pop.setBackgroundDrawable(drawable);
         pop.setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
         pop.setHeight(FrameLayout.LayoutParams.WRAP_CONTENT);
         pop.setFocusable(true);
@@ -830,11 +814,10 @@ public class FViewUtil
     public static void scaleWidth(View view, int scaleWidth, int scaleHeight)
     {
         if (view == null || scaleHeight == 0)
-        {
             return;
-        }
-        int height = getHeight(view);
-        int width = getScaleWidth(scaleWidth, scaleHeight, height);
+
+        final int height = getHeight(view);
+        final int width = getScaleWidth(scaleWidth, scaleHeight, height);
         setWidth(view, width);
     }
 
@@ -848,11 +831,10 @@ public class FViewUtil
     public static void scaleHeight(View view, int scaleWidth, int scaleHeight)
     {
         if (view == null || scaleWidth == 0)
-        {
             return;
-        }
-        int width = getWidth(view);
-        int height = getScaleHeight(scaleWidth, scaleHeight, width);
+
+        final int width = getWidth(view);
+        final int height = getScaleHeight(scaleWidth, scaleHeight, width);
         setHeight(view, height);
     }
 
@@ -906,13 +888,12 @@ public class FViewUtil
     public static void setWidthWeight(View view, int width, float weight)
     {
         if (view == null)
-        {
             return;
-        }
-        ViewGroup.LayoutParams vgParams = view.getLayoutParams();
-        if (vgParams instanceof LinearLayout.LayoutParams)
+
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p instanceof LinearLayout.LayoutParams)
         {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vgParams;
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) p;
 
             boolean needSet = false;
             if (params.width != width)
@@ -927,9 +908,7 @@ public class FViewUtil
             }
 
             if (needSet)
-            {
                 view.setLayoutParams(params);
-            }
         }
     }
 
@@ -943,14 +922,12 @@ public class FViewUtil
     public static void setHeightWeight(View view, int height, float weight)
     {
         if (view == null)
-        {
             return;
-        }
 
-        ViewGroup.LayoutParams vgParams = view.getLayoutParams();
-        if (vgParams instanceof LinearLayout.LayoutParams)
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p instanceof LinearLayout.LayoutParams)
         {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vgParams;
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) p;
 
             boolean needSet = false;
             if (params.height != height)
@@ -965,9 +942,7 @@ public class FViewUtil
             }
 
             if (needSet)
-            {
                 view.setLayoutParams(params);
-            }
         }
     }
 
