@@ -661,20 +661,6 @@ public class FViewUtil
     }
 
     /**
-     * view是否处于活动状态（可见并且已经被添加到界面上）
-     *
-     * @param view
-     * @return
-     */
-    public static boolean isActive(View view)
-    {
-        if (view == null)
-            return false;
-
-        return view.getVisibility() == View.VISIBLE && isAttached(view);
-    }
-
-    /**
      * view是否被添加到界面上
      *
      * @param view
@@ -692,21 +678,33 @@ public class FViewUtil
     }
 
     /**
-     * view是否在某个屏幕的触摸点下面
+     * {@link #isViewUnder(View, int, int, int[])}
      *
      * @param view
-     * @param event       触摸点
-     * @param outLocation 用于接收view的x和y坐标的数组，可以为null
+     * @param event 触摸点
      * @return
      */
-    public static boolean isViewUnder(View view, MotionEvent event, int[] outLocation)
+    public static boolean isViewUnder(View view, MotionEvent event)
     {
         if (view == null)
             return false;
 
         final int x = (int) event.getRawX();
         final int y = (int) event.getRawY();
-        return isViewUnder(view, x, y, outLocation);
+        return isViewUnder(view, x, y, null);
+    }
+
+    /**
+     * {@link #isViewUnder(View, int, int, int[])}
+     *
+     * @param view
+     * @param x
+     * @param y
+     * @return
+     */
+    public static boolean isViewUnder(View view, int x, int y)
+    {
+        return isViewUnder(view, x, y, null);
     }
 
     /**
@@ -721,6 +719,9 @@ public class FViewUtil
     public static boolean isViewUnder(View view, int x, int y, int[] outLocation)
     {
         if (view == null)
+            return false;
+
+        if (!isAttached(view))
             return false;
 
         final int[] location = getLocationOnScreen(view, outLocation);
