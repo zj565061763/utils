@@ -955,11 +955,9 @@ public class FViewUtil
     {
         if (drawable instanceof AnimationDrawable)
         {
-            AnimationDrawable animationDrawable = (AnimationDrawable) drawable;
+            final AnimationDrawable animationDrawable = (AnimationDrawable) drawable;
             if (!animationDrawable.isRunning())
-            {
                 animationDrawable.start();
-            }
         }
     }
 
@@ -983,7 +981,7 @@ public class FViewUtil
     {
         if (drawable instanceof AnimationDrawable)
         {
-            AnimationDrawable animationDrawable = (AnimationDrawable) drawable;
+            final AnimationDrawable animationDrawable = (AnimationDrawable) drawable;
             animationDrawable.stop();
             animationDrawable.selectDrawable(stopIndex);
         }
@@ -996,17 +994,17 @@ public class FViewUtil
      */
     public static void resetView(View view)
     {
-        if (view != null)
-        {
-            view.setAlpha(1.0f);
-            view.setRotation(0.0f);
-            view.setRotationX(0.0f);
-            view.setRotationY(0.0f);
-            view.setTranslationX(0.0f);
-            view.setTranslationY(0.0f);
-            view.setScaleX(1.0f);
-            view.setScaleY(1.0f);
-        }
+        if (view == null)
+            return;
+
+        view.setAlpha(1.0f);
+        view.setRotation(0.0f);
+        view.setRotationX(0.0f);
+        view.setRotationY(0.0f);
+        view.setTranslationX(0.0f);
+        view.setTranslationY(0.0f);
+        view.setScaleX(1.0f);
+        view.setScaleY(1.0f);
     }
 
     /**
@@ -1018,12 +1016,10 @@ public class FViewUtil
      */
     public static float measureText(TextView textView, String content)
     {
-        float width = 0;
-        if (textView != null && content != null)
-        {
-            width = textView.getPaint().measureText(content);
-        }
-        return width;
+        if (textView == null || content == null)
+            return 0;
+
+        return textView.getPaint().measureText(content);
     }
 
     /**
@@ -1051,9 +1047,8 @@ public class FViewUtil
     public static void replaceOldView(final View oldView, final View newView)
     {
         if (oldView == null || newView == null || oldView == newView)
-        {
             return;
-        }
+
         final ViewParent parent = oldView.getParent();
         if (parent instanceof ViewGroup)
         {
@@ -1100,13 +1095,10 @@ public class FViewUtil
     private static void addView(final View parent, final View child, final boolean removeAllViews)
     {
         if (parent == null || child == null)
-        {
             return;
-        }
+
         if (!(parent instanceof ViewGroup))
-        {
             throw new IllegalArgumentException("parent must be instance of ViewGroup");
-        }
 
         final ViewGroup viewGroup = (ViewGroup) parent;
         if (child.getParent() != viewGroup)
@@ -1141,9 +1133,8 @@ public class FViewUtil
     public static void toggleView(final ViewGroup parent, final View child)
     {
         if (child == null || parent == null)
-        {
             return;
-        }
+
         if (child.getParent() != parent)
         {
             removeView(child);
