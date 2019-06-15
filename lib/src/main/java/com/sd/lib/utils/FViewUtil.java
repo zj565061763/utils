@@ -562,7 +562,8 @@ public class FViewUtil
                 visibility == View.INVISIBLE ||
                 visibility == View.GONE)
         {
-            view.setVisibility(visibility);
+            if (view.getVisibility() != visibility)
+                view.setVisibility(visibility);
             return true;
         } else
         {
@@ -584,11 +585,13 @@ public class FViewUtil
 
         if (visible)
         {
-            view.setVisibility(View.VISIBLE);
+            if (view.getVisibility() != View.VISIBLE)
+                view.setVisibility(View.VISIBLE);
             return true;
         } else
         {
-            view.setVisibility(View.GONE);
+            if (view.getVisibility() != View.GONE)
+                view.setVisibility(View.GONE);
             return false;
         }
     }
@@ -607,11 +610,13 @@ public class FViewUtil
 
         if (visible)
         {
-            view.setVisibility(View.VISIBLE);
+            if (view.getVisibility() != View.VISIBLE)
+                view.setVisibility(View.VISIBLE);
             return true;
         } else
         {
-            view.setVisibility(View.INVISIBLE);
+            if (view.getVisibility() != View.INVISIBLE)
+                view.setVisibility(View.INVISIBLE);
             return false;
         }
     }
@@ -629,11 +634,13 @@ public class FViewUtil
 
         if (view.getVisibility() == View.VISIBLE)
         {
-            view.setVisibility(View.GONE);
+            if (view.getVisibility() != View.GONE)
+                view.setVisibility(View.GONE);
             return false;
         } else
         {
-            view.setVisibility(View.VISIBLE);
+            if (view.getVisibility() != View.VISIBLE)
+                view.setVisibility(View.VISIBLE);
             return true;
         }
     }
@@ -651,11 +658,13 @@ public class FViewUtil
 
         if (view.getVisibility() == View.VISIBLE)
         {
-            view.setVisibility(View.INVISIBLE);
+            if (view.getVisibility() != View.INVISIBLE)
+                view.setVisibility(View.INVISIBLE);
             return false;
         } else
         {
-            view.setVisibility(View.VISIBLE);
+            if (view.getVisibility() != View.VISIBLE)
+                view.setVisibility(View.VISIBLE);
             return true;
         }
     }
