@@ -1192,4 +1192,22 @@ public class FViewUtil
             return false;
         }
     }
+
+    /**
+     * 是否全屏
+     *
+     * @param window
+     * @return
+     */
+    public static boolean isFullScreen(Window window)
+    {
+        if (window == null)
+            return false;
+
+        final WindowManager.LayoutParams params = window.getAttributes();
+        if (params == null)
+            return false;
+
+        return (params.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN;
+    }
 }
