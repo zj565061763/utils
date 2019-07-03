@@ -1,6 +1,7 @@
 package com.sd.lib.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.TypedValue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -180,5 +182,27 @@ public class FImageUtil
         {
             return null;
         }
+    }
+
+    /**
+     * 根据图片资源id获得对应的Bitmap
+     *
+     * @param context
+     * @param resId
+     * @return
+     */
+    public static Bitmap getBitmapFromRes(Context context, int resId)
+    {
+        if (resId == 0)
+            return null;
+
+        final Resources resources = context.getResources();
+        final TypedValue value = new TypedValue();
+        resources.openRawResource(resId, value);
+
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inTargetDensity = value.density;
+        final Bitmap bitmap = BitmapFactory.decodeResource(resources, resId, options);
+        return bitmap;
     }
 }
