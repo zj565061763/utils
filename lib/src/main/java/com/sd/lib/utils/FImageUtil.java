@@ -46,15 +46,24 @@ public class FImageUtil
      * drawable转bitmap
      *
      * @param drawable
+     * @param width
+     * @param height
      * @return
      */
-    public static Bitmap drawableToBitmap(Drawable drawable)
+    public static Bitmap drawableToBitmap(Drawable drawable, int width, int height)
     {
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
+        if (width <= 0)
+            width = drawable.getIntrinsicWidth();
+
+        if (height <= 0)
+            height = drawable.getIntrinsicHeight();
+
+        drawable.setBounds(0, 0, width, height);
+
+        final Bitmap bitmap = Bitmap.createBitmap(width, height,
                 drawable.getOpacity() != PixelFormat.OPAQUE ? Config.ARGB_8888 : Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        drawable.draw(canvas);
+
+        drawable.draw(new Canvas(bitmap));
         return bitmap;
     }
 
@@ -68,7 +77,7 @@ public class FImageUtil
      */
     public static byte[] bitmapToBytes(Bitmap bitmap, Bitmap.CompressFormat format, int quality)
     {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(format, quality, baos);
         return baos.toByteArray();
     }
@@ -85,9 +94,7 @@ public class FImageUtil
     public static boolean bitmapToFile(Bitmap bitmap, File file, Bitmap.CompressFormat format, int quality)
     {
         if (bitmap == null || file == null)
-        {
             return false;
-        }
 
         FileOutputStream fos = null;
         try
@@ -121,48 +128,51 @@ public class FImageUtil
      */
     public static Bitmap bytesToBitmap(byte[] bytes)
     {
-        if (bytes != null && bytes.length > 0)
-        {
-            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        } else
-        {
+        if (bytes == null || bytes.length <= 0)
             return null;
-        }
+
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
+    /**
+     * 把Bitmap转为灰色
+     *
+     * @param bitmap
+     * @param recycle
+     * @return
+     */
     public static Bitmap grayBitmap(Bitmap bitmap, boolean recycle)
     {
         if (bitmap == null)
-        {
             return null;
-        }
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
 
-        Bitmap bmpGray = Bitmap.createBitmap(width, height, Config.RGB_565);
-        Canvas canvas = new Canvas(bmpGray);
-        Paint paint = new Paint();
-        ColorMatrix colorMatrix = new ColorMatrix();
+        final int width = bitmap.getWidth();
+        final int height = bitmap.getHeight();
+        final Bitmap bitmapGray = Bitmap.createBitmap(width, height, Config.RGB_565);
+
+        final Canvas canvas = new Canvas(bitmapGray);
+
+        final ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
-        ColorMatrixColorFilter f = new ColorMatrixColorFilter(colorMatrix);
-        paint.setColorFilter(f);
+
+        final Paint paint = new Paint();
+        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
         canvas.drawBitmap(bitmap, 0, 0, paint);
+
         if (recycle)
-        {
             bitmap.recycle();
-        }
-        return bmpGray;
+
+        return bitmapGray;
     }
 
     public static BitmapFactory.Options inJustDecodeBounds(String path)
     {
         if (TextUtils.isEmpty(path))
-        {
             return null;
-        }
+
         try
         {
-            BitmapFactory.Options options = new BitmapFactory.Options();
+            final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(path, options);
             return options;
