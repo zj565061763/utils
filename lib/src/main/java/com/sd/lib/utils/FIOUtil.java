@@ -310,6 +310,47 @@ public class FIOUtil
     }
 
     /**
+     * 拷贝文件夹
+     *
+     * @param fileFrom
+     * @param fileTo
+     * @return
+     */
+    public static boolean copyDir(File fileFrom, File fileTo)
+    {
+        if (fileFrom == null || !fileFrom.exists())
+            return false;
+
+        if (fileTo == null)
+            return false;
+
+        if (fileTo.exists())
+            fileTo.delete();
+        else
+            fileTo.mkdirs();
+
+        final File[] files = fileFrom.listFiles();
+        if (files != null && files.length > 0)
+        {
+            for (File item : files)
+            {
+                final File fileTarget = new File(fileTo, item.getName());
+
+                boolean result = false;
+                if (item.isFile())
+                    result = copyFile(item, fileTarget);
+                else
+                    result = copyDir(item, fileTarget);
+
+                if (!result)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * 解压
      *
      * @param zip 压缩包文件
