@@ -34,18 +34,17 @@ public class FIOUtil
     public static byte[] readBytes(InputStream inputStream) throws IOException
     {
         if (!(inputStream instanceof BufferedInputStream))
-        {
             inputStream = new BufferedInputStream(inputStream);
-        }
+
         ByteArrayOutputStream out = null;
         try
         {
             out = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
+            byte[] buffer = new byte[1024];
             int len = -1;
-            while ((len = inputStream.read(buf)) != -1)
+            while ((len = inputStream.read(buffer)) != -1)
             {
-                out.write(buf, 0, len);
+                out.write(buffer, 0, len);
             }
             return out.toByteArray();
         } finally
@@ -76,6 +75,7 @@ public class FIOUtil
                     skip -= skipSize;
                 }
             }
+
             out = new ByteArrayOutputStream();
             for (int i = 0; i < size; i++)
             {
@@ -99,20 +99,19 @@ public class FIOUtil
     public static String readString(InputStream inputStream, Charset charset) throws IOException
     {
         if (charset == null)
-        {
             charset = Charset.defaultCharset();
-        }
+
         if (!(inputStream instanceof BufferedInputStream))
-        {
             inputStream = new BufferedInputStream(inputStream);
-        }
-        Reader reader = new InputStreamReader(inputStream, charset);
-        StringBuilder sb = new StringBuilder();
-        char[] buf = new char[1024];
+
+        final Reader reader = new InputStreamReader(inputStream, charset);
+        final StringBuilder sb = new StringBuilder();
+        final char[] buffer = new char[1024];
+
         int len = -1;
-        while ((len = reader.read(buf)) != -1)
+        while ((len = reader.read(buffer)) != -1)
         {
-            sb.append(buf, 0, len);
+            sb.append(buffer, 0, len);
         }
         return sb.toString();
     }
@@ -128,10 +127,9 @@ public class FIOUtil
     public static void writeString(OutputStream outputStream, String content, Charset charset) throws IOException
     {
         if (charset == null)
-        {
             charset = Charset.defaultCharset();
-        }
-        Writer writer = new OutputStreamWriter(outputStream, charset);
+
+        final Writer writer = new OutputStreamWriter(outputStream, charset);
         writer.write(content);
         writer.flush();
     }
@@ -146,15 +144,13 @@ public class FIOUtil
     public static void copy(InputStream inputStream, OutputStream outputStream) throws IOException
     {
         if (!(inputStream instanceof BufferedInputStream))
-        {
             inputStream = new BufferedInputStream(inputStream);
-        }
+
         if (!(outputStream instanceof BufferedOutputStream))
-        {
             outputStream = new BufferedOutputStream(outputStream);
-        }
+
+        final byte[] buffer = new byte[1024];
         int len = 0;
-        byte[] buffer = new byte[1024];
         while ((len = inputStream.read(buffer)) != -1)
         {
             outputStream.write(buffer, 0, len);
@@ -199,9 +195,7 @@ public class FIOUtil
     public static String readStringFromFile(File file)
     {
         if (file == null || !file.exists())
-        {
             return null;
-        }
 
         InputStream inputStream = null;
         try
@@ -228,9 +222,8 @@ public class FIOUtil
     public static boolean writeStringToFile(String content, File file)
     {
         if (file == null || content == null)
-        {
             return false;
-        }
+
         OutputStream outputStream = null;
         try
         {
@@ -257,9 +250,8 @@ public class FIOUtil
     public static boolean appendStringToFile(String content, File file)
     {
         if (file == null || content == null)
-        {
             return false;
-        }
+
         OutputStream outputStream = null;
         try
         {
@@ -286,19 +278,18 @@ public class FIOUtil
     public static boolean copy(File fileFrom, File fileTo)
     {
         if (fileFrom == null || !fileFrom.exists())
-        {
             return false;
-        }
+
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try
         {
             if (!fileTo.exists())
-            {
                 fileTo.createNewFile();
-            }
+
             inputStream = new FileInputStream(fileFrom);
             outputStream = new FileOutputStream(fileTo);
+
             copy(inputStream, outputStream);
             return true;
         } catch (Exception e)
