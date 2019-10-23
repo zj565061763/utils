@@ -284,16 +284,25 @@ public class FIOUtil
         if (fileFrom == null || !fileFrom.exists())
             return false;
 
+        if (fileFrom.isDirectory())
+            throw new IllegalArgumentException("fileFrom must not be a directory");
+
         if (fileTo == null)
             return false;
+
+        if (fileTo.exists())
+        {
+            if (fileTo.isDirectory())
+                throw new IllegalArgumentException("fileTo must not be a directory");
+            else
+                fileTo.delete();
+        }
 
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try
         {
-            if (fileTo.exists())
-                fileTo.delete();
-            else
+            if (!fileTo.exists())
                 fileTo.createNewFile();
 
             inputStream = new FileInputStream(fileFrom);
@@ -315,38 +324,49 @@ public class FIOUtil
     /**
      * 拷贝文件夹
      *
-     * @param fileFrom
-     * @param fileTo
+     * @param src
+     * @param dir
      * @return
      */
-    public static boolean copyDir(File fileFrom, File fileTo)
+    public static boolean copyDir(File src, File dir)
     {
-        if (fileFrom == null || !fileFrom.exists())
+        if (src == null || !src.exists())
             return false;
 
-        if (fileTo == null)
+        if (dir == null)
             return false;
 
-        if (fileTo.exists())
-            fileTo.delete();
-        else
-            fileTo.mkdirs();
-
-        final File[] files = fileFrom.listFiles();
-        if (files != null && files.length > 0)
+        if (dir.exists())
         {
-            for (File item : files)
+            if (dir.isFile())
+                throw new IllegalArgumentException("dir must be a directory");
+        } else
+        {
+            if (!dir.mkdirs())
+                return false;
+        }
+
+        if (src.isFile())
+        {
+            return copyFile(src, new File(dir, src.getName()));
+        } else
+        {
+            final File[] files = src.listFiles();
+            if (files != null && files.length > 0)
             {
-                final File fileTarget = new File(fileTo, item.getName());
+                for (File item : files)
+                {
+                    final File fileTarget = new File(dir, item.getName());
 
-                boolean result = false;
-                if (item.isFile())
-                    result = copyFile(item, fileTarget);
-                else
-                    result = copyDir(item, fileTarget);
+                    boolean result = false;
+                    if (item.isFile())
+                        result = copyFile(item, fileTarget);
+                    else
+                        result = copyDir(item, fileTarget);
 
-                if (!result)
-                    return false;
+                    if (!result)
+                        return false;
+                }
             }
         }
 
