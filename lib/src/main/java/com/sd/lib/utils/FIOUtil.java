@@ -335,7 +335,7 @@ public class FIOUtil
     private static boolean unzip(InputStream is, File dir)
     {
         ZipInputStream zipInputStream = null;
-        FileOutputStream outputStream = null;
+        FileOutputStream fileOutputStream = null;
 
         try
         {
@@ -352,9 +352,9 @@ public class FIOUtil
                     file.mkdirs();
                 } else
                 {
-                    outputStream = new FileOutputStream(file);
-                    copy(zipInputStream, outputStream);
-                    outputStream.close();
+                    fileOutputStream = new FileOutputStream(file);
+                    copy(zipInputStream, fileOutputStream);
+                    fileOutputStream.close();
                 }
 
                 zipInputStream.closeEntry();
@@ -367,7 +367,7 @@ public class FIOUtil
         } finally
         {
             FIOUtil.closeQuietly(zipInputStream);
-            FIOUtil.closeQuietly(outputStream);
+            FIOUtil.closeQuietly(fileOutputStream);
         }
         return false;
     }
