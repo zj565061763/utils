@@ -355,6 +355,10 @@ public class FIOUtil
                     file.mkdirs();
                 } else
                 {
+                    final File parentFile = file.getParentFile();
+                    if (!parentFile.exists())
+                        parentFile.mkdirs();
+
                     fileOutputStream = new FileOutputStream(file);
                     copy(zipInputStream, fileOutputStream);
                     fileOutputStream.close();
