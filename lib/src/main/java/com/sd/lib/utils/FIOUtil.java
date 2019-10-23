@@ -206,7 +206,7 @@ public class FIOUtil
         {
             inputStream = new FileInputStream(file);
             return readString(inputStream, null);
-        } catch (Exception e)
+        } catch (IOException e)
         {
             e.printStackTrace();
             return null;
@@ -234,7 +234,7 @@ public class FIOUtil
             outputStream = new FileOutputStream(file);
             writeString(outputStream, content, null);
             return true;
-        } catch (Exception e)
+        } catch (IOException e)
         {
             e.printStackTrace();
             return false;
@@ -262,7 +262,7 @@ public class FIOUtil
             outputStream = new FileOutputStream(file, true);
             writeString(outputStream, content, null);
             return true;
-        } catch (Exception e)
+        } catch (IOException e)
         {
             e.printStackTrace();
             return false;
@@ -298,7 +298,7 @@ public class FIOUtil
 
             copy(inputStream, outputStream);
             return true;
-        } catch (Exception e)
+        } catch (IOException e)
         {
             e.printStackTrace();
             return false;
