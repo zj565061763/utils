@@ -284,6 +284,9 @@ public class FIOUtil
         if (fileFrom == null || !fileFrom.exists())
             return false;
 
+        if (fileTo == null)
+            return false;
+
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try
