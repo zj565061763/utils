@@ -314,7 +314,7 @@ public class FIOUtil
      * @param dir 目标文件夹
      * @return
      */
-    private static boolean unzip(File zip, File dir)
+    public static boolean unzip(File zip, File dir)
     {
         try
         {
@@ -333,7 +333,7 @@ public class FIOUtil
      * @param dir 目标文件夹
      * @return
      */
-    private static boolean unzip(InputStream is, File dir)
+    public static boolean unzip(InputStream is, File dir)
     {
         ZipInputStream zipInputStream = null;
         FileOutputStream fileOutputStream = null;
