@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class FIOUtil
 {
@@ -301,6 +304,72 @@ public class FIOUtil
             closeQuietly(inputStream);
             closeQuietly(outputStream);
         }
+    }
+
+    /**
+     * 解压
+     *
+     * @param zip 压缩包文件
+     * @param dir 目标文件夹
+     * @return
+     */
+    private static boolean unzip(File zip, File dir)
+    {
+        try
+        {
+            return unzip(new FileInputStream(zip), dir);
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 解压
+     *
+     * @param is  压缩包输入流
+     * @param dir 目标文件夹
+     * @return
+     */
+    private static boolean unzip(InputStream is, File dir)
+    {
+        ZipInputStream zipInputStream = null;
+        FileOutputStream outputStream = null;
+
+        try
+        {
+            zipInputStream = new ZipInputStream(is);
+
+            ZipEntry zipEntry = null;
+            while ((zipEntry = zipInputStream.getNextEntry()) != null)
+            {
+                final String name = zipEntry.getName();
+                final File file = new File(dir, name);
+
+                if (zipEntry.isDirectory())
+                {
+                    file.mkdirs();
+                } else
+                {
+                    outputStream = new FileOutputStream(file);
+                    copy(zipInputStream, outputStream);
+                    outputStream.close();
+                }
+
+                zipInputStream.closeEntry();
+            }
+
+            return true;
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            FIOUtil.closeQuietly(zipInputStream);
+            FIOUtil.closeQuietly(outputStream);
+        }
+        return false;
     }
 
     //---------- util method end ----------
