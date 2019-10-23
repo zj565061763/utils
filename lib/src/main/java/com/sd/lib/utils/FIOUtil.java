@@ -20,6 +20,7 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public class FIOUtil
 {
@@ -370,6 +371,72 @@ public class FIOUtil
             FIOUtil.closeQuietly(fileOutputStream);
         }
         return false;
+    }
+
+    /**
+     * 压缩文件
+     *
+     * @param src
+     * @param to
+     * @return
+     */
+    public static boolean zip(File src, File to)
+    {
+        if (src == null || !src.exists())
+            return false;
+
+        if (to == null)
+            return false;
+
+        FileOutputStream fileOutputStream = null;
+        ZipOutputStream zipOutputStream = null;
+
+        try
+        {
+            fileOutputStream = new FileOutputStream(to);
+            zipOutputStream = new ZipOutputStream(fileOutputStream);
+
+            compressFile(src, src.getName(), zipOutputStream);
+            return true;
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            closeQuietly(zipOutputStream);
+            closeQuietly(fileOutputStream);
+        }
+        return false;
+    }
+
+    private static void compressFile(File file, String filename, ZipOutputStream outputStream) throws IOException
+    {
+        if (file.isDirectory())
+        {
+            outputStream.putNextEntry(new ZipEntry(filename + File.separator));
+
+            final File[] files = file.listFiles();
+            if (file != null)
+            {
+                for (File item : files)
+                {
+                    compressFile(item, filename + File.separator + item.getName(), outputStream);
+                }
+            }
+        } else
+        {
+            outputStream.putNextEntry(new ZipEntry(filename));
+
+            FileInputStream fileInputStream = null;
+            try
+            {
+                fileInputStream = new FileInputStream(file);
+                copy(fileInputStream, outputStream);
+            } finally
+            {
+                closeQuietly(fileInputStream);
+            }
+        }
     }
 
     //---------- util method end ----------
