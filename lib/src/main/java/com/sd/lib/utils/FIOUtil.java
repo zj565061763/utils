@@ -279,7 +279,7 @@ public class FIOUtil
      * @param fileTo
      * @return
      */
-    public static boolean copy(File fileFrom, File fileTo)
+    public static boolean copyFile(File fileFrom, File fileTo)
     {
         if (fileFrom == null || !fileFrom.exists())
             return false;
