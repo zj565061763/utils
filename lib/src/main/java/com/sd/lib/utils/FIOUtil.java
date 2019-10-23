@@ -288,7 +288,9 @@ public class FIOUtil
         OutputStream outputStream = null;
         try
         {
-            if (!fileTo.exists())
+            if (fileTo.exists())
+                fileTo.delete();
+            else
                 fileTo.createNewFile();
 
             inputStream = new FileInputStream(fileFrom);
