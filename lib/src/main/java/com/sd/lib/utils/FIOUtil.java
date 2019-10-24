@@ -300,7 +300,10 @@ public class FIOUtil
 
         final File fileToParent = fileTo.getParentFile();
         if (!fileToParent.exists())
-            fileToParent.mkdirs();
+        {
+            if (!fileToParent.mkdirs())
+                return false;
+        }
 
         InputStream inputStream = null;
         OutputStream outputStream = null;
