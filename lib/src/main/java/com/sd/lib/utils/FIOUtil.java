@@ -409,6 +409,15 @@ public class FIOUtil
      */
     public static boolean unzip(InputStream is, File dir)
     {
+        if (is == null || dir == null)
+            return false;
+
+        if (dir.exists())
+        {
+            if (dir.isFile())
+                throw new IllegalArgumentException("dir must be a directory");
+        }
+
         ZipInputStream zipInputStream = null;
         FileOutputStream fileOutputStream = null;
 
