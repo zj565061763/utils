@@ -293,9 +293,13 @@ public class FIOUtil
         if (fileTo.exists())
         {
             if (fileTo.isDirectory())
+            {
                 throw new IllegalArgumentException("fileTo must not be a directory");
-            else
-                fileTo.delete();
+            } else
+            {
+                if (!fileTo.delete())
+                    return false;
+            }
         }
 
         final File fileToParent = fileTo.getParentFile();
