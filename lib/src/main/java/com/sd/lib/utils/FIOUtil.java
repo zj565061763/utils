@@ -298,6 +298,10 @@ public class FIOUtil
                 fileTo.delete();
         }
 
+        final File fileToParent = fileTo.getParentFile();
+        if (!fileToParent.exists())
+            fileToParent.mkdirs();
+
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try
