@@ -348,7 +348,7 @@ public class FIOUtil
     }
 
     /**
-     * 拷贝到指定文件夹
+     * 拷贝文件或者到指定文件夹下的所有文件到目标文件夹
      *
      * @param src 源文件或者文件夹
      * @param dir 目标文件夹
