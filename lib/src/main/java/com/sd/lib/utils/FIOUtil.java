@@ -492,23 +492,35 @@ public class FIOUtil
      * 压缩文件
      *
      * @param src
-     * @param to
+     * @param zip
      * @return
      */
-    public static boolean zip(File src, File to)
+    public static boolean zip(File src, File zip)
     {
         if (src == null || !src.exists())
             return false;
 
-        if (to == null)
+        if (zip == null)
             return false;
+
+        if (zip.exists())
+        {
+            if (zip.isDirectory())
+            {
+                throw new IllegalArgumentException("zip must not be a directory");
+            } else
+            {
+                if (!zip.delete())
+                    return false;
+            }
+        }
 
         FileOutputStream fileOutputStream = null;
         ZipOutputStream zipOutputStream = null;
 
         try
         {
-            fileOutputStream = new FileOutputStream(to);
+            fileOutputStream = new FileOutputStream(zip);
             zipOutputStream = new ZipOutputStream(fileOutputStream);
 
             compressFile(src, src.getName(), zipOutputStream);
