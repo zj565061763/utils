@@ -322,13 +322,13 @@ public class FIOUtil
     }
 
     /**
-     * 拷贝文件夹
+     * 拷贝到指定文件夹
      *
-     * @param src
-     * @param dir
+     * @param src 源文件或者文件夹
+     * @param dir 目标文件夹
      * @return
      */
-    public static boolean copyDir(File src, File dir)
+    public static boolean copyToDir(File src, File dir)
     {
         if (src == null || !src.exists())
             return false;
@@ -362,7 +362,7 @@ public class FIOUtil
                     if (item.isFile())
                         result = copyFile(item, fileTarget);
                     else
-                        result = copyDir(item, fileTarget);
+                        result = copyToDir(item, fileTarget);
 
                     if (!result)
                         return false;
