@@ -225,8 +225,18 @@ public class FIOUtil
      */
     public static boolean writeStringToFile(String content, File file)
     {
-        if (file == null || content == null)
+        if (file == null)
             return false;
+
+        final File fileParent = file.getParentFile();
+        if (fileParent != null && !fileParent.exists())
+        {
+            if (!fileParent.mkdirs())
+                return false;
+        }
+
+        if (content == null)
+            content = "";
 
         OutputStream outputStream = null;
         try
