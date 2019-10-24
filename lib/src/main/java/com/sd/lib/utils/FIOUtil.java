@@ -423,12 +423,23 @@ public class FIOUtil
 
                 if (zipEntry.isDirectory())
                 {
-                    file.mkdirs();
+                    if (file.exists())
+                    {
+                        if (file.isFile())
+                            file.delete();
+                    } else
+                    {
+                        if (!file.mkdirs())
+                            return false;
+                    }
                 } else
                 {
                     final File parentFile = file.getParentFile();
                     if (!parentFile.exists())
-                        parentFile.mkdirs();
+                    {
+                        if (!parentFile.mkdirs())
+                            return false;
+                    }
 
                     fileOutputStream = new FileOutputStream(file);
                     copy(zipInputStream, fileOutputStream);
