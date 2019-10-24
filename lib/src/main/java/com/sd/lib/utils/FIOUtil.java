@@ -1,6 +1,7 @@
 package com.sd.lib.utils;
 
 import android.database.Cursor;
+import android.text.TextUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -263,8 +264,15 @@ public class FIOUtil
      */
     public static boolean appendStringToFile(String content, File file)
     {
-        if (file == null || content == null)
+        if (file == null || TextUtils.isEmpty(content))
             return false;
+
+        final File fileParent = file.getParentFile();
+        if (fileParent != null && !fileParent.exists())
+        {
+            if (!fileParent.mkdirs())
+                return false;
+        }
 
         OutputStream outputStream = null;
         try
