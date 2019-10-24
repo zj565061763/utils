@@ -451,19 +451,18 @@ public class FIOUtil
 
                 if (zipEntry.isDirectory())
                 {
-                    if (file.exists())
+                    if (file.exists() && file.isFile())
                     {
-                        if (file.isFile())
-                            file.delete();
-                    } else
-                    {
-                        if (!file.mkdirs())
+                        if (!file.delete())
                             return false;
                     }
+
+                    if (!file.exists() && !file.mkdirs())
+                        return false;
                 } else
                 {
                     final File parentFile = file.getParentFile();
-                    if (!parentFile.exists())
+                    if (parentFile != null && !parentFile.exists())
                     {
                         if (!parentFile.mkdirs())
                             return false;
