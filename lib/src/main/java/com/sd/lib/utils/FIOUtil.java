@@ -515,6 +515,13 @@ public class FIOUtil
             }
         }
 
+        final File fileParent = zip.getParentFile();
+        if (fileParent != null && !fileParent.exists())
+        {
+            if (!fileParent.mkdirs())
+                return false;
+        }
+
         FileOutputStream fileOutputStream = null;
         ZipOutputStream zipOutputStream = null;
 
