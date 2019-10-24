@@ -313,9 +313,6 @@ public class FIOUtil
         OutputStream outputStream = null;
         try
         {
-            if (!fileTo.exists())
-                fileTo.createNewFile();
-
             inputStream = new FileInputStream(fileFrom);
             outputStream = new FileOutputStream(fileTo);
 
