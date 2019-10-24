@@ -303,7 +303,7 @@ public class FIOUtil
         }
 
         final File fileToParent = fileTo.getParentFile();
-        if (!fileToParent.exists())
+        if (fileToParent != null && !fileToParent.exists())
         {
             if (!fileToParent.mkdirs())
                 return false;
