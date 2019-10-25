@@ -500,6 +500,22 @@ public class FIOUtil
         if (src == null || !src.exists())
             return false;
 
+        final File[] files = new File[]{src};
+        return zip(files, zip);
+    }
+
+    /**
+     * 压缩文件
+     *
+     * @param files
+     * @param zip
+     * @return
+     */
+    public static boolean zip(File[] files, File zip)
+    {
+        if (files == null || files.length <= 0)
+            return false;
+
         if (zip == null)
             return false;
 
@@ -530,7 +546,13 @@ public class FIOUtil
             fileOutputStream = new FileOutputStream(zip);
             zipOutputStream = new ZipOutputStream(fileOutputStream);
 
-            compressFile(src, src.getName(), zipOutputStream);
+            for (File item : files)
+            {
+                if (item == null || !item.exists())
+                    return false;
+
+                compressFile(item, item.getName(), zipOutputStream);
+            }
             return true;
         } catch (IOException e)
         {
