@@ -22,9 +22,8 @@ public class FKeyboardUtil
     public static void showKeyboard(final View view, long delay)
     {
         if (view == null)
-        {
             return;
-        }
+
         if (delay <= 0)
         {
             showKeyboard(view);
@@ -49,10 +48,9 @@ public class FKeyboardUtil
     public static void showKeyboard(View view)
     {
         if (view == null)
-        {
             return;
-        }
-        InputMethodManager manager = getInputMethodManager(view.getContext());
+
+        final InputMethodManager manager = getInputMethodManager(view.getContext());
         view.setFocusable(true);
         view.requestFocus();
         manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
@@ -66,15 +64,11 @@ public class FKeyboardUtil
     public static void hideKeyboard(View view)
     {
         if (view == null)
-        {
             return;
-        }
-        InputMethodManager manager = getInputMethodManager(view.getContext());
-        manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+
+        final InputMethodManager manager = getInputMethodManager(view.getContext());
         if (manager.isActive())
-        {
             manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
     /**
@@ -85,7 +79,7 @@ public class FKeyboardUtil
      */
     public static boolean isKeyboardActive(Context context)
     {
-        InputMethodManager manager = getInputMethodManager(context);
+        final InputMethodManager manager = getInputMethodManager(context);
         return manager.isActive();
     }
 
@@ -97,7 +91,7 @@ public class FKeyboardUtil
      */
     private static InputMethodManager getInputMethodManager(Context context)
     {
-        InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         return manager;
     }
 }
