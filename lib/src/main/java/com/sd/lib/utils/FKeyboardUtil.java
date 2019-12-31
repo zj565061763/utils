@@ -1,8 +1,11 @@
 package com.sd.lib.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
 /**
  * 软键盘操作工具类
@@ -66,9 +69,31 @@ public class FKeyboardUtil
         if (view == null)
             return;
 
-        final InputMethodManager manager = getInputMethodManager(view.getContext());
-        if (manager.isActive())
+        final Context context = view.getContext();
+        final InputMethodManager manager = getInputMethodManager(context);
+
+        if (manager.isActive(view))
+        {
             manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        } else if (manager.isActive())
+        {
+            if (context instanceof Activity)
+            {
+                final Activity activity = (Activity) context;
+                final FrameLayout frameLayout = activity.findViewById(android.R.id.content);
+                if (frameLayout != null)
+                {
+                    final EditText editText = new EditText(activity);
+                    frameLayout.addView(editText, 1, 1);
+
+                    showKeyboard(editText);
+                    if (manager.isActive(editText))
+                        manager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+
+                    frameLayout.removeView(editText);
+                }
+            }
+        }
     }
 
     /**
