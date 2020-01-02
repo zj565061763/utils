@@ -53,7 +53,9 @@ public class FKeyboardUtil
         if (view == null)
             return;
 
-        final InputMethodManager manager = getInputMethodManager(view.getContext());
+        final Context context = view.getContext();
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
         view.setFocusable(true);
         view.requestFocus();
         manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
@@ -70,7 +72,7 @@ public class FKeyboardUtil
             return;
 
         final Context context = view.getContext();
-        final InputMethodManager manager = getInputMethodManager(context);
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         if (manager.isActive(view))
         {
@@ -104,19 +106,7 @@ public class FKeyboardUtil
      */
     public static boolean isKeyboardActive(Context context)
     {
-        final InputMethodManager manager = getInputMethodManager(context);
-        return manager.isActive();
-    }
-
-    /**
-     * 获得InputMethodManager对象
-     *
-     * @param context
-     * @return
-     */
-    private static InputMethodManager getInputMethodManager(Context context)
-    {
         final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        return manager;
+        return manager.isActive();
     }
 }
