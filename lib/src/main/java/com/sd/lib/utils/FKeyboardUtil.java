@@ -17,33 +17,6 @@ public class FKeyboardUtil
     }
 
     /**
-     * 延迟显示软键盘
-     *
-     * @param view
-     * @param delay 延迟多少毫秒
-     */
-    public static void showKeyboard(final View view, long delay)
-    {
-        if (view == null)
-            return;
-
-        if (delay <= 0)
-        {
-            showKeyboard(view);
-        } else
-        {
-            view.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    showKeyboard(view);
-                }
-            }, delay);
-        }
-    }
-
-    /**
      * 显示软键盘
      *
      * @param view
