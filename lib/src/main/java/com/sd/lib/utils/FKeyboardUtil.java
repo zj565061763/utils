@@ -17,11 +17,25 @@ public class FKeyboardUtil
     }
 
     /**
-     * 显示软键盘
+     * {@link #show(View, int)}
      *
      * @param view
      */
-    public static void showKeyboard(View view)
+    public static void show(View view)
+    {
+        show(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    /**
+     * 显示软键盘
+     * <p>
+     * {@link InputMethodManager#SHOW_FORCED}<br>
+     * {@link InputMethodManager#SHOW_IMPLICIT}
+     *
+     * @param view
+     * @param flag
+     */
+    public static void show(View view, int flag)
     {
         if (view == null)
             return;
@@ -31,15 +45,29 @@ public class FKeyboardUtil
 
         view.setFocusable(true);
         view.requestFocus();
-        manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        manager.showSoftInput(view, flag);
+    }
+
+    /**
+     * {@link #hide(View, int)}
+     *
+     * @param view
+     */
+    public static void hide(View view)
+    {
+        hide(view, 0);
     }
 
     /**
      * 隐藏软键盘
+     * <p>
+     * {@link InputMethodManager#HIDE_IMPLICIT_ONLY}
+     * {@link InputMethodManager#HIDE_NOT_ALWAYS}
      *
      * @param view
+     * @param flag
      */
-    public static void hideKeyboard(View view)
+    public static void hide(View view, int flag)
     {
         if (view == null)
             return;
@@ -49,7 +77,7 @@ public class FKeyboardUtil
 
         if (manager.isActive(view))
         {
-            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), flag);
         } else if (manager.isActive())
         {
             if (context instanceof Activity)
@@ -61,9 +89,9 @@ public class FKeyboardUtil
                     final EditText editText = new EditText(activity);
                     frameLayout.addView(editText, 1, 1);
 
-                    showKeyboard(editText);
+                    show(editText);
                     if (manager.isActive(editText))
-                        manager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                        manager.hideSoftInputFromWindow(editText.getWindowToken(), flag);
 
                     frameLayout.removeView(editText);
                 }
@@ -77,9 +105,27 @@ public class FKeyboardUtil
      * @param context
      * @return
      */
-    public static boolean isKeyboardActive(Context context)
+    public static boolean isActive(Context context)
     {
         final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         return manager.isActive();
+    }
+
+    @Deprecated
+    public static void showKeyboard(View view)
+    {
+        show(view);
+    }
+
+    @Deprecated
+    public static void hideKeyboard(View view)
+    {
+        hide(view);
+    }
+
+    @Deprecated
+    public static boolean isKeyboardActive(Context context)
+    {
+        return isActive(context);
     }
 }
