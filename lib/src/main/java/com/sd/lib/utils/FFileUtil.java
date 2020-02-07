@@ -1,6 +1,7 @@
 package com.sd.lib.utils;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -19,16 +20,18 @@ public class FFileUtil
 
     static
     {
-        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DCIM);
-        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_PICTURES);
-        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOWNLOADS);
-        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOCUMENTS);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_MUSIC);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_PODCASTS);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_RINGTONES);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_ALARMS);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_NOTIFICATIONS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_PICTURES);
         PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_MOVIES);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOWNLOADS);
+        PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DCIM);
+
+        if (Build.VERSION.SDK_INT >= 19)
+            PUBLIC_DIRECTORIES.add(Environment.DIRECTORY_DOCUMENTS);
     }
 
     private FFileUtil()
