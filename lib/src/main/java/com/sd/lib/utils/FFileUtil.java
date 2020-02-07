@@ -241,4 +241,10 @@ public class FFileUtil
             return null;
         }
     }
+
+    @Deprecated
+    public static boolean deleteFileOrDir(File file)
+    {
+        return delete(file);
+    }
 }
