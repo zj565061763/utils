@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.sd.lib.context.FContext;
 
@@ -22,65 +23,40 @@ public class FPackageUtil extends FContext
     }
 
     /**
-     * 安装某个apk
-     *
-     * @param path apk文件路径
-     * @return
-     */
-    public static boolean installApk(String path)
-    {
-        if (path == null)
-        {
-            return false;
-        }
-
-        if (!new File(path).exists())
-        {
-            return false;
-        }
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.parse("file://" + path), "application/vnd.android.package-archive");
-        get().startActivity(intent);
-        return true;
-    }
-
-    /**
-     * 返回apk文件的包信息
-     *
-     * @param apkFilePath
-     * @return
-     */
-    public static PackageInfo getApkPackageInfo(String apkFilePath)
-    {
-        PackageManager pm = get().getPackageManager();
-        PackageInfo apkInfo = pm.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA);
-        return apkInfo;
-    }
-
-    /**
      * 返回当前app的包信息
      *
      * @return
      */
     public static PackageInfo getPackageInfo()
     {
-        return getPackageInfo(get().getPackageName());
+        return getPackageInfo(get().getPackageName(), PackageManager.GET_CONFIGURATIONS);
+    }
+
+    /**
+     * 返回当前app的包信息
+     *
+     * @param flag
+     * @return
+     */
+    public static PackageInfo getPackageInfo(int flag)
+    {
+        return getPackageInfo(get().getPackageName(), flag);
     }
 
     /**
      * 返回app的包信息
      *
      * @param packageName app包名
+     * @param flag
      * @return
      */
-    public static PackageInfo getPackageInfo(String packageName)
+    public static PackageInfo getPackageInfo(String packageName, int flag)
     {
         try
         {
-            PackageManager pm = get().getPackageManager();
-            return pm.getPackageInfo(packageName, 0);
+            final PackageManager manager = get().getPackageManager();
+            final PackageInfo info = manager.getPackageInfo(packageName, flag);
+            return info;
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -89,13 +65,27 @@ public class FPackageUtil extends FContext
     }
 
     /**
+     * 返回apk文件的包信息
+     *
+     * @param apkFilePath
+     * @param flag
+     * @return
+     */
+    public static PackageInfo getPackageInfoApk(String apkFilePath, int flag)
+    {
+        final PackageManager manager = get().getPackageManager();
+        final PackageInfo info = manager.getPackageArchiveInfo(apkFilePath, flag);
+        return info;
+    }
+
+    /**
      * 返回当前app的MetaData
      *
      * @return
      */
-    public static Bundle getAppMetaData()
+    public static Bundle getMetaData()
     {
-        return getAppMetaData(get().getPackageName());
+        return getMetaData(get().getPackageName());
     }
 
     /**
@@ -104,18 +94,18 @@ public class FPackageUtil extends FContext
      * @param packageName app包名
      * @return
      */
-    public static Bundle getAppMetaData(String packageName)
+    public static Bundle getMetaData(String packageName)
     {
         try
         {
-            PackageManager pm = get().getPackageManager();
-            ApplicationInfo info = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            final PackageManager manager = get().getPackageManager();
+            final ApplicationInfo info = manager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
             return info.metaData;
         } catch (Exception e)
         {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -138,8 +128,8 @@ public class FPackageUtil extends FContext
     {
         try
         {
-            PackageManager pm = get().getPackageManager();
-            Intent intent = pm.getLaunchIntentForPackage(packageName);
+            final PackageManager manager = get().getPackageManager();
+            final Intent intent = manager.getLaunchIntentForPackage(packageName);
             get().startActivity(intent);
             return true;
         } catch (Exception e)
@@ -167,14 +157,14 @@ public class FPackageUtil extends FContext
      */
     public static boolean isAppBackground(String packageName)
     {
-        ActivityManager activityManager = (ActivityManager) get().getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        final ActivityManager manager = (ActivityManager) get().getSystemService(Context.ACTIVITY_SERVICE);
+        final List<RunningAppProcessInfo> listInfo = manager.getRunningAppProcesses();
 
-        for (RunningAppProcessInfo appProcess : appProcesses)
+        for (RunningAppProcessInfo item : listInfo)
         {
-            if (appProcess.processName.equals(packageName))
+            if (item.processName.equals(packageName))
             {
-                if (appProcess.importance != RunningAppProcessInfo.IMPORTANCE_FOREGROUND)
+                if (item.importance != RunningAppProcessInfo.IMPORTANCE_FOREGROUND)
                 {
                     return true;
                 } else
@@ -187,6 +177,27 @@ public class FPackageUtil extends FContext
     }
 
     /**
+     * 安装某个apk
+     *
+     * @param path apk文件路径
+     * @return
+     */
+    public static boolean installApk(String path)
+    {
+        if (TextUtils.isEmpty(path))
+            return false;
+
+        if (!new File(path).exists())
+            return false;
+
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.parse("file://" + path), "application/vnd.android.package-archive");
+        get().startActivity(intent);
+        return true;
+    }
+
+    /**
      * 返回手机上是否安装了某个app
      *
      * @param packageName app包名
@@ -194,15 +205,6 @@ public class FPackageUtil extends FContext
      */
     public static boolean isAppInstalled(String packageName)
     {
-        try
-        {
-            PackageManager pm = get().getPackageManager();
-            PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
-            return packageInfo != null;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+        return getPackageInfo(packageName, PackageManager.GET_CONFIGURATIONS) != null;
     }
 }
