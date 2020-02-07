@@ -176,7 +176,7 @@ public class FFileUtil
      * @param file
      * @return
      */
-    public static boolean deleteFileOrDir(File file)
+    public static boolean delete(File file)
     {
         if (file == null || !file.exists())
             return true;
@@ -189,7 +189,7 @@ public class FFileUtil
         {
             for (File item : files)
             {
-                deleteFileOrDir(item);
+                delete(item);
             }
         }
         return file.delete();
