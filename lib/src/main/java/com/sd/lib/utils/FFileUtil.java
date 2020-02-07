@@ -150,7 +150,7 @@ public class FFileUtil
      * @param file
      * @return
      */
-    public static long getFileOrDirSize(File file)
+    public static long getFileSize(File file)
     {
         if (file == null || !file.exists())
             return 0;
@@ -165,7 +165,7 @@ public class FFileUtil
         long length = 0;
         for (File item : files)
         {
-            length += getFileOrDirSize(item);
+            length += getFileSize(item);
         }
         return length;
     }
@@ -203,7 +203,8 @@ public class FFileUtil
      */
     public static String formatFileSize(long fileLength)
     {
-        DecimalFormat df = new DecimalFormat("#.00");
+        final DecimalFormat df = new DecimalFormat("#.00");
+
         String fileSizeString = "";
         if (fileLength <= 0)
         {
@@ -231,7 +232,7 @@ public class FFileUtil
      */
     public static File getAnrFile()
     {
-        File file = new File("/data/anr/traces.txt");
+        final File file = new File("/data/anr/traces.txt");
         if (file.exists())
         {
             return file;
