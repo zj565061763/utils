@@ -78,13 +78,10 @@ public class FFileUtil
     public static File getExternalDirectory(String directory)
     {
         if (!isExternalStorageMounted())
-        {
             return null;
-        }
+
         if (TextUtils.isEmpty(directory))
-        {
             return Environment.getExternalStorageDirectory();
-        }
 
         File dir = null;
         if (PUBLIC_DIRECTORIES.contains(directory))
@@ -127,16 +124,14 @@ public class FFileUtil
     public static File newFileUnderDir(File dir, String ext)
     {
         if (dir == null)
-        {
             return null;
-        }
+
         if (ext == null)
-        {
             ext = "";
-        }
 
         long current = System.currentTimeMillis();
         File file = new File(dir, current + ext);
+
         while (file.exists())
         {
             current++;
@@ -154,18 +149,15 @@ public class FFileUtil
     public static long getFileOrDirSize(File file)
     {
         if (file == null || !file.exists())
-        {
             return 0;
-        }
+
         if (!file.isDirectory())
-        {
             return file.length();
-        }
-        File[] files = file.listFiles();
+
+        final File[] files = file.listFiles();
         if (files == null || files.length <= 0)
-        {
             return 0;
-        }
+
         long length = 0;
         for (File item : files)
         {
