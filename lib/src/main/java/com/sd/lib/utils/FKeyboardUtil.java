@@ -1,8 +1,11 @@
 package com.sd.lib.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
 /**
  * 软键盘操作工具类
@@ -14,66 +17,85 @@ public class FKeyboardUtil
     }
 
     /**
-     * 延迟显示软键盘
+     * {@link #show(View, int)}
      *
      * @param view
-     * @param delay 延迟多少毫秒
      */
-    public static void showKeyboard(final View view, long delay)
+    public static void show(View view)
     {
-        if (view == null)
-        {
-            return;
-        }
-        if (delay <= 0)
-        {
-            showKeyboard(view);
-        } else
-        {
-            view.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    showKeyboard(view);
-                }
-            }, delay);
-        }
+        show(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
     /**
      * 显示软键盘
+     * <p>
+     * {@link InputMethodManager#SHOW_FORCED}<br>
+     * {@link InputMethodManager#SHOW_IMPLICIT}
+     *
+     * @param view
+     * @param flag
+     */
+    public static void show(View view, int flag)
+    {
+        if (view == null)
+            return;
+
+        final Context context = view.getContext();
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        view.setFocusable(true);
+        view.requestFocus();
+        manager.showSoftInput(view, flag);
+    }
+
+    /**
+     * {@link #hide(View, int)}
      *
      * @param view
      */
-    public static void showKeyboard(View view)
+    public static void hide(View view)
     {
-        if (view == null)
-        {
-            return;
-        }
-        InputMethodManager manager = getInputMethodManager(view.getContext());
-        view.setFocusable(true);
-        view.requestFocus();
-        manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        hide(view, 0);
     }
 
     /**
      * 隐藏软键盘
+     * <p>
+     * {@link InputMethodManager#HIDE_IMPLICIT_ONLY}
+     * {@link InputMethodManager#HIDE_NOT_ALWAYS}
      *
      * @param view
+     * @param flag
      */
-    public static void hideKeyboard(View view)
+    public static void hide(View view, int flag)
     {
         if (view == null)
-        {
             return;
-        }
-        InputMethodManager manager = getInputMethodManager(view.getContext());
-        manager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-        if (manager.isActive())
+
+        final Context context = view.getContext();
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (manager.isActive(view))
         {
-            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), flag);
+        } else if (manager.isActive())
+        {
+            if (context instanceof Activity)
+            {
+                final Activity activity = (Activity) context;
+                final FrameLayout frameLayout = activity.findViewById(android.R.id.content);
+                if (frameLayout != null)
+                {
+                    final EditText editText = new EditText(activity);
+                    frameLayout.addView(editText, 1, 1);
+
+                    show(editText);
+                    if (manager.isActive(editText))
+                        manager.hideSoftInputFromWindow(editText.getWindowToken(), flag);
+
+                    frameLayout.removeView(editText);
+                }
+            }
         }
     }
 
@@ -83,21 +105,27 @@ public class FKeyboardUtil
      * @param context
      * @return
      */
-    public static boolean isKeyboardActive(Context context)
+    public static boolean isActive(Context context)
     {
-        InputMethodManager manager = getInputMethodManager(context);
+        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         return manager.isActive();
     }
 
-    /**
-     * 获得InputMethodManager对象
-     *
-     * @param context
-     * @return
-     */
-    private static InputMethodManager getInputMethodManager(Context context)
+    @Deprecated
+    public static void showKeyboard(View view)
     {
-        InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        return manager;
+        show(view);
+    }
+
+    @Deprecated
+    public static void hideKeyboard(View view)
+    {
+        hide(view);
+    }
+
+    @Deprecated
+    public static boolean isKeyboardActive(Context context)
+    {
+        return isActive(context);
     }
 }
