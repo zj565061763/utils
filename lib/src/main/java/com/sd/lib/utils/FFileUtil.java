@@ -130,14 +130,18 @@ public class FFileUtil
             ext = "";
 
         long current = System.currentTimeMillis();
-        File file = new File(dir, current + ext);
-
-        while (file.exists())
+        while (true)
         {
-            current++;
-            file = new File(dir, current + ext);
+            final File file = new File(dir, current + ext);
+            if (file.exists())
+            {
+                current++;
+                continue;
+            } else
+            {
+                return file;
+            }
         }
-        return file;
     }
 
     /**
