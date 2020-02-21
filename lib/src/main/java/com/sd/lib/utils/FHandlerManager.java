@@ -42,4 +42,20 @@ public class FHandlerManager
     {
         return BACKGROUND_HANDLER;
     }
+
+    /**
+     * Ui线程执行
+     *
+     * @param runnable
+     */
+    public static void runOnUiThread(Runnable runnable)
+    {
+        if (runnable == null)
+            return;
+
+        if (Looper.myLooper() == Looper.getMainLooper())
+            runnable.run();
+        else
+            MAIN_HANDLER.post(runnable);
+    }
 }
