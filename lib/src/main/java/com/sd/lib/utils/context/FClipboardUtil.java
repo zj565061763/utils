@@ -22,8 +22,8 @@ public class FClipboardUtil extends FContext
      */
     public static void setText(CharSequence text)
     {
-        ClipboardManager clip = (ClipboardManager) get().getSystemService(Context.CLIPBOARD_SERVICE);
-        clip.setPrimaryClip(ClipData.newPlainText(null, text));
+        final ClipboardManager manager = (ClipboardManager) get().getSystemService(Context.CLIPBOARD_SERVICE);
+        manager.setPrimaryClip(ClipData.newPlainText(null, text));
     }
 
     /**
@@ -33,14 +33,22 @@ public class FClipboardUtil extends FContext
      */
     public static CharSequence getText()
     {
-        ClipboardManager clip = (ClipboardManager) get().getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clip.hasPrimaryClip())
-        {
-            return clip.getPrimaryClip().getItemAt(0).getText();
-        } else
-        {
+        final ClipboardManager manager = (ClipboardManager) get().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (!manager.hasPrimaryClip())
             return null;
-        }
-    }
 
+        final ClipData clipData = manager.getPrimaryClip();
+        if (clipData == null)
+            return null;
+
+        final int count = clipData.getItemCount();
+        if (count <= 0)
+            return null;
+
+        final ClipData.Item item = clipData.getItemAt(0);
+        if (item == null)
+            return null;
+
+        return item.getText();
+    }
 }
