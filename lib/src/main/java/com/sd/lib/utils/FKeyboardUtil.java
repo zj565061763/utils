@@ -74,29 +74,37 @@ public class FKeyboardUtil
 
         final Context context = view.getContext();
         final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (manager.isActive(view))
-        {
+        if (manager.isActive())
             manager.hideSoftInputFromWindow(view.getWindowToken(), flag);
-        } else if (manager.isActive())
-        {
-            if (context instanceof Activity)
-            {
-                final Activity activity = (Activity) context;
-                final FrameLayout frameLayout = activity.findViewById(android.R.id.content);
-                if (frameLayout != null)
-                {
-                    final EditText editText = new EditText(activity);
-                    frameLayout.addView(editText, 1, 1);
+    }
 
-                    show(editText);
-                    if (manager.isActive(editText))
-                        manager.hideSoftInputFromWindow(editText.getWindowToken(), flag);
+    /**
+     * 隐藏软键盘
+     * <p>
+     * {@link InputMethodManager#HIDE_IMPLICIT_ONLY}
+     * {@link InputMethodManager#HIDE_NOT_ALWAYS}
+     *
+     * @param activity
+     * @param flag
+     */
+    public static void hide(Activity activity, int flag)
+    {
+        if (activity == null)
+            return;
 
-                    frameLayout.removeView(editText);
-                }
-            }
-        }
+        final InputMethodManager manager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (!manager.isActive())
+            return;
+
+        final FrameLayout frameLayout = activity.findViewById(android.R.id.content);
+        final EditText editText = new EditText(activity);
+        frameLayout.addView(editText, 1, 1);
+
+        show(editText);
+        if (manager.isActive(editText))
+            manager.hideSoftInputFromWindow(editText.getWindowToken(), flag);
+
+        frameLayout.removeView(editText);
     }
 
     /**
