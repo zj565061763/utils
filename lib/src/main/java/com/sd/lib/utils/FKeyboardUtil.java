@@ -79,6 +79,16 @@ public class FKeyboardUtil
     }
 
     /**
+     * {@link #hide(Activity, int)}
+     *
+     * @param activity
+     */
+    public static void hide(Activity activity)
+    {
+        hide(activity, 0);
+    }
+
+    /**
      * 隐藏软键盘
      * <p>
      * {@link InputMethodManager#HIDE_IMPLICIT_ONLY}
