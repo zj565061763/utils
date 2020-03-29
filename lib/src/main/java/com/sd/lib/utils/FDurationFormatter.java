@@ -114,8 +114,7 @@ public class FDurationFormatter
 
     protected String formatTimeAll()
     {
-        final String result = mYear + "-" + formatZero(formatMonthValue(mMonth)) + "-" + formatZero(mDayOfMonth) + " " + formatCommonPart();
-        return result;
+        return mYear + "-" + formatZero(formatMonthValue(mMonth)) + "-" + formatZero(mDayOfMonth) + " " + formatCommonPart();
     }
 
     protected String formatCommonPart()
