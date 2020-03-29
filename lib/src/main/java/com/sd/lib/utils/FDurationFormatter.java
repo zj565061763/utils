@@ -73,7 +73,8 @@ public class FDurationFormatter
             if (dayOfWeek == Calendar.SUNDAY)
                 weekOfMonth--;
 
-            if (mDayOfWeek == Calendar.SUNDAY)
+            final int targetDayOfWeek = mDayOfWeek;
+            if (targetDayOfWeek == Calendar.SUNDAY)
                 targetWeekOfMonth--;
 
             if (weekOfMonth == targetWeekOfMonth)
