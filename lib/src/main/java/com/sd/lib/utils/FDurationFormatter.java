@@ -11,6 +11,7 @@ public class FDurationFormatter
     public final int mMonth;
     public final int mWeekOfYear;
     public final int mWeekOfMonth;
+    public final int mDayOfYear;
     public final int mDayOfMonth;
     public final int mDayOfWeek;
     public final int mHourOfDay;
@@ -28,6 +29,7 @@ public class FDurationFormatter
         mMonth = mTargetCalendar.get(Calendar.MONTH);
         mWeekOfYear = mTargetCalendar.get(Calendar.WEEK_OF_YEAR);
         mWeekOfMonth = mTargetCalendar.get(Calendar.WEEK_OF_MONTH);
+        mDayOfYear = mTargetCalendar.get(Calendar.DAY_OF_YEAR);
         mDayOfMonth = mTargetCalendar.get(Calendar.DAY_OF_MONTH);
         mDayOfWeek = mTargetCalendar.get(Calendar.DAY_OF_WEEK);
         mHourOfDay = mTargetCalendar.get(Calendar.HOUR_OF_DAY);
@@ -51,15 +53,8 @@ public class FDurationFormatter
             return formatTimeAll();
         }
 
-        final int month = calendar.get(Calendar.MONTH);
-        if (month != mMonth)
-        {
-            // 不在同一月
-            return formatTimeAll();
-        }
-
-        final int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        final int dayBefore = dayOfMonth - mDayOfMonth;
+        final int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        final int dayBefore = dayOfYear - mDayOfYear;
         if (dayBefore == 0)
         {
             return formatToday();
