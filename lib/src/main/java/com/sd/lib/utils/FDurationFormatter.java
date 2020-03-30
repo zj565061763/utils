@@ -52,7 +52,10 @@ public class FDurationFormatter
 
         final int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
         final int dayBefore = dayOfYear - mDayOfYear;
-        if (dayBefore == 0)
+        if (dayBefore < 0)
+        {
+            return formatFuture();
+        } else if (dayBefore == 0)
         {
             return formatToday();
         } else if (dayBefore == 1)
@@ -83,6 +86,11 @@ public class FDurationFormatter
                 return formatTimeAll();
             }
         }
+    }
+
+    protected String formatFuture()
+    {
+        return formatTimeAll();
     }
 
     protected String formatToday()
