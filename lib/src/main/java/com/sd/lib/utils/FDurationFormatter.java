@@ -40,9 +40,6 @@ public class FDurationFormatter
     public String format()
     {
         final long currentTime = System.currentTimeMillis();
-        if (mTargetTime >= currentTime)
-            return formatTimeAll();
-
         final Calendar calendar = mCurrentCalendar;
         calendar.setTime(new Date(currentTime));
 
