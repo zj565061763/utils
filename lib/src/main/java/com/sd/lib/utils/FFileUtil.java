@@ -126,8 +126,14 @@ public class FFileUtil
         if (dir == null)
             return null;
 
-        if (ext == null)
+        if (TextUtils.isEmpty(ext))
+        {
             ext = "";
+        } else
+        {
+            if (!ext.startsWith("."))
+                ext = "." + ext;
+        }
 
         long current = System.currentTimeMillis();
         while (true)
