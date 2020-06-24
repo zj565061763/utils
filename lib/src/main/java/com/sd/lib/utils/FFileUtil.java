@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
 import java.text.DecimalFormat;
@@ -148,6 +149,30 @@ public class FFileUtil
                 return file;
             }
         }
+    }
+
+    /**
+     * 根据源文件，创建一个输出文件
+     *
+     * @param source
+     * @param outputDir 为null的话，和源文件同一级
+     * @return
+     */
+    public static File newOutputFile(File source, File outputDir)
+    {
+        if (source == null || !source.exists())
+            return null;
+
+        if (outputDir == null)
+            outputDir = source.getParentFile();
+
+        outputDir = mkdirs(outputDir);
+        if (outputDir == null)
+            return null;
+
+        final String ext = MimeTypeMap.getFileExtensionFromUrl(source.getAbsolutePath());
+        final File outFile = newFileUnderDir(outputDir, ext);
+        return outFile;
     }
 
     /**
