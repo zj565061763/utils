@@ -111,8 +111,7 @@ public class FKeyboardUtil
         frameLayout.addView(editText, 1, 1);
 
         show(editText);
-        if (manager.isActive(editText))
-            manager.hideSoftInputFromWindow(editText.getWindowToken(), flag);
+        hide(editText, flag);
 
         frameLayout.removeView(editText);
     }
