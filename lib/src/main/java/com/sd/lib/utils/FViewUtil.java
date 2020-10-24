@@ -411,16 +411,15 @@ public class FViewUtil
     public static boolean setHeight(View view, int height)
     {
         final ViewGroup.LayoutParams params = view.getLayoutParams();
-        if (params != null)
+        if (params == null)
+            return false;
+
+        if (params.height != height)
         {
-            if (params.height != height)
-            {
-                params.height = height;
-                view.setLayoutParams(params);
-            }
-            return true;
+            params.height = height;
+            view.setLayoutParams(params);
         }
-        return false;
+        return true;
     }
 
     /**
@@ -433,16 +432,15 @@ public class FViewUtil
     public static boolean setWidth(View view, int width)
     {
         final ViewGroup.LayoutParams params = view.getLayoutParams();
-        if (params != null)
+        if (params == null)
+            return false;
+
+        if (params.width != width)
         {
-            if (params.width != width)
-            {
-                params.width = width;
-                view.setLayoutParams(params);
-            }
-            return true;
+            params.width = width;
+            view.setLayoutParams(params);
         }
-        return false;
+        return true;
     }
 
     /**
@@ -451,31 +449,31 @@ public class FViewUtil
      * @param view
      * @param width
      * @param height
-     * @return
      */
-    public static boolean setSize(View view, int width, int height)
+    public static void setSize(View view, int width, int height)
     {
         final ViewGroup.LayoutParams params = view.getLayoutParams();
-        if (params != null)
+        if (params == null)
         {
-            boolean needSet = false;
-            if (params.width != width)
-            {
-                params.width = width;
-                needSet = true;
-            }
-            if (params.height != height)
-            {
-                params.height = height;
-                needSet = true;
-            }
-
-            if (needSet)
-                view.setLayoutParams(params);
-
-            return true;
+            view.setLayoutParams(new ViewGroup.LayoutParams(width, height));
+            return;
         }
-        return false;
+
+        boolean needSet = false;
+        if (params.width != width)
+        {
+            params.width = width;
+            needSet = true;
+        }
+
+        if (params.height != height)
+        {
+            params.height = height;
+            needSet = true;
+        }
+
+        if (needSet)
+            view.setLayoutParams(params);
     }
 
     /**
