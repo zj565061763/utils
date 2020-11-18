@@ -72,8 +72,12 @@ public class FCollectionUtil
         if (!isIndexLegal(list, index))
             return null;
 
-        index = list.size() - 1 - index;
-        return list.get(index);
+        final int lastIndex = list.size() - 1;
+        final int transformIndex = lastIndex - index;
+        if (!isIndexLegal(list, transformIndex))
+            return null;
+
+        return list.get(transformIndex);
     }
 
     /**
@@ -87,13 +91,11 @@ public class FCollectionUtil
     public static <T> List<List<T>> splitList(List<T> list, int countPerList)
     {
         if (isEmpty(list) || countPerList <= 0)
-        {
             return null;
-        }
 
-        List<List<T>> listGroup = new ArrayList<>();
+        final List<List<T>> listResult = new ArrayList<>();
+
         List<T> listPage = new ArrayList<>();
-
         for (int i = 0; i < list.size(); i++)
         {
             listPage.add(list.get(i));
@@ -101,17 +103,16 @@ public class FCollectionUtil
             {
                 if ((i + 1) % (countPerList) == 0)
                 {
-                    listGroup.add(listPage);
+                    listResult.add(listPage);
                     listPage = new ArrayList<T>();
                 }
             }
         }
-        if (listPage.size() > 0)
-        {
-            listGroup.add(listPage);
-        }
 
-        return listGroup;
+        if (listPage.size() > 0)
+            listResult.add(listPage);
+
+        return listResult;
     }
 
     /**
