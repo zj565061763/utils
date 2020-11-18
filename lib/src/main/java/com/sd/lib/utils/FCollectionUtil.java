@@ -12,13 +12,7 @@ public class FCollectionUtil
 
     public static boolean isEmpty(Collection<?> list)
     {
-        if (list != null && !list.isEmpty())
-        {
-            return false;
-        } else
-        {
-            return true;
-        }
+        return list == null || list.isEmpty();
     }
 
     /**
@@ -31,11 +25,9 @@ public class FCollectionUtil
     public static boolean isIndexLegal(Collection<?> list, int index)
     {
         if (isEmpty(list))
-        {
             return false;
-        }
-        final int size = list.size();
 
+        final int size = list.size();
         return isIndexLegal(size, index);
     }
 
@@ -48,13 +40,7 @@ public class FCollectionUtil
      */
     public static boolean isIndexLegal(int size, int index)
     {
-        if (index >= 0 && index < size)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
+        return index >= 0 && index < size;
     }
 
     /**
@@ -68,9 +54,8 @@ public class FCollectionUtil
     public static <T> T get(List<T> list, int index)
     {
         if (!isIndexLegal(list, index))
-        {
             return null;
-        }
+
         return list.get(index);
     }
 
@@ -85,9 +70,8 @@ public class FCollectionUtil
     public static <T> T getLast(List<T> list, int index)
     {
         if (!isIndexLegal(list, index))
-        {
             return null;
-        }
+
         index = list.size() - 1 - index;
         return list.get(index);
     }
