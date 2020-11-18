@@ -126,10 +126,12 @@ public class FCollectionUtil
      */
     public static <T> List<T> subList(List<T> list, int start, int end)
     {
-        if (isEmpty(list) || !isIndexLegal(list, start) || !isIndexLegal(list, end))
-        {
+        if (isEmpty(list))
             return null;
-        }
+
+        if (!isIndexLegal(list, start) || !isIndexLegal(list, end))
+            return null;
+
         return list.subList(start, end);
     }
 
@@ -144,12 +146,13 @@ public class FCollectionUtil
      */
     public static <T> List<T> copyList(List<T> list, int start, int end)
     {
-        if (isEmpty(list) || !isIndexLegal(list, start) || !isIndexLegal(list, end) || start > end)
-        {
+        if (isEmpty(list))
             return null;
-        }
 
-        List<T> listResult = new ArrayList<>();
+        if (!isIndexLegal(list, start) || !isIndexLegal(list, end))
+            return null;
+
+        final List<T> listResult = new ArrayList<>();
         for (int i = start; i < end; i++)
         {
             listResult.add(list.get(i));
