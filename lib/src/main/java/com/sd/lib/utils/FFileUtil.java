@@ -50,26 +50,6 @@ public class FFileUtil
     }
 
     /**
-     * 获得缓存目录
-     *
-     * @param dirName 缓存目录下的文件夹名字
-     * @param context
-     * @return
-     */
-    public static File getCacheDir(String dirName, Context context)
-    {
-        File dir = null;
-        if (isExternalStorageMounted())
-        {
-            dir = new File(context.getExternalCacheDir(), dirName);
-        } else
-        {
-            dir = new File(context.getCacheDir(), dirName);
-        }
-        return mkdirs(dir);
-    }
-
-    /**
      * 返回外部存储指定名称的目录<br>
      * 如果名称为空并且外部存储存在，则返回外部存储目录
      *
@@ -92,27 +72,45 @@ public class FFileUtil
         {
             dir = new File(Environment.getExternalStorageDirectory(), directory);
         }
+
         return mkdirs(dir);
     }
 
     /**
-     * 创建文件夹
+     * 获得cache下的目录
      *
-     * @param dir
+     * @param dirName 缓存目录下的文件夹名字
+     * @param context
      * @return
      */
-    public static File mkdirs(File dir)
+    public static File getCacheDir(String dirName, Context context)
     {
-        if (dir == null || dir.exists())
+        File dir = null;
+        if (isExternalStorageMounted())
+        {
+            dir = new File(context.getExternalCacheDir(), dirName);
+        } else
+        {
+            dir = new File(context.getCacheDir(), dirName);
+        }
+        return mkdirs(dir);
+    }
+
+    /**
+     * 返回files下的目录
+     *
+     * @param dirName
+     * @param context
+     * @return
+     */
+    public static File getFilesDir(String dirName, Context context)
+    {
+        File dir = context.getExternalFilesDir(dirName);
+        if (checkDir(dir))
             return dir;
 
-        try
-        {
-            return dir.mkdirs() ? dir : null;
-        } catch (Exception e)
-        {
-            return null;
-        }
+        dir = new File(context.getFilesDir(), dirName);
+        return mkdirs(dir);
     }
 
     /**
@@ -270,6 +268,41 @@ public class FFileUtil
         } else
         {
             return null;
+        }
+    }
+
+    /**
+     * 如果文件夹不存在，则尝试创建文件夹
+     *
+     * @param dir
+     * @return
+     */
+    public static File mkdirs(File dir)
+    {
+        return checkDir(dir) ? dir : null;
+    }
+
+    /**
+     * 检查文件夹是否存在，如果不存在则尝试创建
+     *
+     * @param dir
+     * @return
+     */
+    public static boolean checkDir(File dir)
+    {
+        if (dir == null)
+            return false;
+
+        if (dir.exists())
+            return true;
+
+        try
+        {
+            return dir.mkdirs();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
         }
     }
 
