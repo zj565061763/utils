@@ -308,6 +308,34 @@ public class FViewUtil
     }
 
     /**
+     * 设置View的padding，如果值为null，则维持原来的padding值
+     *
+     * @param view
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     */
+    public static void setPadding(View view, Integer left, Integer top, Integer right, Integer bottom)
+    {
+        if (view == null)
+            return;
+
+        final int paddingLeft = left != null ? left : view.getPaddingLeft();
+        final int paddingTop = top != null ? top : view.getPaddingTop();
+        final int paddingRight = right != null ? right : view.getPaddingRight();
+        final int paddingBottom = bottom != null ? bottom : view.getPaddingBottom();
+
+        if (view.getPaddingLeft() != paddingLeft ||
+                view.getPaddingTop() != paddingTop ||
+                view.getPaddingRight() != paddingRight ||
+                view.getPaddingBottom() != paddingBottom)
+        {
+            view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        }
+    }
+
+    /**
      * 根据传入的宽度，获得按指定比例缩放后的高度
      *
      * @param scaleWidth  指定的比例宽度
