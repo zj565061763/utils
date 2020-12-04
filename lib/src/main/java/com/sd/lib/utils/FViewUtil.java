@@ -155,11 +155,12 @@ public class FViewUtil
      * 设置view的上下左右margin（当view的LayoutParams instanceof MarginLayoutParams才有效）
      *
      * @param view
-     * @param margins
+     * @param margin
+     * @return true-设置后发生了变更
      */
-    public static void setMargins(View view, int margins)
+    public static boolean setMargins(View view, int margin)
     {
-        setMargin(view, margins, margins, margins, margins);
+        return setMargin(view, margin, margin, margin, margin);
     }
 
     /**
@@ -170,37 +171,33 @@ public class FViewUtil
      * @param top
      * @param right
      * @param bottom
+     * @return true-设置后发生了变更
      */
-    public static void setMargin(View view, int left, int top, int right, int bottom)
+    public static boolean setMargin(View view, Integer left, Integer top, Integer right, Integer bottom)
     {
         final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-            return;
+            return false;
 
-        boolean needSet = false;
-        if (params.leftMargin != left)
-        {
-            params.leftMargin = left;
-            needSet = true;
-        }
-        if (params.topMargin != top)
-        {
-            params.topMargin = top;
-            needSet = true;
-        }
-        if (params.rightMargin != right)
-        {
-            params.rightMargin = right;
-            needSet = true;
-        }
-        if (params.bottomMargin != bottom)
-        {
-            params.bottomMargin = bottom;
-            needSet = true;
-        }
+        final int leftMargin = left != null ? left : params.leftMargin;
+        final int topMargin = top != null ? top : params.topMargin;
+        final int rightMargin = right != null ? right : params.rightMargin;
+        final int bottomMargin = bottom != null ? bottom : params.bottomMargin;
 
-        if (needSet)
+        if (params.leftMargin != leftMargin ||
+                params.topMargin != topMargin ||
+                params.rightMargin != rightMargin ||
+                params.bottomMargin != bottomMargin)
+        {
+            params.leftMargin = leftMargin;
+            params.topMargin = topMargin;
+            params.rightMargin = rightMargin;
+            params.bottomMargin = bottomMargin;
+
             view.setLayoutParams(params);
+            return true;
+        }
+        return false;
     }
 
     /**
