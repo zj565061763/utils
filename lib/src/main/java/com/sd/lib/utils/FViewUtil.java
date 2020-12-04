@@ -339,11 +339,12 @@ public class FViewUtil
      * @param top
      * @param right
      * @param bottom
+     * @return true-设置后发生了变更
      */
-    public static void setPadding(View view, Integer left, Integer top, Integer right, Integer bottom)
+    public static boolean setPadding(View view, Integer left, Integer top, Integer right, Integer bottom)
     {
         if (view == null)
-            return;
+            return false;
 
         final int paddingLeft = left != null ? left : view.getPaddingLeft();
         final int paddingTop = top != null ? top : view.getPaddingTop();
@@ -356,7 +357,9 @@ public class FViewUtil
                 view.getPaddingBottom() != paddingBottom)
         {
             view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+            return true;
         }
+        return false;
     }
 
     /**
