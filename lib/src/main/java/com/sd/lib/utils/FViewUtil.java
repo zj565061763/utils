@@ -72,18 +72,20 @@ public class FViewUtil
      *
      * @param view
      * @param left
+     * @return true-设置发生了变更
      */
-    public static void setMarginLeft(View view, int left)
+    public static boolean setMarginLeft(View view, int left)
     {
         final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-            return;
+            return false;
 
         if (params.leftMargin == left)
-            return;
+            return false;
 
         params.leftMargin = left;
         view.setLayoutParams(params);
+        return true;
     }
 
     /**
@@ -91,18 +93,20 @@ public class FViewUtil
      *
      * @param view
      * @param top
+     * @return true-设置发生了变更
      */
-    public static void setMarginTop(View view, int top)
+    public static boolean setMarginTop(View view, int top)
     {
         final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-            return;
+            return false;
 
         if (params.topMargin == top)
-            return;
+            return false;
 
         params.topMargin = top;
         view.setLayoutParams(params);
+        return true;
     }
 
     /**
@@ -110,18 +114,20 @@ public class FViewUtil
      *
      * @param view
      * @param right
+     * @return true-设置发生了变更
      */
-    public static void setMarginRight(View view, int right)
+    public static boolean setMarginRight(View view, int right)
     {
         final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-            return;
+            return false;
 
         if (params.rightMargin == right)
-            return;
+            return false;
 
         params.rightMargin = right;
         view.setLayoutParams(params);
+        return true;
     }
 
     /**
@@ -129,18 +135,20 @@ public class FViewUtil
      *
      * @param view
      * @param bottom
+     * @return true-设置发生了变更
      */
-    public static void setMarginBottom(View view, int bottom)
+    public static boolean setMarginBottom(View view, int bottom)
     {
         final MarginLayoutParams params = getMarginLayoutParams(view);
         if (params == null)
-            return;
+            return false;
 
         if (params.bottomMargin == bottom)
-            return;
+            return false;
 
         params.bottomMargin = bottom;
         view.setLayoutParams(params);
+        return true;
     }
 
     /**
