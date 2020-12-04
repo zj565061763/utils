@@ -251,56 +251,60 @@ public class FViewUtil
      * 设置view的左边padding
      *
      * @param view
-     * @param left
+     * @param padding
      */
-    public static void setPaddingLeft(View view, int left)
+    public static void setPaddingLeft(View view, int padding)
     {
         if (view == null)
             return;
 
-        view.setPadding(left, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
+        if (view.getPaddingLeft() != padding)
+            view.setPadding(padding, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
     }
 
     /**
      * 设置view的顶部padding
      *
      * @param view
-     * @param top
+     * @param padding
      */
-    public static void setPaddingTop(View view, int top)
+    public static void setPaddingTop(View view, int padding)
     {
         if (view == null)
             return;
 
-        view.setPadding(view.getPaddingLeft(), top, view.getPaddingRight(), view.getPaddingBottom());
+        if (view.getPaddingTop() != padding)
+            view.setPadding(view.getPaddingLeft(), padding, view.getPaddingRight(), view.getPaddingBottom());
     }
 
     /**
      * 设置view的右边padding
      *
      * @param view
-     * @param right
+     * @param padding
      */
-    public static void setPaddingRight(View view, int right)
+    public static void setPaddingRight(View view, int padding)
     {
         if (view == null)
             return;
 
-        view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), right, view.getPaddingBottom());
+        if (view.getPaddingRight() != padding)
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), padding, view.getPaddingBottom());
     }
 
     /**
      * 设置view的底部padding
      *
      * @param view
-     * @param bottom
+     * @param padding
      */
-    public static void setPaddingBottom(View view, int bottom)
+    public static void setPaddingBottom(View view, int padding)
     {
         if (view == null)
             return;
 
-        view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), bottom);
+        if (view.getPaddingBottom() != padding)
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), padding);
     }
 
     /**
