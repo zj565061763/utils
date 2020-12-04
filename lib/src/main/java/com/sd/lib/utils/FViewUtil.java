@@ -260,14 +260,18 @@ public class FViewUtil
      *
      * @param view
      * @param padding
+     * @return true-设置后发生了变更
      */
-    public static void setPaddingLeft(View view, int padding)
+    public static boolean setPaddingLeft(View view, int padding)
     {
         if (view == null)
-            return;
+            return false;
 
-        if (view.getPaddingLeft() != padding)
-            view.setPadding(padding, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
+        if (view.getPaddingLeft() == padding)
+            return false;
+
+        view.setPadding(padding, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
+        return true;
     }
 
     /**
@@ -275,14 +279,18 @@ public class FViewUtil
      *
      * @param view
      * @param padding
+     * @return true-设置后发生了变更
      */
-    public static void setPaddingTop(View view, int padding)
+    public static boolean setPaddingTop(View view, int padding)
     {
         if (view == null)
-            return;
+            return false;
 
-        if (view.getPaddingTop() != padding)
-            view.setPadding(view.getPaddingLeft(), padding, view.getPaddingRight(), view.getPaddingBottom());
+        if (view.getPaddingTop() == padding)
+            return false;
+
+        view.setPadding(view.getPaddingLeft(), padding, view.getPaddingRight(), view.getPaddingBottom());
+        return true;
     }
 
     /**
@@ -290,14 +298,18 @@ public class FViewUtil
      *
      * @param view
      * @param padding
+     * @return true-设置后发生了变更
      */
-    public static void setPaddingRight(View view, int padding)
+    public static boolean setPaddingRight(View view, int padding)
     {
         if (view == null)
-            return;
+            return false;
 
-        if (view.getPaddingRight() != padding)
-            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), padding, view.getPaddingBottom());
+        if (view.getPaddingRight() == padding)
+            return false;
+
+        view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), padding, view.getPaddingBottom());
+        return true;
     }
 
     /**
@@ -305,14 +317,18 @@ public class FViewUtil
      *
      * @param view
      * @param padding
+     * @return true-设置后发生了变更
      */
-    public static void setPaddingBottom(View view, int padding)
+    public static boolean setPaddingBottom(View view, int padding)
     {
         if (view == null)
-            return;
+            return false;
 
-        if (view.getPaddingBottom() != padding)
-            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), padding);
+        if (view.getPaddingBottom() == padding)
+            return false;
+
+        view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), padding);
+        return true;
     }
 
     /**
