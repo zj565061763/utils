@@ -72,7 +72,7 @@ public class FViewUtil
      *
      * @param view
      * @param left
-     * @return true-设置发生了变更
+     * @return true-设置后发生了变更
      */
     public static boolean setMarginLeft(View view, int left)
     {
@@ -93,7 +93,7 @@ public class FViewUtil
      *
      * @param view
      * @param top
-     * @return true-设置发生了变更
+     * @return true-设置后发生了变更
      */
     public static boolean setMarginTop(View view, int top)
     {
@@ -114,7 +114,7 @@ public class FViewUtil
      *
      * @param view
      * @param right
-     * @return true-设置发生了变更
+     * @return true-设置后发生了变更
      */
     public static boolean setMarginRight(View view, int right)
     {
@@ -135,7 +135,7 @@ public class FViewUtil
      *
      * @param view
      * @param bottom
-     * @return true-设置发生了变更
+     * @return true-设置后发生了变更
      */
     public static boolean setMarginBottom(View view, int bottom)
     {
