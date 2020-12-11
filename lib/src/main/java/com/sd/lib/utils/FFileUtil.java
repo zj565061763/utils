@@ -85,14 +85,11 @@ public class FFileUtil
      */
     public static File getCacheDir(String dirName, Context context)
     {
-        File dir = null;
-        if (isExternalStorageMounted())
-        {
-            dir = new File(context.getExternalCacheDir(), dirName);
-        } else
-        {
-            dir = new File(context.getCacheDir(), dirName);
-        }
+        File dir = new File(context.getExternalCacheDir(), dirName);
+        if (checkDir(dir))
+            return dir;
+
+        dir = new File(context.getCacheDir(), dirName);
         return mkdirs(dir);
     }
 
