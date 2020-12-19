@@ -112,33 +112,6 @@ public class FFileUtil
     }
 
     /**
-     * 返回临时目录
-     *
-     * @return
-     */
-    public static File getTempDir(Context context)
-    {
-        final String dirName = "ftemp_dir";
-        return getFilesDir(dirName, context);
-    }
-
-    /**
-     * 创建临时文件
-     *
-     * @param ext
-     * @return
-     */
-    public static File newTempFile(String ext, Context context)
-    {
-        final File dir = getTempDir(context);
-        if (dir == null)
-            return null;
-
-        final File tempFile = newFileUnderDir(dir, ext);
-        return tempFile;
-    }
-
-    /**
      * 在文件夹下创建一个文件
      *
      * @param dir 文件夹
