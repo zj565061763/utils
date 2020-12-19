@@ -6,6 +6,10 @@ import java.io.File;
 
 public class FTempDirectory
 {
+    private FTempDirectory()
+    {
+    }
+
     /**
      * 返回临时目录
      *
