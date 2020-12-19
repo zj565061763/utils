@@ -118,11 +118,8 @@ public class FFileUtil
      * @param ext 文件扩展名
      * @return 创建的文件
      */
-    public static synchronized File newFileUnderDir(File dir, String ext)
+    public static File newFileUnderDir(File dir, String ext)
     {
-        if (dir == null)
-            return null;
-
         if (!checkDir(dir))
             return null;
 
