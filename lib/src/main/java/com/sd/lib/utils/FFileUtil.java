@@ -156,30 +156,6 @@ public class FFileUtil
     }
 
     /**
-     * 根据源文件，创建一个输出文件
-     *
-     * @param source
-     * @param outputDir 为null的话，和源文件同一级
-     * @return
-     */
-    public static File newOutputFile(File source, File outputDir)
-    {
-        if (source == null || !source.exists())
-            return null;
-
-        if (outputDir == null)
-            outputDir = source.getParentFile();
-
-        outputDir = mkdirs(outputDir);
-        if (outputDir == null)
-            return null;
-
-        final String ext = MimeTypeMap.getFileExtensionFromUrl(source.getAbsolutePath());
-        final File outFile = newFileUnderDir(outputDir, ext);
-        return outFile;
-    }
-
-    /**
      * 获得文件或者文件夹下所有文件的大小
      *
      * @param file
@@ -316,5 +292,30 @@ public class FFileUtil
     public static boolean deleteFileOrDir(File file)
     {
         return delete(file);
+    }
+
+    /**
+     * 根据源文件，创建一个输出文件
+     *
+     * @param source
+     * @param outputDir 为null的话，和源文件同一级
+     * @return
+     */
+    @Deprecated
+    public static File newOutputFile(File source, File outputDir)
+    {
+        if (source == null || !source.exists())
+            return null;
+
+        if (outputDir == null)
+            outputDir = source.getParentFile();
+
+        outputDir = mkdirs(outputDir);
+        if (outputDir == null)
+            return null;
+
+        final String ext = MimeTypeMap.getFileExtensionFromUrl(source.getAbsolutePath());
+        final File outFile = newFileUnderDir(outputDir, ext);
+        return outFile;
     }
 }
