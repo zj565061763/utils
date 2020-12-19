@@ -156,6 +156,29 @@ public class FFileUtil
     }
 
     /**
+     * 获得扩展名
+     *
+     * @param url
+     * @return
+     */
+    public static String getExt(String url)
+    {
+        String ext = null;
+        try
+        {
+            ext = MimeTypeMap.getFileExtensionFromUrl(url);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        if (ext == null)
+            ext = "";
+
+        return ext;
+    }
+
+    /**
      * 获得文件或者文件夹下所有文件的大小
      *
      * @param file
