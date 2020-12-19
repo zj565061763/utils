@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +118,12 @@ public class FFileUtil
      * @param ext 文件扩展名
      * @return 创建的文件
      */
-    public static File newFileUnderDir(File dir, String ext)
+    public static synchronized File newFileUnderDir(File dir, String ext)
     {
         if (dir == null)
+            return null;
+
+        if (!checkDir(dir))
             return null;
 
         if (TextUtils.isEmpty(ext))
@@ -141,7 +145,15 @@ public class FFileUtil
                 continue;
             } else
             {
-                return file;
+                try
+                {
+                    if (file.createNewFile())
+                        return file;
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                    return null;
+                }
             }
         }
     }
