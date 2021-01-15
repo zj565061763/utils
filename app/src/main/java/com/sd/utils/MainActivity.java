@@ -1,9 +1,10 @@
 package com.sd.utils;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sd.lib.utils.FDurationFormatter;
 import com.sd.lib.utils.FKeyboardUtil;
@@ -20,17 +21,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-
-        final long targetTime = calendar.getTime().getTime();
-        final String format = new FDurationFormatter(targetTime).format();
-        Log.i(TAG, format);
+        testDurationFormatter();
     }
 
     @Override
     public void onClick(View v)
     {
         FKeyboardUtil.hide(this);
+    }
+
+    private void testDurationFormatter()
+    {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        final long targetTime = calendar.getTime().getTime();
+
+        final String format = new FDurationFormatter(targetTime).format();
+        Log.i(TAG, format);
     }
 }
