@@ -66,18 +66,18 @@ public class FDurationFormatter
             return formatDayBeforeYesterday();
         } else
         {
-            int weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH);
-            int targetWeekOfMonth = mWeekOfMonth;
+            int week = calendar.get(Calendar.WEEK_OF_YEAR);
+            int targetWeek = mWeekOfYear;
 
             final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
             if (dayOfWeek == Calendar.SUNDAY)
-                weekOfMonth--;
+                week--;
 
             final int targetDayOfWeek = mDayOfWeek;
             if (targetDayOfWeek == Calendar.SUNDAY)
-                targetWeekOfMonth--;
+                targetWeek--;
 
-            if (weekOfMonth == targetWeekOfMonth)
+            if (week == targetWeek)
             {
                 // 同一周
                 return formatDayInSameWeek();
