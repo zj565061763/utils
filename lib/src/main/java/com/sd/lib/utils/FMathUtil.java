@@ -146,4 +146,52 @@ public class FMathUtil
     {
         return radian * 180 / Math.PI;
     }
+
+    /**
+     * {@link #transformBoundsValue(double, double, double, double, double, int)}
+     */
+    public static double transformBoundsValue(double inputMin, double inputMax, double outputMin, double outputMax, double inputValue)
+    {
+        return transformBoundsValue(inputMin, inputMax, outputMin, outputMax, inputValue, 2);
+    }
+
+    /**
+     * 例如：
+     * <p>
+     * input：[0-100]
+     * output：[0-10]
+     * inputValue：50
+     * 则计算结果为：5
+     *
+     * @param inputMin   输入最小值
+     * @param inputMax   输入最大值
+     * @param outputMin  输出最小值
+     * @param outputMax  输出最大值
+     * @param inputValue 输入值
+     * @param scale      最多保留几位小数
+     * @return 输出值
+     */
+    public static double transformBoundsValue(double inputMin, double inputMax, double outputMin, double outputMax, double inputValue, int scale)
+    {
+        if (inputMin >= inputMax)
+            throw new IllegalArgumentException("inputMin >= inputMin");
+
+        if (outputMin >= outputMax)
+            throw new IllegalArgumentException("outputMin >= outputMax");
+
+        if (inputValue < inputMin)
+            inputValue = inputMin;
+
+        if (inputValue > inputMax)
+            inputValue = inputMax;
+
+        final double inputTotal = subtract(inputMax, inputMin);
+        final double inputDelta = subtract(inputValue, inputMin);
+        final double inputPercent = divide(inputDelta, inputTotal, 5);
+
+        final double outTotal = subtract(outputMax, outputMin);
+        final double outDelta = multiply(outTotal, inputPercent);
+        final double result = add(outputMin, outDelta);
+        return scaleHalfUp(result, scale);
+    }
 }
