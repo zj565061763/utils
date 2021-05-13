@@ -179,7 +179,7 @@ public class FFileUtil
         {
             final int lastIndex = url.lastIndexOf(".");
             if (lastIndex > 0)
-                ext = ext.substring(lastIndex + 1);
+                ext = url.substring(lastIndex + 1);
         }
 
         if (ext == null)
