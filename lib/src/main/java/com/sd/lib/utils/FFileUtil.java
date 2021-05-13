@@ -163,6 +163,9 @@ public class FFileUtil
      */
     public static String getExt(String url)
     {
+        if (TextUtils.isEmpty(url))
+            return "";
+
         String ext = null;
         try
         {
@@ -170,6 +173,13 @@ public class FFileUtil
         } catch (Exception e)
         {
             e.printStackTrace();
+        }
+
+        if (TextUtils.isEmpty(ext))
+        {
+            final int lastIndex = url.lastIndexOf(".");
+            if (lastIndex > 0)
+                ext = ext.substring(lastIndex + 1);
         }
 
         if (ext == null)
