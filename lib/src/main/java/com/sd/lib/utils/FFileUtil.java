@@ -12,6 +12,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用https://github.com/zj565061763/io替代
+ */
+@Deprecated
 public class FFileUtil
 {
     public static final long KB = 1024;

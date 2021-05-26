@@ -23,6 +23,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * 用https://github.com/zj565061763/io替代
+ */
+@Deprecated
 public class FIOUtil
 {
     private FIOUtil()

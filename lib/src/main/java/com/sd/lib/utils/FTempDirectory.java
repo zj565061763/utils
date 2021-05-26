@@ -4,6 +4,10 @@ import android.content.Context;
 
 import java.io.File;
 
+/**
+ * 用https://github.com/zj565061763/io替代
+ */
+@Deprecated
 public class FTempDirectory
 {
     private FTempDirectory()
